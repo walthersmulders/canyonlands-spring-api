@@ -1,1 +1,45 @@
 = Canyonlands Spring API
+
+== Keycloak - Docker
+In the `test/resources/keycloak/realms` directory you will find a preconfigured realm for the application.
+The docker compose file will start a keycloak instance with the realm imported.
+
+Once the keycloak instance has started up in Docker, you can access the admin console at
+ `http://localhost:8024/` with the username `admin` and password `admin`.
+
+=== Export Realm, Client and Users
+To export the realm, client and users from Keycloak, you will have to log into the container bash as
+ the `root` user by running following command:
+
+[source,bash]
+----
+docker exec -u root -t -i keycloak /bin/bash
+----
+
+To export the realm, client and users, run the following command:
+
+[source,bash]
+----
+/opt/keycloak/bin/kc.sh export --dir /opt/keycloak/data/export --users realm_file --realm canyonlands
+----
+
+This will create a new export json file in the /opt/keycloak/data/export directory within the container.
+Copy this file and replace it with the one in the test/resources/keycloak/realms directory.
+
+NOTE: If keycloak startup fails due to `Script upload is disabled` error, remove the `authorizationSettings`
+ node from the realm json file.
+
+== Getting an Access Token
+To get an access token run the following command:
+
+[source,bash]
+----
+curl --location 'http://localhost:8024/realms/canyonlands/protocol/openid-connect/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'client_id=canyonlands' \
+--data-urlencode 'username=walthersmulders' \
+--data-urlencode 'password=walthersmulders' \
+--data-urlencode 'grant_type=password' \
+--data-urlencode 'client_secret=yWbjVxoipwXoqSmruM13IJ2GSvQHrM2K'
+----
+

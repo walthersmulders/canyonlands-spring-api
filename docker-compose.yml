@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  keycloak:
+    container_name: keycloak
+    networks:
+      - backend
+    image: keycloak/keycloak:24.0.2
+    restart: always
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8024:8080"
+    command: start-dev --import-realm
+    volumes:
+      - ./src/test/resources/keycloak/realms/canyonlands-realm.json:/opt/keycloak/data/import/canyonlands-realm.json
+
+  canyonlands-db:
+    container_name: canyonlands-db
+    networks:
+      - backend
+    image: postgres:16.2-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: canyonlands
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    command: -p 5432
+    volumes:
+      - canyonlands-data:/var/lib/postgresql/data
+
+volumes:
+  canyonlands-data:
+    driver: local
+
+networks:
+  backend:
+    driver: bridge

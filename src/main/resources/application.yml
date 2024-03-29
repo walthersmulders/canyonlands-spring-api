@@ -1,4 +1,20 @@
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: canyonlands
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: ${KEYCLOAK_URL}
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_URL}
+          jwk-set-uri: ${KEYCLOAK_URL}/protocol/openid-connect/certs
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
     username: ${POSTGRES_USER}
@@ -15,4 +31,8 @@ spring:
     enabled: true
   application:
     name: canyonlands-spring-api
-
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
