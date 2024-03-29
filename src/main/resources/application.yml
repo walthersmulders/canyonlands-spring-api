@@ -35,4 +35,4 @@ logging:
   level:
     org:
       springframework:
-        security: TRACE
+        security: ${LOGGING_LEVEL}
