@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changes/v0001_schema.sql
+  - include:
+      file: db/changelog/preload/v0001_preload_book_genres.sql
