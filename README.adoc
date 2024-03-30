@@ -1,5 +1,26 @@
 = Canyonlands Spring API
 
+== User Roles
+A user can have one of the following roles:
+
+- `USER`: A regular user
+- `SYS_ADMIN`: A system administrator
+
+These roles are set in keycloak Client, and will appear in the token.
+
+Certain methods will have the following protection:
+
+[source,java]
+----
+@PreAuthorize("hasAuthority('SYS_ADMIN')")
+----
+
+Which means that only users with the `SYS_ADMIN` role will be able to access the method.
+
+NOTE: If a user has multiple roles, the `hasAuthority` method will check if the user has at least one of the roles.
+
+For example: A system administrator will have both `USER` and `SYS_ADMIN` roles.
+
 == Keycloak - Docker
 In the `test/resources/keycloak/realms` directory you will find a preconfigured realm for the application.
 The docker compose file will start a keycloak instance with the realm imported.

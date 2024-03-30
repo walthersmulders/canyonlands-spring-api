@@ -317,6 +317,24 @@
           "clientRole": true,
           "containerId": "52c1927e-a5b6-4240-a4c0-016f976f3136",
           "attributes": {}
+        },
+        {
+          "id": "54990fa3-2b3d-431d-bd05-dc681328a2a8",
+          "name": "SYS_ADMIN",
+          "description": "System Administrator",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "52c1927e-a5b6-4240-a4c0-016f976f3136",
+          "attributes": {}
+        },
+        {
+          "id": "00fab160-94c0-4c3a-8b5b-eaab7ed305fb",
+          "name": "USER",
+          "description": "User privileges",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "52c1927e-a5b6-4240-a4c0-016f976f3136",
+          "attributes": {}
         }
       ],
       "security-admin-console": [],
@@ -521,6 +539,10 @@
         "user"
       ],
       "clientRoles": {
+        "canyonlands": [
+          "SYS_ADMIN",
+          "USER"
+        ],
         "account": [
           "view-profile",
           "manage-account"
@@ -761,9 +783,10 @@
       "protocol": "openid-connect",
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
-        "oauth2.device.authorization.grant.enabled": "false",
         "client.secret.creation.time": "1711749803",
         "backchannel.logout.session.required": "true",
+        "post.logout.redirect.uris": "+",
+        "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
       },
       "authenticationFlowBindingOverrides": {},
@@ -779,6 +802,7 @@
           "config": {
             "user.session.note": "clientHost",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientHost",
@@ -794,6 +818,7 @@
           "config": {
             "user.session.note": "clientAddress",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientAddress",
@@ -809,6 +834,7 @@
           "config": {
             "user.session.note": "client_id",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "client_id",
@@ -828,7 +854,15 @@
         "phone",
         "offline_access",
         "microprofile-jwt"
-      ]
+      ],
+      "authorizationSettings": {
+        "allowRemoteResourceManagement": true,
+        "policyEnforcementMode": "ENFORCING",
+        "resources": [],
+        "policies": [],
+        "scopes": [],
+        "decisionStrategy": "UNANIMOUS"
+      }
     },
     {
       "id": "cd3d581e-302a-4708-8e39-3658179823d1",
@@ -1520,14 +1554,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
+            "saml-user-attribute-mapper",
             "oidc-usermodel-property-mapper",
             "saml-role-list-mapper",
-            "saml-user-property-mapper",
+            "oidc-address-mapper",
             "oidc-sha256-pairwise-sub-mapper",
-            "oidc-usermodel-attribute-mapper",
-            "saml-user-attribute-mapper",
             "oidc-full-name-mapper",
-            "oidc-address-mapper"
+            "oidc-usermodel-attribute-mapper",
+            "saml-user-property-mapper"
           ]
         }
       },
@@ -1584,9 +1618,9 @@
           "allowed-protocol-mapper-types": [
             "oidc-address-mapper",
             "oidc-sha256-pairwise-sub-mapper",
-            "oidc-full-name-mapper",
             "saml-role-list-mapper",
             "oidc-usermodel-property-mapper",
+            "oidc-full-name-mapper",
             "oidc-usermodel-attribute-mapper",
             "saml-user-property-mapper",
             "saml-user-attribute-mapper"
