@@ -64,3 +64,17 @@ curl --location 'http://localhost:8024/realms/canyonlands/protocol/openid-connec
 --data-urlencode 'client_secret=yWbjVxoipwXoqSmruM13IJ2GSvQHrM2K'
 ----
 
+== Bootstrap Docker infrastructure
+To start the project database and keycloak in docker run the following command in the root of the project:
+
+[source,bash]
+----
+docker compose up -d
+----
+
+To take down the docker infrastructure along with the volumes run the following command:
+
+[source,bash]
+----
+docker compose down --volumes
+----
