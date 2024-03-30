@@ -1,4 +1,4 @@
-package com.walthersmulders.mapstruct.dto;
+package com.walthersmulders.mapstruct.dto.bookgenre;
 
 public record BookGenreNoID(
         String genre,

@@ -2,8 +2,8 @@ package com.walthersmulders.service;
 
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
-import com.walthersmulders.mapstruct.dto.BookGenre;
-import com.walthersmulders.mapstruct.dto.BookGenreNoID;
+import com.walthersmulders.mapstruct.dto.bookgenre.BookGenre;
+import com.walthersmulders.mapstruct.dto.bookgenre.BookGenreNoID;
 import com.walthersmulders.mapstruct.mapper.BookGenreMapper;
 import com.walthersmulders.persistance.entity.BookGenreEntity;
 import com.walthersmulders.persistance.repository.BookGenreRepository;

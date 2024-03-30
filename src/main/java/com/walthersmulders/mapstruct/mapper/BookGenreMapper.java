@@ -1,7 +1,7 @@
 package com.walthersmulders.mapstruct.mapper;
 
-import com.walthersmulders.mapstruct.dto.BookGenre;
-import com.walthersmulders.mapstruct.dto.BookGenreNoID;
+import com.walthersmulders.mapstruct.dto.bookgenre.BookGenre;
+import com.walthersmulders.mapstruct.dto.bookgenre.BookGenreNoID;
 import com.walthersmulders.persistance.entity.BookGenreEntity;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;

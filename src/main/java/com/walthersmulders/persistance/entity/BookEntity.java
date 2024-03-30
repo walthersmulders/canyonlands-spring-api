@@ -63,13 +63,13 @@ public class BookEntity implements Serializable {
     @JoinColumn(name = "book_genre_id")
     private BookGenreEntity bookGenre;
 
+    public void addAuthor(AuthorEntity authorEntity) {
+        AuthorBookEntity authorBookEntity = new AuthorBookEntity(authorEntity, this);
+        authors.add(authorBookEntity);
+    }
+
     /**
      * TODO :: IMPL this
-     * public void addAuthorEntity(AuthorEntity authorEntity) {
-     *         AuthorBookEntity authorBookEntity = new AuthorBookEntity(authorEntity, this);
-     *         authors.add(authorBookEntity);
-     *     }
-     * <p>
      * public void removeAuthorEntity(AuthorEntity authorEntity) {
      * for (Iterator<AuthorBookEntity> iterator = authors.iterator(); iterator.hasNext(); ) {
      * AuthorBookEntity authorBookEntity = iterator.next();

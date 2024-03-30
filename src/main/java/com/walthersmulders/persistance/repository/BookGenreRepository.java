@@ -10,10 +10,10 @@ import java.util.UUID;
 
 @Repository
 public interface BookGenreRepository extends JpaRepository<BookGenreEntity, UUID> {
-
-    @Query(value = "SELECT CASE WHEN EXISTS " +
-                   "(SELECT bge FROM BookGenreEntity bge WHERE bge.genre = :genre AND bge.subGenre = :subGenre) " +
-                   "THEN TRUE ELSE FALSE END FROM BookGenreEntity")
+    @Query("SELECT CASE WHEN COUNT(bge) > 0 THEN true ELSE false END " +
+           "FROM BookGenreEntity bge " +
+           "WHERE bge.genre = :genre " +
+           "AND bge.subGenre = :subGenre")
     boolean exists(
             @Param(value = "genre") String genre,
             @Param(value = "subGenre") String subGenre

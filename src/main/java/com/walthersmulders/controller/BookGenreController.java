@@ -1,7 +1,7 @@
 package com.walthersmulders.controller;
 
-import com.walthersmulders.mapstruct.dto.BookGenre;
-import com.walthersmulders.mapstruct.dto.BookGenreNoID;
+import com.walthersmulders.mapstruct.dto.bookgenre.BookGenre;
+import com.walthersmulders.mapstruct.dto.bookgenre.BookGenreNoID;
 import com.walthersmulders.service.BookGenreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
