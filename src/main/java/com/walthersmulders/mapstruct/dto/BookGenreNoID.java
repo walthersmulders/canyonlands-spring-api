@@ -1,6 +1,6 @@
 package com.walthersmulders.mapstruct.dto;
 
-public record GenreBookNoID(
+public record BookGenreNoID(
         String genre,
         String subGenre
 ) {

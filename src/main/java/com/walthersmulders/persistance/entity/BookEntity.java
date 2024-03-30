@@ -61,7 +61,7 @@ public class BookEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_genre_id")
-    private GenreBookEntity bookGenre;
+    private BookGenreEntity bookGenre;
 
     /**
      * TODO :: IMPL this

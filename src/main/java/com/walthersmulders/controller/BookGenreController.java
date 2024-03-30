@@ -1,8 +1,8 @@
 package com.walthersmulders.controller;
 
-import com.walthersmulders.mapstruct.dto.GenreBook;
-import com.walthersmulders.mapstruct.dto.GenreBookNoID;
-import com.walthersmulders.service.GenreBookService;
+import com.walthersmulders.mapstruct.dto.BookGenre;
+import com.walthersmulders.mapstruct.dto.BookGenreNoID;
+import com.walthersmulders.service.BookGenreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -14,43 +14,43 @@ import java.util.UUID;
 @RequestMapping("/genre/book")
 @RestController
 @Validated
-public class GenreBookController {
-    private final GenreBookService genreBookService;
+public class BookGenreController {
+    private final BookGenreService bookGenreService;
 
-    public GenreBookController(GenreBookService genreBookService) {
-        this.genreBookService = genreBookService;
+    public BookGenreController(BookGenreService bookGenreService) {
+        this.bookGenreService = bookGenreService;
     }
 
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public GenreBook createGenre(@RequestBody GenreBookNoID genreBookNoID) {
-        return genreBookService.create(genreBookNoID);
+    public BookGenre createGenre(@RequestBody BookGenreNoID bookGenreNoID) {
+        return bookGenreService.create(bookGenreNoID);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<GenreBook> getGenres() {
-        return genreBookService.getGenres();
+    public List<BookGenre> getGenres() {
+        return bookGenreService.getGenres();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
-    public GenreBook getGenre(@PathVariable UUID id) {
-        return genreBookService.getGenre(id);
+    public BookGenre getGenre(@PathVariable UUID id) {
+        return bookGenreService.getGenre(id);
     }
 
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void updateGenre(@PathVariable UUID id, @RequestBody GenreBookNoID genreBookNoID) {
-        genreBookService.update(id, genreBookNoID);
+    public void updateGenre(@PathVariable UUID id, @RequestBody BookGenreNoID bookGenreNoID) {
+        bookGenreService.update(id, bookGenreNoID);
     }
 
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteGenre(@PathVariable UUID id) {
-        genreBookService.delete(id);
+        bookGenreService.delete(id);
     }
 }

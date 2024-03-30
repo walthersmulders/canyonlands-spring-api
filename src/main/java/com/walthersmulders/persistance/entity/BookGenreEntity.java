@@ -18,7 +18,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GenreBookEntity implements Serializable {
+public class BookGenreEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
