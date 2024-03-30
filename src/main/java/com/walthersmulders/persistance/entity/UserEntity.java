@@ -23,7 +23,7 @@ public class UserEntity implements Serializable {
 
     @Id
     @Column(name = "user_id", nullable = false)
-    private UUID userId;
+    private UUID userID;
 
     @Column(name = "username", unique = true, nullable = false, length = 100)
     private String username;

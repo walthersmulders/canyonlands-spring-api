@@ -11,11 +11,11 @@ import org.mapstruct.ReportingPolicy;
 public interface UserMapper {
     UserEntity userToEntity(User user);
 
-    User entityToUser(UserEntity userEntity);
+    User entityToUser(UserEntity entity);
 
     @InheritConfiguration
     UserEntity userEntityUpdateMerge(
-            @MappingTarget UserEntity userEntity,
+            @MappingTarget UserEntity entity,
             String emailAddress,
             String firstName,
             String lastName
