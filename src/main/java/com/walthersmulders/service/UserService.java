@@ -1,5 +1,7 @@
 package com.walthersmulders.service;
 
+import com.walthersmulders.exception.EntityNotFoundException;
+import com.walthersmulders.exception.GenericBadRequestException;
 import com.walthersmulders.mapstruct.dto.User;
 import com.walthersmulders.mapstruct.mapper.UserMapper;
 import com.walthersmulders.persistance.entity.UserEntity;
@@ -8,10 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -43,8 +42,7 @@ public class UserService {
 
         if (!id.equals(UUID.fromString(jwt.getClaimAsString("sub")))) {
             log.error("User id in the path variable does not match the user id in the JWT");
-            // TODO :: Custom bad request exception handler
-            return null;
+            throw new GenericBadRequestException("Client ID mismatch");
         }
 
         log.info("User id in the path variable matches the user id in the JWT");
@@ -53,8 +51,7 @@ public class UserService {
 
         if (existingUser.isEmpty()) {
             log.error("User with id {} not found", id);
-            // TODO :: custom entity not found exception
-            return null;
+            throw new EntityNotFoundException("User", Map.of("id", id.toString()));
         }
 
         String emailAddress = jwt.getClaimAsString("email");

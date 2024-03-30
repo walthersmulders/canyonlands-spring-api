@@ -1,21 +1,27 @@
 package com.walthersmulders.service;
 
+import com.walthersmulders.exception.EntityExistsException;
+import com.walthersmulders.exception.EntityNotFoundException;
 import com.walthersmulders.mapstruct.dto.GenreBook;
 import com.walthersmulders.mapstruct.dto.GenreBookNoID;
 import com.walthersmulders.mapstruct.mapper.GenreBookMapper;
 import com.walthersmulders.persistance.entity.GenreBookEntity;
 import com.walthersmulders.persistance.repository.GenreBookRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+
+import static java.util.Map.entry;
 
 @Service
 @Slf4j
 public class GenreBookService {
+    private static final String BOOK_GENRE = "Book Genre";
+
     private final GenreBookRepository genreBookRepository;
     private final GenreBookMapper     genreBookMapper;
 
@@ -43,9 +49,17 @@ public class GenreBookService {
         boolean exists = genreBookRepository.exists(genreBookNoID.genre(), genreBookNoID.subGenre());
 
         if (exists) {
-            log.error("Genre with genre {} and sub genre {} already exists", genreBookNoID.genre(), genreBookNoID.subGenre());
-            // TODO :: custom exception
-            return null;
+            log.error(
+                    "Genre with genre {} and sub genre {} already exists",
+                    genreBookNoID.genre(),
+                    genreBookNoID.subGenre()
+            );
+
+            throw new EntityExistsException(
+                    BOOK_GENRE, Map.ofEntries(
+                    entry("genre", genreBookNoID.genre()),
+                    entry("subGenre", genreBookNoID.subGenre())
+            ));
         }
 
         GenreBookEntity bookGenre = genreBookMapper.genreBookNoIDToEntity(genreBookNoID);
@@ -60,11 +74,11 @@ public class GenreBookService {
     public GenreBook getGenre(UUID id) {
         log.info("Getting genre with id: {}", id);
 
-        // TODO :: new EntityNotFoundException("BookGenre", Map.of("bookGenreId", String.valueOf(bookGenreId)))));
-
         return genreBookMapper.entityToGenreBook(
                 genreBookRepository.findById(id)
-                                   .orElseThrow(() -> new EntityNotFoundException("Not Found"))
+                                   .orElseThrow(() -> new EntityNotFoundException(
+                                           BOOK_GENRE, Map.of("bookGenreId", id.toString()))
+                                   )
         );
     }
 
@@ -75,8 +89,8 @@ public class GenreBookService {
 
         if (existingBookGenre.isEmpty()) {
             log.error("Genre with id {} not found", id);
-            // TODO :: custom entity not found exception
-            return;
+
+            throw new EntityNotFoundException(BOOK_GENRE, Map.of("bookGenreId", id.toString()));
         }
 
         GenreBookEntity updatedBookGenre = genreBookMapper.genreBookEntityUpdateMerge(
