@@ -71,4 +71,15 @@ public class UserService {
 
         return userMapper.entityToUser(updatedUser);
     }
+
+    public User getUser(UUID id) {
+        log.info("Getting user with id: {}", id);
+
+        return userMapper.entityToUser(
+                userRepository.findById(id)
+                              .orElseThrow(() -> new EntityNotFoundException(
+                                      "User", Map.of("id", id.toString()))
+                              )
+        );
+    }
 }

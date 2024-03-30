@@ -27,6 +27,13 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable UUID id) {
+        return userService.getUser(id);
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     public User updateUser(@PathVariable UUID id, @AuthenticationPrincipal Jwt jwt) {
         return userService.updateUser(id, jwt);
