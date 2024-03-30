@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegistrationController {
     private final RegistrationService registrationService;
 
-    public RegistrationController(RegistrationService registrationService) {this.registrationService = registrationService;}
+    public RegistrationController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @GetMapping()
+    @GetMapping
     public void register(@AuthenticationPrincipal Jwt jwt) {
         registrationService.register(jwt);
     }
