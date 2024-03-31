@@ -1,6 +1,6 @@
 package com.walthersmulders.mapstruct.mapper;
 
-import com.walthersmulders.mapstruct.dto.User;
+import com.walthersmulders.mapstruct.dto.user.User;
 import com.walthersmulders.persistance.entity.UserEntity;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;

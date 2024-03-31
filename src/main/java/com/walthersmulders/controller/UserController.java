@@ -1,6 +1,6 @@
 package com.walthersmulders.controller;
 
-import com.walthersmulders.mapstruct.dto.User;
+import com.walthersmulders.mapstruct.dto.user.User;
 import com.walthersmulders.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

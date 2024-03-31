@@ -2,7 +2,7 @@ package com.walthersmulders.service;
 
 import com.walthersmulders.exception.EntityNotFoundException;
 import com.walthersmulders.exception.GenericBadRequestException;
-import com.walthersmulders.mapstruct.dto.User;
+import com.walthersmulders.mapstruct.dto.user.User;
 import com.walthersmulders.mapstruct.mapper.UserMapper;
 import com.walthersmulders.persistance.entity.UserEntity;
 import com.walthersmulders.persistance.repository.UserRepository;

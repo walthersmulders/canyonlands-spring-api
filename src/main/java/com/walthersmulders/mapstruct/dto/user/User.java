@@ -1,4 +1,4 @@
-package com.walthersmulders.mapstruct.dto;
+package com.walthersmulders.mapstruct.dto.user;
 
 import java.util.UUID;
 
