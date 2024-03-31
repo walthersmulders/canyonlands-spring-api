@@ -31,4 +31,14 @@ public class UsersBookController {
     ) {
         return usersBookService.addBookToUserLibrary(userID, bookID, usersBookUpsert);
     }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/{userID}/books/{bookID}")
+    public UsersBook getUsersBook(
+            @PathVariable(name = "userID") UUID userID,
+            @PathVariable(name = "bookID") UUID bookID
+    ) {
+        return usersBookService.getUsersBook(userID, bookID);
+    }
 }

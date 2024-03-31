@@ -5,11 +5,13 @@ import com.walthersmulders.exception.EntityNotFoundException;
 import com.walthersmulders.mapstruct.dto.usersbook.UsersBook;
 import com.walthersmulders.mapstruct.dto.usersbook.UsersBookUpsert;
 import com.walthersmulders.mapstruct.mapper.UserMapper;
+import com.walthersmulders.mapstruct.mapper.UsersBookMapper;
 import com.walthersmulders.persistance.entity.BookEntity;
 import com.walthersmulders.persistance.entity.UserEntity;
 import com.walthersmulders.persistance.entity.UsersBookEntity;
 import com.walthersmulders.persistance.repository.BookRepository;
 import com.walthersmulders.persistance.repository.UserRepository;
+import com.walthersmulders.persistance.repository.UsersBookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,19 +25,26 @@ import java.util.UUID;
 public class UsersBookService {
     private static final String BOOK_ID = "bookID";
     private static final String BOOK    = "Book";
+    private static final String USER_ID = "userID";
 
-    private final UserRepository userRepository;
-    private final UserMapper     userMapper;
-    private final BookRepository bookRepository;
+    private final UserRepository      userRepository;
+    private final UserMapper          userMapper;
+    private final BookRepository      bookRepository;
+    private final UsersBookRepository usersBookRepository;
+    private final UsersBookMapper     usersBookMapper;
 
     public UsersBookService(
             UserRepository userRepository,
             UserMapper userMapper,
-            BookRepository bookRepository
+            BookRepository bookRepository,
+            UsersBookRepository usersBookRepository,
+            UsersBookMapper usersBookMapper
     ) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.bookRepository = bookRepository;
+        this.usersBookRepository = usersBookRepository;
+        this.usersBookMapper = usersBookMapper;
     }
 
     @Transactional
@@ -47,7 +56,7 @@ public class UsersBookService {
         if (userWithBooks.isEmpty()) {
             log.error("User with userID: {} not found", userID);
 
-            throw new EntityNotFoundException("User", Map.of("userID", userID.toString()));
+            throw new EntityNotFoundException("User", Map.of(USER_ID, userID.toString()));
         }
 
         UsersBookEntity existingBook = userWithBooks.get()
@@ -87,5 +96,23 @@ public class UsersBookService {
 
             return userMapper.entityToUsersBook(book, usersBookUpsert.rating());
         }
+    }
+
+    @Transactional(readOnly = true)
+    public UsersBook getUsersBook(UUID userID, UUID bookID) {
+        log.info("Fetching book with bookID: {} for user with userID: {}", bookID, userID);
+
+        Optional<UsersBookEntity> usersBook = usersBookRepository.fetchUsersBook(userID, bookID);
+
+        if (usersBook.isEmpty()) {
+            log.error("Combination with userID: {} and bookID: {} not found", userID, bookID);
+
+            throw new EntityNotFoundException("UsersBook", Map.ofEntries(
+                    Map.entry(USER_ID, userID.toString()),
+                    Map.entry(BOOK_ID, bookID.toString())
+            ));
+        }
+
+        return usersBookMapper.entityToUsersBook(usersBook.get());
     }
 }
