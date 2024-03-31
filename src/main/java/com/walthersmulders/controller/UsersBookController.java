@@ -49,4 +49,14 @@ public class UsersBookController {
     public List<UsersBook> getAllUserBooks(@PathVariable(name = "userID") UUID userID) {
         return usersBookService.getAllUserBooks(userID);
     }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(value = "/{userID}/books/{bookID}")
+    public void delete(
+            @PathVariable(name = "userID") UUID userID,
+            @PathVariable(name = "bookID") UUID bookID
+    ) {
+        usersBookService.delete(userID, bookID);
+    }
 }

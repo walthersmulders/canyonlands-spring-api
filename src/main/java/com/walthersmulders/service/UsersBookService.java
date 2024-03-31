@@ -9,6 +9,7 @@ import com.walthersmulders.mapstruct.mapper.UsersBookMapper;
 import com.walthersmulders.persistance.entity.BookEntity;
 import com.walthersmulders.persistance.entity.UserEntity;
 import com.walthersmulders.persistance.entity.UsersBookEntity;
+import com.walthersmulders.persistance.entity.UsersBookID;
 import com.walthersmulders.persistance.repository.BookRepository;
 import com.walthersmulders.persistance.repository.UserRepository;
 import com.walthersmulders.persistance.repository.UsersBookRepository;
@@ -127,5 +128,13 @@ public class UsersBookService {
         log.info("Fetched all books for user with userID: {}", userID);
 
         return usersBooks.stream().map(usersBookMapper::entityToUsersBook).toList();
+    }
+
+    public void delete(UUID userID, UUID bookID) {
+        log.info("Deleting book with bookID: {} for user with userID: {}", bookID, userID);
+
+        usersBookRepository.deleteById(new UsersBookID(userID, bookID));
+
+        log.info("Deleted book with bookID: {} for user with userID: {}", bookID, userID);
     }
 }
