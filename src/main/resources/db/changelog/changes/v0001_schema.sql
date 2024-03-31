@@ -2,7 +2,7 @@
 
 --changeset walthersmulders:1
 
-CREATE TABLE book_genre
+CREATE TABLE genre_book
 (
     book_genre_id UUID         NOT NULL,
     genre         VARCHAR(255) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE book
     PRIMARY KEY (book_id),
     UNIQUE (isbn),
     UNIQUE (title),
-    FOREIGN KEY (book_genre_id) REFERENCES book_genre (book_genre_id)
+    FOREIGN KEY (book_genre_id) REFERENCES genre_book (book_genre_id)
 );
 
 CREATE TABLE author_book
