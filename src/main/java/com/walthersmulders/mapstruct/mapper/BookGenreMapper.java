@@ -1,7 +1,7 @@
 package com.walthersmulders.mapstruct.mapper;
 
 import com.walthersmulders.mapstruct.dto.bookgenre.BookGenre;
-import com.walthersmulders.mapstruct.dto.bookgenre.BookGenreNoID;
+import com.walthersmulders.mapstruct.dto.bookgenre.BookGenreUpsert;
 import com.walthersmulders.persistance.entity.BookGenreEntity;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
@@ -12,11 +12,11 @@ import org.mapstruct.ReportingPolicy;
 public interface BookGenreMapper {
     BookGenre entityToBookGenre(BookGenreEntity entity);
 
-    BookGenreEntity bookGenreNoIDToEntity(BookGenreNoID bookGenreNoID);
+    BookGenreEntity bookGenreUpsertToEntity(BookGenreUpsert bookGenreUpsert);
 
     @InheritConfiguration
     BookGenreEntity bookGenreEntityUpdateMerge(
             @MappingTarget BookGenreEntity entity,
-            BookGenreNoID bookGenreNoID
+            BookGenreUpsert bookGenreUpsert
     );
 }

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+// TODO :: Rename to BookUpsert
 public record BookAdd(
         @NotEmpty @Size(min = 1, max = 255) String title,
         @NotEmpty String plot,
