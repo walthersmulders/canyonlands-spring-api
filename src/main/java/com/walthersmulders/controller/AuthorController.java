@@ -64,4 +64,8 @@ public class AuthorController {
     public void updateAuthor(@PathVariable UUID id, @Valid @RequestBody AuthorNoID authorNoID) {
         authorBookService.updateAuthor(id, authorNoID);
     }
+
+    // TODO :: method to add book to author by authorID
+
+    // TODO :: method to remove book from author by authorID
 }

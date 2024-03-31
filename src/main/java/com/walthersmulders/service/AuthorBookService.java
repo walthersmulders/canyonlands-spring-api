@@ -5,6 +5,8 @@ import com.walthersmulders.exception.EntityNotFoundException;
 import com.walthersmulders.mapstruct.dto.author.Author;
 import com.walthersmulders.mapstruct.dto.author.AuthorNoID;
 import com.walthersmulders.mapstruct.dto.author.AuthorWithBooks;
+import com.walthersmulders.mapstruct.dto.book.Book;
+import com.walthersmulders.mapstruct.dto.book.BookAdd;
 import com.walthersmulders.mapstruct.dto.book.BookWithAuthorsAdd;
 import com.walthersmulders.mapstruct.dto.book.BookWithLinks;
 import com.walthersmulders.mapstruct.mapper.AuthorMapper;
@@ -27,7 +29,10 @@ import static java.util.Map.entry;
 @Service
 @Slf4j
 public class AuthorBookService {
-    private static final String AUTHOR = "Author";
+    private static final String AUTHOR    = "Author";
+    private static final String AUTHOR_ID = "authorID";
+    private static final String BOOK      = "Book";
+    private static final String BOOK_ID   = "bookID";
 
     private final AuthorRepository    authorRepository;
     private final AuthorMapper        authorMapper;
@@ -49,19 +54,30 @@ public class AuthorBookService {
     }
 
     @Transactional(readOnly = true)
-    public List<BookWithLinks> getBooks() {
+    public List<BookWithLinks> getBooksWithLinks() {
         log.info("Getting all books");
 
+        List<BookEntity> booksWithLinks = bookRepository.fetchBooksWithLinks();
 
-        List<BookEntity> booksWithAuthors = bookRepository.fetchAll();
+        log.info("Found {} books", booksWithLinks.size());
 
-        log.info("Found {} books", booksWithAuthors.size());
+        return booksWithLinks.isEmpty() ? List.of()
+                                        : booksWithLinks.stream()
+                                                        .map(bookMapper::entityToBookWithLinks)
+                                                        .toList();
+    }
 
-        return booksWithAuthors.isEmpty() ? List.of()
-                                          : booksWithAuthors.stream()
-                                                            .map(bookMapper::entityToBookWithLinks)
-                                                            .toList();
+    public List<Book> getBooks() {
+        log.info("Getting all books");
 
+        List<BookEntity> books = bookRepository.findAll();
+
+        log.info("Found {} books", books.size());
+
+        return books.isEmpty() ? List.of()
+                               : books.stream()
+                                      .map(bookMapper::entityToBook)
+                                      .toList();
     }
 
     public Author createAuthor(AuthorNoID authorNoID) {
@@ -123,7 +139,7 @@ public class AuthorBookService {
                 errorsMap.put("title", bookWithAuthorsAdd.book().title());
             }
 
-            throw new EntityExistsException("Book", errorsMap);
+            throw new EntityExistsException(BOOK, errorsMap);
         }
 
         Optional<BookGenreEntity> bookGenre = bookGenreRepository.findById(bookWithAuthorsAdd.bookGenreID());
@@ -160,7 +176,7 @@ public class AuthorBookService {
                 findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(
                         AUTHOR,
-                        Map.of("authorID", id.toString())
+                        Map.of(AUTHOR_ID, id.toString())
                 ));
 
         return authorMapper.entityToAuthor(author);
@@ -176,7 +192,7 @@ public class AuthorBookService {
                 .fetchAuthorWithBooks(id)
                 .orElseThrow(() -> new EntityNotFoundException(
                         AUTHOR,
-                        Map.of("authorID", id.toString())
+                        Map.of(AUTHOR_ID, id.toString())
                 ));
 
         return authorMapper.entityToAuthorWithBooks(authorWithBooks);
@@ -208,17 +224,108 @@ public class AuthorBookService {
 
             throw new EntityNotFoundException(
                     AUTHOR,
-                    Map.of("authorID", id.toString())
+                    Map.of(AUTHOR_ID, id.toString())
             );
         }
 
-        AuthorEntity updatedAuthor = authorMapper.authorEntityUpdateMerge(
-                existingAuthor.get(),
-                authorNoID
-        );
+        log.info("Check if incoming object has the same fields as existing");
 
-        authorRepository.save(updatedAuthor);
+        if (existingAuthor.get().checkUpdateDtoEqualsEntity(authorNoID)
+            && Objects.equals(existingAuthor.get().getAdditionalName(), authorNoID.additionalName())
+        ) {
+            log.info("Incoming object has the same fields as existing, no need to update");
+        } else {
+            log.info("Incoming object has different fields as existing, updating");
 
-        log.info("Author updated with authorID {}", id);
+            AuthorEntity updatedAuthor = authorMapper.authorEntityUpdateMerge(
+                    existingAuthor.get(),
+                    authorNoID
+            );
+
+            authorRepository.save(updatedAuthor);
+
+            log.info("Author updated with authorID {}", id);
+        }
+    }
+
+    public Book getBook(UUID id) {
+        log.info("Getting book with bookID {}", id);
+
+        BookEntity book = bookRepository.findById(id)
+                                        .orElseThrow(() -> new EntityNotFoundException(
+                                                BOOK,
+                                                Map.of(BOOK_ID, id.toString())
+                                        ));
+
+        return bookMapper.entityToBook(book);
+    }
+
+    @Transactional(readOnly = true)
+    public BookWithLinks getBookWithLinks(UUID id) {
+        log.info("Getting book with links for bookID {}", id);
+
+        BookEntity bookWithLinks = bookRepository.fetchBookWithLinks(id)
+                                                 .orElseThrow(() -> new EntityNotFoundException(
+                                                         BOOK,
+                                                         Map.of(BOOK_ID, id.toString())
+                                                 ));
+
+        return bookMapper.entityToBookWithLinks(bookWithLinks);
+    }
+
+    public void updateBook(UUID id, BookAdd bookAdd) {
+        log.info("Updating book with bookID {}", id);
+
+        Optional<BookEntity> existingBook = bookRepository.findById(id);
+
+        if (existingBook.isEmpty()) {
+            log.error("Book with bookID {} not found", id);
+
+            throw new EntityNotFoundException(
+                    BOOK,
+                    Map.of(BOOK_ID, id.toString())
+            );
+        }
+
+        log.info("Check if incoming object has the same fields as existing");
+
+        if (existingBook.get().checkUpdateDtoEqualsEntity(bookAdd)) {
+            log.info("Incoming object has the same fields as existing, no need to update");
+        } else {
+            log.info("Incoming object has different fields as existing, updating");
+
+            log.info("Check if book with ISBN {} already exists", bookAdd.isbn());
+
+            boolean existsByIsbn = bookRepository.existsByIsbn(bookAdd.isbn());
+
+            log.info("Check if book with title {} already exists", bookAdd.title());
+
+            boolean existsByTitle = bookRepository.existsByTitle(bookAdd.title());
+
+            Map<String, String> errorsMap = new HashMap<>();
+
+            if (existsByTitle || existsByIsbn) {
+                if (existsByIsbn) {
+                    errorsMap.put("isbn", bookAdd.isbn());
+                }
+
+                if (existsByTitle) {
+                    errorsMap.put("title", bookAdd.title());
+                }
+
+                throw new EntityExistsException(BOOK, errorsMap);
+            }
+
+            BookEntity updatedBook = bookMapper.bookEntityUpdateMerge(
+                    existingBook.get(),
+                    bookAdd
+            );
+
+            updatedBook.setDateUpdated(LocalDateTime.now());
+
+            bookRepository.save(updatedBook);
+
+            log.info("Book updated with bookID {}", id);
+        }
     }
 }
