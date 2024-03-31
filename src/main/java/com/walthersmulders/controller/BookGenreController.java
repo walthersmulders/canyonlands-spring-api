@@ -3,6 +3,7 @@ package com.walthersmulders.controller;
 import com.walthersmulders.mapstruct.dto.bookgenre.BookGenre;
 import com.walthersmulders.mapstruct.dto.bookgenre.BookGenreNoID;
 import com.walthersmulders.service.BookGenreService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -24,7 +25,7 @@ public class BookGenreController {
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public BookGenre createGenre(@RequestBody BookGenreNoID bookGenreNoID) {
+    public BookGenre createGenre(@Valid @RequestBody BookGenreNoID bookGenreNoID) {
         return bookGenreService.create(bookGenreNoID);
     }
 
@@ -43,7 +44,7 @@ public class BookGenreController {
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void updateGenre(@PathVariable UUID id, @RequestBody BookGenreNoID bookGenreNoID) {
+    public void updateGenre(@PathVariable UUID id, @Valid @RequestBody BookGenreNoID bookGenreNoID) {
         bookGenreService.update(id, bookGenreNoID);
     }
 
