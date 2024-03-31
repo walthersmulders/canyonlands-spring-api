@@ -59,4 +59,15 @@ public class UsersBookController {
     ) {
         usersBookService.delete(userID, bookID);
     }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping(value = "/{userID}/books/{bookID}")
+    public void update(
+            @PathVariable(name = "userID") UUID userID,
+            @PathVariable(name = "bookID") UUID bookID,
+            @Valid @RequestBody UsersBookUpsert usersBookUpsert
+    ) {
+        usersBookService.update(userID, bookID, usersBookUpsert);
+    }
 }

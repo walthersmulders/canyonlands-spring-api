@@ -137,4 +137,28 @@ public class UsersBookService {
 
         log.info("Deleted book with bookID: {} for user with userID: {}", bookID, userID);
     }
+
+    public void update(UUID userID, UUID bookID, UsersBookUpsert usersBookUpsert) {
+        log.info("Updating book with bookID: {} for user with userID: {}", bookID, userID);
+
+        Optional<UsersBookEntity> existingUsersBook = usersBookRepository.findById(
+                new UsersBookID(userID, bookID)
+        );
+
+        if (existingUsersBook.isEmpty()) {
+            log.error("Combination with userID: {} and bookID: {} not found", userID, bookID);
+
+            throw new EntityNotFoundException("UsersBook", Map.ofEntries(
+                    Map.entry(USER_ID, userID.toString()),
+                    Map.entry(BOOK_ID, bookID.toString())
+            ));
+        }
+
+        existingUsersBook.get().setReview(usersBookUpsert.review());
+        existingUsersBook.get().setRating(usersBookUpsert.rating());
+
+        usersBookRepository.save(existingUsersBook.get());
+
+        log.info("Updated book with bookID: {} for user with userID: {}", bookID, userID);
+    }
 }
