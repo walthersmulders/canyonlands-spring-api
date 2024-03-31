@@ -29,12 +29,14 @@ public class BookGenreController {
         return bookGenreService.create(bookGenreNoID);
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public List<BookGenre> getGenres() {
         return bookGenreService.getGenres();
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     public BookGenre getGenre(@PathVariable UUID id) {
