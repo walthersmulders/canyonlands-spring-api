@@ -66,7 +66,9 @@ public class BookController {
         authorBookService.updateBook(id, bookAdd);
     }
 
-    // TODO :: method to add author to book by bookID
+    // TODO :: method to add author to book by bookID and authorID
 
-    // TODO :: method to remove author from book by bookID
+    // TODO :: method to remove author from book by bookID and authorID (NOTE :: A book must have at least one author)
+
+    // TODO :: method to update genre for a book by bookID and genreID (NOTE :: A book must always have a genre)
 }
