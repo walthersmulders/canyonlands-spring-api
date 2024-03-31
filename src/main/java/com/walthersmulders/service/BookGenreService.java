@@ -93,14 +93,22 @@ public class BookGenreService {
             throw new EntityNotFoundException(BOOK_GENRE, Map.of("bookGenreId", id.toString()));
         }
 
-        BookGenreEntity updatedBookGenre = bookGenreMapper.bookGenreEntityUpdateMerge(
-                existingBookGenre.get(),
-                bookGenreNoID
-        );
+        log.info("Check if incoming object has the same fields as existing");
 
-        bookGenreRepository.save(updatedBookGenre);
+        if (existingBookGenre.get().checkUpdateDtoEqualsEntity(bookGenreNoID)) {
+            log.info("Incoming object has the same fields as existing, no need to update");
+        } else {
+            log.info("Incoming object has different fields as existing, updating");
 
-        log.info("Updated genre with id: {}", id);
+            BookGenreEntity updatedBookGenre = bookGenreMapper.bookGenreEntityUpdateMerge(
+                    existingBookGenre.get(),
+                    bookGenreNoID
+            );
+
+            bookGenreRepository.save(updatedBookGenre);
+
+            log.info("Updated genre with id: {}", id);
+        }
     }
 
     public void delete(UUID id) {
