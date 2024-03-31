@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequestMapping("/author")
 @RestController
@@ -31,7 +32,28 @@ public class AuthorController {
     @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<AuthorWithBooks> getAuthors() {
+    public List<Author> getAuthors() {
         return authorBookService.getAuthors();
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/books")
+    public List<AuthorWithBooks> getAuthorsWithBooks() {
+        return authorBookService.getAuthorsWithBooks();
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}")
+    public Author getAuthor(@PathVariable UUID id) {
+        return authorBookService.getAuthor(id);
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}/books")
+    public AuthorWithBooks getAuthorWithBooks(@PathVariable UUID id) {
+        return authorBookService.getAuthorWithBooks(id);
     }
 }

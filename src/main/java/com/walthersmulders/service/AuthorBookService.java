@@ -20,16 +20,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static java.util.Map.entry;
 
 @Service
 @Slf4j
 public class AuthorBookService {
+    private static final String AUTHOR = "Author";
+
     private final AuthorRepository    authorRepository;
     private final AuthorMapper        authorMapper;
     private final BookRepository      bookRepository;
@@ -74,7 +73,7 @@ public class AuthorBookService {
             log.error("Author already exists");
 
             throw new EntityExistsException(
-                    "Author", Map.ofEntries(
+                    AUTHOR, Map.ofEntries(
                     entry("first name", authorNoID.firstName()),
                     entry("last name", authorNoID.lastName())
             ));
@@ -89,17 +88,16 @@ public class AuthorBookService {
         return authorMapper.entityToAuthor(authorEntity);
     }
 
-    @Transactional(readOnly = true)
-    public List<AuthorWithBooks> getAuthors() {
+    public List<Author> getAuthors() {
         log.info("Getting all authors");
 
-        List<AuthorEntity> authors = authorRepository.fetchAll();
+        List<AuthorEntity> authors = authorRepository.findAll();
 
         log.info("Found {} authors", authors.size());
 
         return authors.isEmpty() ? List.of()
                                  : authors.stream()
-                                          .map(authorMapper::entityToAuthorWithBooks)
+                                          .map(authorMapper::entityToAuthor)
                                           .toList();
     }
 
@@ -153,5 +151,50 @@ public class AuthorBookService {
         bookRepository.save(book);
 
         return bookMapper.entityToBookWithLinks(book);
+    }
+
+    public Author getAuthor(UUID id) {
+        log.info("Getting author with authorID {}", id);
+
+        AuthorEntity author = authorRepository.
+                findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        AUTHOR,
+                        Map.of("authorID", id.toString())
+                ));
+
+        return authorMapper.entityToAuthor(author);
+    }
+
+    @Transactional(readOnly = true)
+    public AuthorWithBooks getAuthorWithBooks(UUID id) {
+        log.info("Getting author with books for authorID {}", id);
+
+        // TODO :: If author does not have a book then the result will be empty, need to handle this
+
+        AuthorEntity authorWithBooks = authorRepository
+                .fetchAuthorWithBooks(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        AUTHOR,
+                        Map.of("authorID", id.toString())
+                ));
+
+        return authorMapper.entityToAuthorWithBooks(authorWithBooks);
+    }
+
+    @Transactional(readOnly = true)
+    public List<AuthorWithBooks> getAuthorsWithBooks() {
+        log.info("Getting all authors with books");
+
+        // TODO :: If author does not have a book then the result will be empty, need to handle this
+
+        List<AuthorEntity> authorsWithBooks = authorRepository.fetchAllWithBooks();
+
+        log.info("Found {} authors", authorsWithBooks.size());
+
+        return authorsWithBooks.isEmpty() ? List.of()
+                                          : authorsWithBooks.stream()
+                                                            .map(authorMapper::entityToAuthorWithBooks)
+                                                            .toList();
     }
 }

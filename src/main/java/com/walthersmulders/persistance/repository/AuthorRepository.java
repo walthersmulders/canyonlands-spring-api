@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -23,5 +24,13 @@ public interface AuthorRepository extends JpaRepository<AuthorEntity, UUID> {
     @Query("SELECT ae " +
            "FROM AuthorEntity ae " +
            "JOIN FETCH ae.books")
-    List<AuthorEntity> fetchAll();
+    List<AuthorEntity> fetchAllWithBooks();
+
+    @Query("SELECT ae " +
+           "FROM AuthorEntity ae " +
+           "JOIN FETCH ae.books " +
+           "WHERE ae.authorID = :authorID")
+    Optional<AuthorEntity> fetchAuthorWithBooks(
+            @Param(value = "authorID") UUID authorID
+    );
 }
