@@ -26,6 +26,13 @@ public interface BookRepository extends JpaRepository<BookEntity, UUID> {
             @Param(value = "isbn") String isbn
     );
 
+    @Query("SELECT CASE WHEN COUNT(be) > 0 THEN true ELSE false END " +
+           "FROM BookEntity be " +
+           "WHERE be.bookGenre.bookGenreID = :bookGenreID")
+    boolean existsByBookGenreID(
+            @Param(value = "bookGenreID") UUID bookGenreID
+    );
+
     @Query("SELECT be " +
            "FROM BookEntity be " +
            "JOIN FETCH be.authors")

@@ -2,11 +2,13 @@ package com.walthersmulders.service;
 
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
+import com.walthersmulders.exception.GenericBadRequestException;
 import com.walthersmulders.mapstruct.dto.bookgenre.BookGenre;
 import com.walthersmulders.mapstruct.dto.bookgenre.BookGenreNoID;
 import com.walthersmulders.mapstruct.mapper.BookGenreMapper;
 import com.walthersmulders.persistance.entity.BookGenreEntity;
 import com.walthersmulders.persistance.repository.BookGenreRepository;
+import com.walthersmulders.persistance.repository.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +26,16 @@ public class BookGenreService {
 
     private final BookGenreRepository bookGenreRepository;
     private final BookGenreMapper     bookGenreMapper;
+    private final BookRepository      bookRepository;
 
-    public BookGenreService(BookGenreRepository bookGenreRepository, BookGenreMapper bookGenreMapper) {
+    public BookGenreService(
+            BookGenreRepository bookGenreRepository,
+            BookGenreMapper bookGenreMapper,
+            BookRepository bookRepository
+    ) {
         this.bookGenreRepository = bookGenreRepository;
         this.bookGenreMapper = bookGenreMapper;
+        this.bookRepository = bookRepository;
     }
 
     public List<BookGenre> getGenres() {
@@ -112,6 +120,17 @@ public class BookGenreService {
     }
 
     public void delete(UUID id) {
+        log.info("Checking if genre belongs to any book");
+        boolean isLinkedToBook = bookRepository.existsByBookGenreID(id);
+
+        if (isLinkedToBook) {
+            log.error("Genre with id {} is linked to a book, cannot delete", id);
+
+            throw new GenericBadRequestException(
+                    "Genre with id " + id + " is linked to a book, cannot delete"
+            );
+        }
+
         log.info("Deleting genre with id: {}", id);
 
         bookGenreRepository.deleteById(id);
