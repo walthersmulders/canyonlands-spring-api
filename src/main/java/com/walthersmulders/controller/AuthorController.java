@@ -56,4 +56,11 @@ public class AuthorController {
     public AuthorWithBooks getAuthorWithBooks(@PathVariable UUID id) {
         return authorBookService.getAuthorWithBooks(id);
     }
+
+    @PreAuthorize("hasAuthority('SYS_ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{id}")
+    public void updateAuthor(@PathVariable UUID id, @RequestBody AuthorNoID authorNoID) {
+        authorBookService.updateAuthor(id, authorNoID);
+    }
 }

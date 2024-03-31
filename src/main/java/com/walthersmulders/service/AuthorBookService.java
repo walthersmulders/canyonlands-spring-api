@@ -197,4 +197,28 @@ public class AuthorBookService {
                                                             .map(authorMapper::entityToAuthorWithBooks)
                                                             .toList();
     }
+
+    public void updateAuthor(UUID id, AuthorNoID authorNoID) {
+        log.info("Updating author with authorID {}", id);
+
+        Optional<AuthorEntity> existingAuthor = authorRepository.findById(id);
+
+        if (existingAuthor.isEmpty()) {
+            log.error("Author with authorID {} not found", id);
+
+            throw new EntityNotFoundException(
+                    AUTHOR,
+                    Map.of("authorID", id.toString())
+            );
+        }
+
+        AuthorEntity updatedAuthor = authorMapper.authorEntityUpdateMerge(
+                existingAuthor.get(),
+                authorNoID
+        );
+
+        authorRepository.save(updatedAuthor);
+
+        log.info("Author updated with authorID {}", id);
+    }
 }
