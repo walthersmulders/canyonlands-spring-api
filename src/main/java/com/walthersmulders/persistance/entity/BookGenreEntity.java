@@ -15,7 +15,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
-@Table(name = "book_genre")
+@Table(name = "genre_book")
 @Getter
 @Setter
 @NoArgsConstructor

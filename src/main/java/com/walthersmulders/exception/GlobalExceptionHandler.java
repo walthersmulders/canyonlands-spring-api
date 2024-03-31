@@ -38,6 +38,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return buildApiErrorHandler(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
+    // TODO :: make sure to print out appropriate error message, do not want to expose internals to the calling client
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     @ExceptionHandler(Exception.class)
