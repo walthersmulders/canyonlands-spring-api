@@ -1,5 +1,6 @@
 package com.walthersmulders.persistance.entity;
 
+import com.walthersmulders.mapstruct.dto.bookgenre.BookGenreNoID;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -32,4 +33,9 @@ public class BookGenreEntity implements Serializable {
 
     @Column(name = "sub_genre", nullable = false, length = 500)
     private String subGenre;
+
+    public boolean checkUpdateDtoEqualsEntity(BookGenreNoID bookGenreNoID) {
+        return this.genre.equals(bookGenreNoID.genre()) &&
+               this.subGenre.equals(bookGenreNoID.subGenre());
+    }
 }

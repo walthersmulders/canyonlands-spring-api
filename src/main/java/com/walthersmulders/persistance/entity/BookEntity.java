@@ -1,5 +1,6 @@
 package com.walthersmulders.persistance.entity;
 
+import com.walthersmulders.mapstruct.dto.book.BookAdd;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -83,6 +84,15 @@ public class BookEntity implements Serializable {
      * }
      * }
      */
+
+    public boolean checkUpdateDtoEqualsEntity(BookAdd bookAdd) {
+        return this.title.equals(bookAdd.title()) &&
+               this.isbn.equals(bookAdd.isbn()) &&
+               this.pages.equals(bookAdd.pages()) &&
+               this.plot.equals(bookAdd.plot()) &&
+               this.cover.equals(bookAdd.cover()) &&
+               this.datePublished.equals(bookAdd.datePublished());
+    }
 
     @Override
     public int hashCode() {
