@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -28,5 +29,13 @@ public interface BookRepository extends JpaRepository<BookEntity, UUID> {
     @Query("SELECT be " +
            "FROM BookEntity be " +
            "JOIN FETCH be.authors")
-    List<BookEntity> fetchAll();
+    List<BookEntity> fetchBooksWithLinks();
+
+    @Query("SELECT be " +
+           "FROM BookEntity be " +
+           "JOIN FETCH be.authors " +
+           "WHERE be.bookID = :bookID")
+    Optional<BookEntity> fetchBookWithLinks(
+            @Param(value = "bookID") UUID bookID
+    );
 }

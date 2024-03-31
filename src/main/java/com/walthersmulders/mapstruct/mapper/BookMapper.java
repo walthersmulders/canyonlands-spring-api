@@ -6,10 +6,7 @@ import com.walthersmulders.mapstruct.dto.book.BookAdd;
 import com.walthersmulders.mapstruct.dto.book.BookWithLinks;
 import com.walthersmulders.persistance.entity.AuthorBookEntity;
 import com.walthersmulders.persistance.entity.BookEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,12 @@ public interface BookMapper {
     BookEntity bookAddToEntity(BookAdd book);
 
     Book entityToBook(BookEntity entity);
+
+    @InheritConfiguration
+    BookEntity bookEntityUpdateMerge(
+            @MappingTarget BookEntity entity,
+            BookAdd book
+    );
 
     @Named(value = "authorBookListToAuthorList")
     default List<Author> authorBookListToAuthorList(BookEntity entity) {
