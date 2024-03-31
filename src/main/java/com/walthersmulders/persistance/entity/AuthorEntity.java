@@ -1,6 +1,6 @@
 package com.walthersmulders.persistance.entity;
 
-import com.walthersmulders.mapstruct.dto.author.AuthorNoID;
+import com.walthersmulders.mapstruct.dto.author.AuthorUpsert;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,8 +38,8 @@ public class AuthorEntity implements Serializable {
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AuthorBookEntity> books;
 
-    public boolean checkUpdateDtoEqualsEntity(AuthorNoID authorNoID) {
-        return this.firstName.equals(authorNoID.firstName()) &&
-               this.lastName.equals(authorNoID.lastName());
+    public boolean checkUpdateDtoEqualsEntity(AuthorUpsert authorUpsert) {
+        return this.firstName.equals(authorUpsert.firstName()) &&
+               this.lastName.equals(authorUpsert.lastName());
     }
 }

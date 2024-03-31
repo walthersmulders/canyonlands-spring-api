@@ -1,7 +1,7 @@
 package com.walthersmulders.mapstruct.mapper;
 
 import com.walthersmulders.mapstruct.dto.author.Author;
-import com.walthersmulders.mapstruct.dto.author.AuthorNoID;
+import com.walthersmulders.mapstruct.dto.author.AuthorUpsert;
 import com.walthersmulders.mapstruct.dto.author.AuthorWithBooks;
 import com.walthersmulders.mapstruct.dto.book.Book;
 import com.walthersmulders.persistance.entity.AuthorBookEntity;
@@ -18,12 +18,12 @@ public interface AuthorMapper {
     @Mapping(target = "books", source = "entity", qualifiedByName = "authorBookListToBookList")
     AuthorWithBooks entityToAuthorWithBooks(AuthorEntity entity);
 
-    AuthorEntity authorNoIDToEntity(AuthorNoID authorNoID);
+    AuthorEntity authorUpsertToEntity(AuthorUpsert authorUpsert);
 
     @InheritConfiguration
     AuthorEntity authorEntityUpdateMerge(
             @MappingTarget AuthorEntity authorEntity,
-            AuthorNoID authorNoID
+            AuthorUpsert authorUpsert
     );
 
     @Named(value = "authorBookListToBookList")

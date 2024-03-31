@@ -3,7 +3,7 @@ package com.walthersmulders.service;
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
 import com.walthersmulders.mapstruct.dto.author.Author;
-import com.walthersmulders.mapstruct.dto.author.AuthorNoID;
+import com.walthersmulders.mapstruct.dto.author.AuthorUpsert;
 import com.walthersmulders.mapstruct.dto.author.AuthorWithBooks;
 import com.walthersmulders.mapstruct.dto.book.Book;
 import com.walthersmulders.mapstruct.dto.book.BookAdd;
@@ -41,7 +41,8 @@ public class AuthorBookService {
     private final BookGenreRepository bookGenreRepository;
 
     public AuthorBookService(
-            AuthorRepository authorRepository, AuthorMapper authorMapper,
+            AuthorRepository authorRepository,
+            AuthorMapper authorMapper,
             BookRepository bookRepository,
             BookMapper bookMapper,
             BookGenreRepository bookGenreRepository
@@ -80,22 +81,22 @@ public class AuthorBookService {
                                       .toList();
     }
 
-    public Author createAuthor(AuthorNoID authorNoID) {
+    public Author createAuthor(AuthorUpsert authorUpsert) {
         log.info("Creating author");
 
-        boolean exists = authorRepository.exists(authorNoID.firstName(), authorNoID.lastName());
+        boolean exists = authorRepository.exists(authorUpsert.firstName(), authorUpsert.lastName());
 
         if (exists) {
             log.error("Author already exists");
 
             throw new EntityExistsException(
                     AUTHOR, Map.ofEntries(
-                    entry("first name", authorNoID.firstName()),
-                    entry("last name", authorNoID.lastName())
+                    entry("first name", authorUpsert.firstName()),
+                    entry("last name", authorUpsert.lastName())
             ));
         }
 
-        AuthorEntity authorEntity = authorMapper.authorNoIDToEntity(authorNoID);
+        AuthorEntity authorEntity = authorMapper.authorUpsertToEntity(authorUpsert);
 
         authorRepository.save(authorEntity);
 
@@ -214,7 +215,7 @@ public class AuthorBookService {
                                                             .toList();
     }
 
-    public void updateAuthor(UUID id, AuthorNoID authorNoID) {
+    public void updateAuthor(UUID id, AuthorUpsert authorUpsert) {
         log.info("Updating author with authorID {}", id);
 
         Optional<AuthorEntity> existingAuthor = authorRepository.findById(id);
@@ -230,8 +231,8 @@ public class AuthorBookService {
 
         log.info("Check if incoming object has the same fields as existing");
 
-        if (existingAuthor.get().checkUpdateDtoEqualsEntity(authorNoID)
-            && Objects.equals(existingAuthor.get().getAdditionalName(), authorNoID.additionalName())
+        if (existingAuthor.get().checkUpdateDtoEqualsEntity(authorUpsert)
+            && Objects.equals(existingAuthor.get().getAdditionalName(), authorUpsert.additionalName())
         ) {
             log.info("Incoming object has the same fields as existing, no need to update");
         } else {
@@ -239,7 +240,7 @@ public class AuthorBookService {
 
             AuthorEntity updatedAuthor = authorMapper.authorEntityUpdateMerge(
                     existingAuthor.get(),
-                    authorNoID
+                    authorUpsert
             );
 
             authorRepository.save(updatedAuthor);
