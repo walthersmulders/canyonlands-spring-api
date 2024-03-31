@@ -2,8 +2,8 @@ package com.walthersmulders.controller;
 
 import com.walthersmulders.mapstruct.dto.book.Book;
 import com.walthersmulders.mapstruct.dto.book.BookUpsert;
-import com.walthersmulders.mapstruct.dto.book.BookWithAuthorsAdd;
 import com.walthersmulders.mapstruct.dto.book.BookWithLinks;
+import com.walthersmulders.mapstruct.dto.book.BookWithLinksUpsert;
 import com.walthersmulders.service.AuthorBookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -27,8 +27,8 @@ public class BookController {
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public BookWithLinks createWithAuthors(@Valid @RequestBody BookWithAuthorsAdd bookWithAuthorsAdd) {
-        return authorBookService.createBookWithAuthors(bookWithAuthorsAdd);
+    public BookWithLinks createWithAuthors(@Valid @RequestBody BookWithLinksUpsert bookWithLinksUpsert) {
+        return authorBookService.createBookWithAuthors(bookWithLinksUpsert);
     }
 
     @PreAuthorize("hasAuthority('USER')")

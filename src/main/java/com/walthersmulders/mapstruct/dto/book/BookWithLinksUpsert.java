@@ -6,8 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-// TODO :: Rename to BookWithLinksUpsert
-public record BookWithAuthorsAdd(
+public record BookWithLinksUpsert(
         @Valid @NotNull List<UUID> authorIDs,
         @NotNull UUID bookGenreID,
         @NotNull BookUpsert book

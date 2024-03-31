@@ -7,8 +7,8 @@ import com.walthersmulders.mapstruct.dto.author.AuthorUpsert;
 import com.walthersmulders.mapstruct.dto.author.AuthorWithBooks;
 import com.walthersmulders.mapstruct.dto.book.Book;
 import com.walthersmulders.mapstruct.dto.book.BookUpsert;
-import com.walthersmulders.mapstruct.dto.book.BookWithAuthorsAdd;
 import com.walthersmulders.mapstruct.dto.book.BookWithLinks;
+import com.walthersmulders.mapstruct.dto.book.BookWithLinksUpsert;
 import com.walthersmulders.mapstruct.mapper.AuthorMapper;
 import com.walthersmulders.mapstruct.mapper.BookMapper;
 import com.walthersmulders.persistance.entity.AuthorEntity;
@@ -119,51 +119,51 @@ public class AuthorBookService {
     }
 
     @Transactional
-    public BookWithLinks createBookWithAuthors(BookWithAuthorsAdd bookWithAuthorsAdd) {
+    public BookWithLinks createBookWithAuthors(BookWithLinksUpsert bookWithLinksUpsert) {
         log.info("Creating book with authors");
-        log.info("Check if book with ISBN {} already exists", bookWithAuthorsAdd.book().isbn());
+        log.info("Check if book with ISBN {} already exists", bookWithLinksUpsert.book().isbn());
 
-        boolean existsByIsbn = bookRepository.existsByIsbn(bookWithAuthorsAdd.book().isbn());
+        boolean existsByIsbn = bookRepository.existsByIsbn(bookWithLinksUpsert.book().isbn());
 
-        log.info("Check if book with title {} already exists", bookWithAuthorsAdd.book().title());
+        log.info("Check if book with title {} already exists", bookWithLinksUpsert.book().title());
 
-        boolean existsByTitle = bookRepository.existsByTitle(bookWithAuthorsAdd.book().title());
+        boolean existsByTitle = bookRepository.existsByTitle(bookWithLinksUpsert.book().title());
 
         Map<String, String> errorsMap = new HashMap<>();
 
         if (existsByTitle || existsByIsbn) {
             if (existsByIsbn) {
-                errorsMap.put("isbn", bookWithAuthorsAdd.book().isbn());
+                errorsMap.put("isbn", bookWithLinksUpsert.book().isbn());
             }
 
             if (existsByTitle) {
-                errorsMap.put("title", bookWithAuthorsAdd.book().title());
+                errorsMap.put("title", bookWithLinksUpsert.book().title());
             }
 
             throw new EntityExistsException(BOOK, errorsMap);
         }
 
-        Optional<BookGenreEntity> bookGenre = bookGenreRepository.findById(bookWithAuthorsAdd.bookGenreID());
+        Optional<BookGenreEntity> bookGenre = bookGenreRepository.findById(bookWithLinksUpsert.bookGenreID());
 
         if (bookGenre.isEmpty()) {
-            log.error("Book genre with id {} not found", bookWithAuthorsAdd.bookGenreID());
+            log.error("Book genre with id {} not found", bookWithLinksUpsert.bookGenreID());
 
             throw new EntityNotFoundException(
                     "Book Genre",
-                    Map.of("bookGenreId", String.valueOf(bookWithAuthorsAdd.bookGenreID()))
+                    Map.of("bookGenreId", String.valueOf(bookWithLinksUpsert.bookGenreID()))
             );
         }
 
-        BookEntity book = bookMapper.bookUpsertToEntity(bookWithAuthorsAdd.book());
+        BookEntity book = bookMapper.bookUpsertToEntity(bookWithLinksUpsert.book());
 
         book.setBookGenre(bookGenre.get());
         book.setDateAdded(LocalDateTime.now());
         book.setDateUpdated(LocalDateTime.now());
 
-        bookWithAuthorsAdd.authorIDs()
-                          .stream()
-                          .map(authorRepository::findById)
-                          .forEach(author -> author.ifPresent(book::addAuthor));
+        bookWithLinksUpsert.authorIDs()
+                           .stream()
+                           .map(authorRepository::findById)
+                           .forEach(author -> author.ifPresent(book::addAuthor));
 
         bookRepository.save(book);
 
