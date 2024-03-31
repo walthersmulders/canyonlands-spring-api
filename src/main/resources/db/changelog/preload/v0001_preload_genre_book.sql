@@ -1,6 +1,7 @@
 --liquibase formatted sql
 
 --changeset walthersmulders:1
+
 INSERT INTO genre_book (book_genre_id, genre, sub_genre)
 VALUES (gen_random_uuid(), 'Arts & Entertainment', 'Art & Architecture'),
        (gen_random_uuid(), 'Arts & Entertainment', 'Art History'),
