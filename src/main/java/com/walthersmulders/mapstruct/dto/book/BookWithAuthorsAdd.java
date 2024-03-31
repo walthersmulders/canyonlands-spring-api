@@ -10,6 +10,6 @@ import java.util.UUID;
 public record BookWithAuthorsAdd(
         @Valid @NotNull List<UUID> authorIDs,
         @NotNull UUID bookGenreID,
-        @NotNull BookAdd book
+        @NotNull BookUpsert book
 ) {
 }

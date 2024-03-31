@@ -1,7 +1,7 @@
 package com.walthersmulders.controller;
 
 import com.walthersmulders.mapstruct.dto.book.Book;
-import com.walthersmulders.mapstruct.dto.book.BookAdd;
+import com.walthersmulders.mapstruct.dto.book.BookUpsert;
 import com.walthersmulders.mapstruct.dto.book.BookWithAuthorsAdd;
 import com.walthersmulders.mapstruct.dto.book.BookWithLinks;
 import com.walthersmulders.service.AuthorBookService;
@@ -62,8 +62,8 @@ public class BookController {
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void updateBook(@PathVariable UUID id, @Valid @RequestBody BookAdd bookAdd) {
-        authorBookService.updateBook(id, bookAdd);
+    public void updateBook(@PathVariable UUID id, @Valid @RequestBody BookUpsert bookUpsert) {
+        authorBookService.updateBook(id, bookUpsert);
     }
 
     // TODO :: method to add author to book by bookID and authorID

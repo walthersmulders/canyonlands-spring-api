@@ -6,7 +6,7 @@ import com.walthersmulders.mapstruct.dto.author.Author;
 import com.walthersmulders.mapstruct.dto.author.AuthorUpsert;
 import com.walthersmulders.mapstruct.dto.author.AuthorWithBooks;
 import com.walthersmulders.mapstruct.dto.book.Book;
-import com.walthersmulders.mapstruct.dto.book.BookAdd;
+import com.walthersmulders.mapstruct.dto.book.BookUpsert;
 import com.walthersmulders.mapstruct.dto.book.BookWithAuthorsAdd;
 import com.walthersmulders.mapstruct.dto.book.BookWithLinks;
 import com.walthersmulders.mapstruct.mapper.AuthorMapper;
@@ -154,7 +154,7 @@ public class AuthorBookService {
             );
         }
 
-        BookEntity book = bookMapper.bookAddToEntity(bookWithAuthorsAdd.book());
+        BookEntity book = bookMapper.bookUpsertToEntity(bookWithAuthorsAdd.book());
 
         book.setBookGenre(bookGenre.get());
         book.setDateAdded(LocalDateTime.now());
@@ -274,7 +274,7 @@ public class AuthorBookService {
         return bookMapper.entityToBookWithLinks(bookWithLinks);
     }
 
-    public void updateBook(UUID id, BookAdd bookAdd) {
+    public void updateBook(UUID id, BookUpsert bookUpsert) {
         log.info("Updating book with bookID {}", id);
 
         Optional<BookEntity> existingBook = bookRepository.findById(id);
@@ -290,28 +290,28 @@ public class AuthorBookService {
 
         log.info("Check if incoming object has the same fields as existing");
 
-        if (existingBook.get().checkUpdateDtoEqualsEntity(bookAdd)) {
+        if (existingBook.get().checkUpdateDtoEqualsEntity(bookUpsert)) {
             log.info("Incoming object has the same fields as existing, no need to update");
         } else {
             log.info("Incoming object has different fields as existing, updating");
 
-            log.info("Check if book with ISBN {} already exists", bookAdd.isbn());
+            log.info("Check if book with ISBN {} already exists", bookUpsert.isbn());
 
-            boolean existsByIsbn = bookRepository.existsByIsbn(bookAdd.isbn());
+            boolean existsByIsbn = bookRepository.existsByIsbn(bookUpsert.isbn());
 
-            log.info("Check if book with title {} already exists", bookAdd.title());
+            log.info("Check if book with title {} already exists", bookUpsert.title());
 
-            boolean existsByTitle = bookRepository.existsByTitle(bookAdd.title());
+            boolean existsByTitle = bookRepository.existsByTitle(bookUpsert.title());
 
             Map<String, String> errorsMap = new HashMap<>();
 
             if (existsByTitle || existsByIsbn) {
                 if (existsByIsbn) {
-                    errorsMap.put("isbn", bookAdd.isbn());
+                    errorsMap.put("isbn", bookUpsert.isbn());
                 }
 
                 if (existsByTitle) {
-                    errorsMap.put("title", bookAdd.title());
+                    errorsMap.put("title", bookUpsert.title());
                 }
 
                 throw new EntityExistsException(BOOK, errorsMap);
@@ -319,7 +319,7 @@ public class AuthorBookService {
 
             BookEntity updatedBook = bookMapper.bookEntityUpdateMerge(
                     existingBook.get(),
-                    bookAdd
+                    bookUpsert
             );
 
             updatedBook.setDateUpdated(LocalDateTime.now());
