@@ -187,8 +187,6 @@ public class AuthorBookService {
     public AuthorWithBooks getAuthorWithBooks(UUID id) {
         log.info("Getting author with books for authorID {}", id);
 
-        // TODO :: If author does not have a book then the result will be empty, need to handle this
-
         AuthorEntity authorWithBooks = authorRepository
                 .fetchAuthorWithBooks(id)
                 .orElseThrow(() -> new EntityNotFoundException(
@@ -202,8 +200,6 @@ public class AuthorBookService {
     @Transactional(readOnly = true)
     public List<AuthorWithBooks> getAuthorsWithBooks() {
         log.info("Getting all authors with books");
-
-        // TODO :: If author does not have a book then the result will be empty, need to handle this
 
         List<AuthorEntity> authorsWithBooks = authorRepository.fetchAllWithBooks();
 

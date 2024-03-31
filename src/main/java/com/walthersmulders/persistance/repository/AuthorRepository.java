@@ -23,12 +23,12 @@ public interface AuthorRepository extends JpaRepository<AuthorEntity, UUID> {
 
     @Query("SELECT ae " +
            "FROM AuthorEntity ae " +
-           "JOIN FETCH ae.books")
+           "LEFT JOIN FETCH ae.books")
     List<AuthorEntity> fetchAllWithBooks();
 
     @Query("SELECT ae " +
            "FROM AuthorEntity ae " +
-           "JOIN FETCH ae.books " +
+           "LEFT JOIN FETCH ae.books " +
            "WHERE ae.authorID = :authorID")
     Optional<AuthorEntity> fetchAuthorWithBooks(
             @Param(value = "authorID") UUID authorID
