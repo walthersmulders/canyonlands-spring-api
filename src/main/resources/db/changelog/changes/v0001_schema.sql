@@ -66,10 +66,11 @@ CREATE TABLE users
 
 CREATE TABLE users_book
 (
-    user_id UUID NOT NULL,
-    book_id UUID NOT NULL,
+    user_id UUID    NOT NULL,
+    book_id UUID    NOT NULL,
+    rating  INTEGER NOT NULL,
     review  VARCHAR(5000),
-    rating  INTEGER,
+
 
     PRIMARY KEY (user_id, book_id),
     FOREIGN KEY (user_id) REFERENCES users,

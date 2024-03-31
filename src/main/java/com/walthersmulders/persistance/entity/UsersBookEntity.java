@@ -31,15 +31,24 @@ public class UsersBookEntity implements Serializable {
     @JoinColumn(name = "book_id")
     private BookEntity book;
 
-    @Column(name = "review", length = 5000, nullable = true)
+    @Column(name = "review", length = 5000)
     private String review;
 
-    @Column(name = "rating", nullable = true)
+    @Column(name = "rating", nullable = false)
     private Integer rating;
 
-    public UsersBookEntity(UserEntity userEntity, BookEntity bookEntity) {
-        this.user = userEntity;
-        this.book = bookEntity;
+    public UsersBookEntity(UserEntity user, BookEntity book, Integer rating) {
+        this.user = user;
+        this.book = book;
+        this.rating = rating;
+        this.usersBookID = new UsersBookID(user.getUserID(), book.getBookID());
+    }
+
+    public UsersBookEntity(UserEntity user, BookEntity book, Integer rating, String review) {
+        this.user = user;
+        this.book = book;
+        this.rating = rating;
+        this.review = review;
         this.usersBookID = new UsersBookID(user.getUserID(), book.getBookID());
     }
 

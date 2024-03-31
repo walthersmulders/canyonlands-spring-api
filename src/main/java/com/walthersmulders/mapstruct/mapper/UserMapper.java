@@ -1,6 +1,8 @@
 package com.walthersmulders.mapstruct.mapper;
 
 import com.walthersmulders.mapstruct.dto.user.User;
+import com.walthersmulders.mapstruct.dto.usersbook.UsersBook;
+import com.walthersmulders.persistance.entity.BookEntity;
 import com.walthersmulders.persistance.entity.UserEntity;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
@@ -20,4 +22,8 @@ public interface UserMapper {
             String firstName,
             String lastName
     );
+
+    UsersBook entityToUsersBook(BookEntity book, Integer rating, String review);
+
+    UsersBook entityToUsersBook(BookEntity book, Integer rating);
 }
