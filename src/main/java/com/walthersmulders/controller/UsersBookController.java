@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RequestMapping("/users")
@@ -40,5 +41,12 @@ public class UsersBookController {
             @PathVariable(name = "bookID") UUID bookID
     ) {
         return usersBookService.getUsersBook(userID, bookID);
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/{userID}/books")
+    public List<UsersBook> getAllUserBooks(@PathVariable(name = "userID") UUID userID) {
+        return usersBookService.getAllUserBooks(userID);
     }
 }

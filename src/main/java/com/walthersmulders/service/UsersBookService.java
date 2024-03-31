@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -113,6 +114,18 @@ public class UsersBookService {
             ));
         }
 
+        log.info("Combination with userID: {} and bookID: {} found", userID, bookID);
+
         return usersBookMapper.entityToUsersBook(usersBook.get());
+    }
+
+    public List<UsersBook> getAllUserBooks(UUID userID) {
+        log.info("Fetching all books for user with userID: {}", userID);
+
+        List<UsersBookEntity> usersBooks = usersBookRepository.fetchAllUsersBooks(userID);
+
+        log.info("Fetched all books for user with userID: {}", userID);
+
+        return usersBooks.stream().map(usersBookMapper::entityToUsersBook).toList();
     }
 }
