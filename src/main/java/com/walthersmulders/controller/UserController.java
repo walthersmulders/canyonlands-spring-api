@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RestController
 public class UserController {
     private final UserService userService;

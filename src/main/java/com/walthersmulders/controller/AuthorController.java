@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/author")
+@RequestMapping("/authors")
 @RestController
 @Validated
 public class AuthorController {
@@ -67,5 +67,5 @@ public class AuthorController {
 
     // TODO :: method to add book to author by authorID
 
-    // TODO :: method to remove book from author by authorID
+    // TODO :: method to remove book from author by authorID (NOTE :: A book must always have at least one author)
 }
