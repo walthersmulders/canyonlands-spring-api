@@ -4,6 +4,7 @@ import com.walthersmulders.mapstruct.dto.author.Author;
 import com.walthersmulders.mapstruct.dto.author.AuthorNoID;
 import com.walthersmulders.mapstruct.dto.author.AuthorWithBooks;
 import com.walthersmulders.service.AuthorBookService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -25,7 +26,7 @@ public class AuthorController {
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Author create(@RequestBody AuthorNoID authorNoID) {
+    public Author create(@Valid @RequestBody AuthorNoID authorNoID) {
         return authorBookService.createAuthor(authorNoID);
     }
 
@@ -60,7 +61,7 @@ public class AuthorController {
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void updateAuthor(@PathVariable UUID id, @RequestBody AuthorNoID authorNoID) {
+    public void updateAuthor(@PathVariable UUID id, @Valid @RequestBody AuthorNoID authorNoID) {
         authorBookService.updateAuthor(id, authorNoID);
     }
 }
