@@ -64,9 +64,9 @@ public class BookEntity implements Serializable {
     @JoinColumn(name = "book_genre_id")
     private BookGenreEntity bookGenre;
 
-    public void addAuthor(AuthorEntity authorEntity) {
-        AuthorBookEntity authorBookEntity = new AuthorBookEntity(authorEntity, this);
-        authors.add(authorBookEntity);
+    public void addAuthor(AuthorEntity author) {
+        AuthorBookEntity authorBook = new AuthorBookEntity(author, this);
+        authors.add(authorBook);
     }
 
     /**
