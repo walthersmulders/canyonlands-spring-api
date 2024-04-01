@@ -66,9 +66,19 @@ public class BookController {
         authorBookService.updateBook(id, bookUpsert);
     }
 
-    // TODO :: method to add author to book by bookID and authorID
+    @PreAuthorize("hasAuthority('SYS_ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{bookID}/authors/{authorID}")
+    public void addAuthorToBook(@PathVariable UUID bookID, @PathVariable UUID authorID) {
+        authorBookService.addAuthorToBook(bookID, authorID);
+    }
 
-    // TODO :: method to remove author from book by bookID and authorID (NOTE :: A book must have at least one author)
+    @PreAuthorize("hasAuthority('SYS_ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{bookID}/authors/{authorID}")
+    public void removeAuthorFromBook(@PathVariable UUID bookID, @PathVariable UUID authorID) {
+        authorBookService.removeAuthorFromBook(bookID, authorID);
+    }
 
     // TODO :: method to update genre for a book by bookID and genreID (NOTE :: A book must always have a genre)
 }

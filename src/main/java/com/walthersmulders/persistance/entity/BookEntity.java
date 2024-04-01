@@ -11,10 +11,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "book")
@@ -69,21 +66,18 @@ public class BookEntity implements Serializable {
         authors.add(authorBook);
     }
 
-    /**
-     * TODO :: IMPL this
-     * public void removeAuthorEntity(AuthorEntity authorEntity) {
-     * for (Iterator<AuthorBookEntity> iterator = authors.iterator(); iterator.hasNext(); ) {
-     * AuthorBookEntity authorBookEntity = iterator.next();
-     * <p>
-     * if (authorBookEntity.getBook().equals(this) && authorBookEntity.getAuthor().equals(authorEntity)) {
-     * iterator.remove();
-     * <p>
-     * authorBookEntity.setBook(null);
-     * authorBookEntity.setAuthor(null);
-     * }
-     * }
-     * }
-     */
+    public void removeAuthor(AuthorEntity author) {
+        for (Iterator<AuthorBookEntity> iterator = authors.iterator(); iterator.hasNext(); ) {
+            AuthorBookEntity authorBookEntity = iterator.next();
+
+            if (authorBookEntity.getBook().equals(this) && authorBookEntity.getAuthor().equals(author)) {
+                iterator.remove();
+
+                authorBookEntity.setBook(null);
+                authorBookEntity.setAuthor(null);
+            }
+        }
+    }
 
     public boolean checkUpdateDtoEqualsEntity(BookUpsert bookUpsert) {
         return this.title.equals(bookUpsert.title()) &&

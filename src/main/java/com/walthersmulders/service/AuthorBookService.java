@@ -2,6 +2,7 @@ package com.walthersmulders.service;
 
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
+import com.walthersmulders.exception.GenericBadRequestException;
 import com.walthersmulders.mapstruct.dto.author.Author;
 import com.walthersmulders.mapstruct.dto.author.AuthorUpsert;
 import com.walthersmulders.mapstruct.dto.author.AuthorWithBooks;
@@ -291,7 +292,6 @@ public class AuthorBookService {
             log.info("Incoming object has the same fields as existing, no need to update");
         } else {
             log.info("Incoming object has different fields as existing, updating");
-
             log.info("Check if book with ISBN {} already exists", bookUpsert.isbn());
 
             boolean existsByIsbn = bookRepository.existsByIsbn(bookUpsert.isbn());
@@ -328,36 +328,10 @@ public class AuthorBookService {
     }
 
     @Transactional
-    public void addBookToAuthor(UUID authorID, UUID bookID) {
-        log.info("Adding book with bookID {} to author with authorID {}", bookID, authorID);
+    public void addAuthorToBook(UUID bookID, UUID authorID) {
+        log.info("Adding author with authorID {} to book with bookID {}", authorID, bookID);
 
-        Optional<AuthorEntity> author = authorRepository.fetchAuthorWithBooks(authorID);
-
-        if (author.isEmpty()) {
-            log.error("Author with authorID {} not found", authorID);
-
-            throw new EntityNotFoundException(
-                    AUTHOR,
-                    Map.of(AUTHOR_ID, authorID.toString())
-            );
-        }
-
-        AuthorBookEntity authorBook = author.get().getBooks()
-                                            .stream()
-                                            .filter(book -> book.getBook().getBookID().equals(bookID))
-                                            .findFirst()
-                                            .orElse(null);
-
-        if (authorBook != null) {
-            log.error("Book with bookID {} already exists in authors list", bookID);
-
-            throw new EntityExistsException(
-                    BOOK,
-                    Map.of(BOOK_ID, bookID.toString())
-            );
-        }
-
-        Optional<BookEntity> book = bookRepository.findById(bookID);
+        Optional<BookEntity> book = bookRepository.fetchBookWithAuthors(bookID);
 
         if (book.isEmpty()) {
             log.error("Book with bookID {} not found", bookID);
@@ -368,6 +342,68 @@ public class AuthorBookService {
             );
         }
 
-        author.get().addBook(book.get());
+        AuthorBookEntity authorBook = book.get().getAuthors()
+                                          .stream()
+                                          .filter(author -> author.getAuthor().getAuthorID().equals(authorID))
+                                          .findFirst()
+                                          .orElse(null);
+
+        if (authorBook != null) {
+            log.error("Author with authorID {} already exists in books list", authorID);
+
+            throw new EntityExistsException(
+                    AUTHOR,
+                    Map.of(AUTHOR_ID, authorID.toString())
+            );
+        }
+
+        Optional<AuthorEntity> author = authorRepository.findById(authorID);
+
+        if (author.isEmpty()) {
+            log.error("Author with authorID {} not found", authorID);
+
+            throw new EntityNotFoundException(
+                    AUTHOR,
+                    Map.of(AUTHOR_ID, authorID.toString())
+            );
+        }
+
+        book.get().addAuthor(author.get());
+
+        log.info("Author with authorID {} added to book with bookID {}", authorID, bookID);
+    }
+
+    @Transactional
+    public void removeAuthorFromBook(UUID bookID, UUID authorID) {
+        log.info("Removing author with authorID {} from book with bookID {}", authorID, bookID);
+
+        Optional<BookEntity> book = bookRepository.fetchBookWithAuthors(bookID);
+
+        if (book.isEmpty()) {
+            log.error("Book with bookID {} not found", bookID);
+
+            throw new EntityNotFoundException(
+                    BOOK,
+                    Map.of(BOOK_ID, bookID.toString())
+            );
+        }
+
+        AuthorBookEntity authorBook = book.get().getAuthors()
+                                          .stream()
+                                          .filter(author -> author.getAuthor().getAuthorID().equals(authorID))
+                                          .findFirst()
+                                          .orElse(null);
+
+        if (authorBook != null) {
+            if (authorBook.getBook().getAuthors().size() <= 1) {
+                log.error("A book must have at least one author");
+
+                throw new GenericBadRequestException("A book must have at least one author");
+            }
+
+            authorBook.getBook().removeAuthor(authorBook.getAuthor());
+
+            log.info("Author with authorID {} removed from book with bookID {}", authorID, bookID);
+        }
     }
 }

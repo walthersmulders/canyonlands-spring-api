@@ -45,4 +45,12 @@ public interface BookRepository extends JpaRepository<BookEntity, UUID> {
     Optional<BookEntity> fetchBookWithLinks(
             @Param(value = "bookID") UUID bookID
     );
+
+    @Query("SELECT be " +
+           "FROM BookEntity be " +
+           "LEFT JOIN FETCH be.authors " +
+           "WHERE be.bookID = :bookID")
+    Optional<BookEntity> fetchBookWithAuthors(
+            @Param(value = "bookID") UUID bookID
+    );
 }
