@@ -406,4 +406,36 @@ public class AuthorBookService {
             log.info("Author with authorID {} removed from book with bookID {}", authorID, bookID);
         }
     }
+
+    public void updateBookGenre(UUID bookID, UUID genreID) {
+        log.info("Updating book genre with genreID {} for book with bookID {}", genreID, bookID);
+
+        Optional<BookEntity> book = bookRepository.findById(bookID);
+
+        if (book.isEmpty()) {
+            log.error("Book with bookID {} not found", bookID);
+
+            throw new EntityNotFoundException(
+                    BOOK,
+                    Map.of(BOOK_ID, bookID.toString())
+            );
+        }
+
+        Optional<BookGenreEntity> bookGenre = bookGenreRepository.findById(genreID);
+
+        if (bookGenre.isEmpty()) {
+            log.error("Book genre with genreID {} not found", genreID);
+
+            throw new EntityNotFoundException(
+                    "Book Genre",
+                    Map.of("bookGenreId", genreID.toString())
+            );
+        }
+
+        book.get().setBookGenre(bookGenre.get());
+
+        bookRepository.save(book.get());
+
+        log.info("Book genre updated with genreID {} for book with bookID {}", genreID, bookID);
+    }
 }

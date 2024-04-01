@@ -80,5 +80,10 @@ public class BookController {
         authorBookService.removeAuthorFromBook(bookID, authorID);
     }
 
-    // TODO :: method to update genre for a book by bookID and genreID (NOTE :: A book must always have a genre)
+    @PreAuthorize("hasAuthority('SYS_ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{bookID}/genres/{genreID}")
+    public void updateBookGenre(@PathVariable UUID bookID, @PathVariable UUID genreID) {
+        authorBookService.updateBookGenre(bookID, genreID);
+    }
 }
