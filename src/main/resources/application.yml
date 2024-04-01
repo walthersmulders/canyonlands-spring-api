@@ -31,6 +31,10 @@ spring:
     enabled: true
   application:
     name: canyonlands-spring-api
+management:
+  endpoint:
+    health:
+      show-details: when_authorized
 logging:
   level:
     org:
