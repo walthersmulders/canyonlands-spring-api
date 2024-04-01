@@ -42,4 +42,9 @@ public class AuthorEntity implements Serializable {
         return this.firstName.equals(authorUpsert.firstName()) &&
                this.lastName.equals(authorUpsert.lastName());
     }
+
+    public void addBook(BookEntity book) {
+        AuthorBookEntity authorBook = new AuthorBookEntity(this, book);
+        books.add(authorBook);
+    }
 }

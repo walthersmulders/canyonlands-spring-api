@@ -65,7 +65,12 @@ public class AuthorController {
         authorBookService.updateAuthor(id, authorUpsert);
     }
 
-    // TODO :: method to add book to author by authorID
+    @PreAuthorize("hasAuthority('SYS_ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{authorID}/books/{bookID}")
+    public void addBookToAuthor(@PathVariable UUID authorID, @PathVariable UUID bookID) {
+        authorBookService.addBookToAuthor(authorID, bookID);
+    }
 
     // TODO :: method to remove book from author by authorID (NOTE :: A book must always have at least one author)
 }

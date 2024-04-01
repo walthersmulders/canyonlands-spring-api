@@ -11,6 +11,7 @@ import com.walthersmulders.mapstruct.dto.book.BookWithLinks;
 import com.walthersmulders.mapstruct.dto.book.BookWithLinksUpsert;
 import com.walthersmulders.mapstruct.mapper.AuthorMapper;
 import com.walthersmulders.mapstruct.mapper.BookMapper;
+import com.walthersmulders.persistance.entity.AuthorBookEntity;
 import com.walthersmulders.persistance.entity.AuthorEntity;
 import com.walthersmulders.persistance.entity.BookEntity;
 import com.walthersmulders.persistance.entity.BookGenreEntity;
@@ -324,5 +325,49 @@ public class AuthorBookService {
 
             log.info("Book updated with bookID {}", id);
         }
+    }
+
+    @Transactional
+    public void addBookToAuthor(UUID authorID, UUID bookID) {
+        log.info("Adding book with bookID {} to author with authorID {}", bookID, authorID);
+
+        Optional<AuthorEntity> author = authorRepository.fetchAuthorWithBooks(authorID);
+
+        if (author.isEmpty()) {
+            log.error("Author with authorID {} not found", authorID);
+
+            throw new EntityNotFoundException(
+                    AUTHOR,
+                    Map.of(AUTHOR_ID, authorID.toString())
+            );
+        }
+
+        AuthorBookEntity authorBook = author.get().getBooks()
+                                            .stream()
+                                            .filter(book -> book.getBook().getBookID().equals(bookID))
+                                            .findFirst()
+                                            .orElse(null);
+
+        if (authorBook != null) {
+            log.error("Book with bookID {} already exists in authors list", bookID);
+
+            throw new EntityExistsException(
+                    BOOK,
+                    Map.of(BOOK_ID, bookID.toString())
+            );
+        }
+
+        Optional<BookEntity> book = bookRepository.findById(bookID);
+
+        if (book.isEmpty()) {
+            log.error("Book with bookID {} not found", bookID);
+
+            throw new EntityNotFoundException(
+                    BOOK,
+                    Map.of(BOOK_ID, bookID.toString())
+            );
+        }
+
+        author.get().addBook(book.get());
     }
 }
