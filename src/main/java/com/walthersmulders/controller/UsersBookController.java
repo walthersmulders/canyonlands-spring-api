@@ -57,7 +57,7 @@ public class UsersBookController {
             @PathVariable(name = "userID") UUID userID,
             @PathVariable(name = "bookID") UUID bookID
     ) {
-        usersBookService.delete(userID, bookID);
+        usersBookService.removeBookFromUserLibrary(userID, bookID);
     }
 
     @PreAuthorize("hasAuthority('USER')")

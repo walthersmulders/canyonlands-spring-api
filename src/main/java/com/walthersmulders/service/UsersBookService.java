@@ -130,7 +130,7 @@ public class UsersBookService {
         return usersBooks.stream().map(usersBookMapper::entityToUsersBook).toList();
     }
 
-    public void delete(UUID userID, UUID bookID) {
+    public void removeBookFromUserLibrary(UUID userID, UUID bookID) {
         log.info("Deleting book with bookID: {} for user with userID: {}", bookID, userID);
 
         usersBookRepository.deleteById(new UsersBookID(userID, bookID));

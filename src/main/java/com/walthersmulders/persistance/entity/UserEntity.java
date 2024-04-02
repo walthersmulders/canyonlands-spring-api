@@ -49,20 +49,6 @@ public class UserEntity implements Serializable {
         books.add(usersBook);
     }
 
-
-    // TODO :: Implement this
-    //    public void removeBookFromUserLibrary(BookEntity book) {
-    //        for (Iterator<UsersBookEntity> iterator = books.iterator(); iterator.hasNext(); ) {
-    //            UsersBookEntity usersBook = iterator.next();
-    //
-    //            if (usersBook.getUser().equals(this) && usersBook.getBook().equals(book)) {
-    //                iterator.remove();
-    //                usersBook.setBook(null);
-    //                usersBook.setUser(null);
-    //            }
-    //        }
-    //    }
-
     @Override
     public int hashCode() {
         return Objects.hashCode(this.userID);
