@@ -1,7 +1,5 @@
 package com.walthersmulders.controller;
 
-// TODO :: Controller to manage genres used for movies
-
 import com.walthersmulders.mapstruct.dto.genremovie.GenreMovie;
 import com.walthersmulders.mapstruct.dto.genremovie.GenreMovieUpsert;
 import com.walthersmulders.service.GenreMovieService;
@@ -12,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequestMapping("/genres/movies")
 @RestController
@@ -30,10 +29,27 @@ public class GenreMovieController {
         return genreMovieService.create(genreMovieUpsert);
     }
 
-    @PreAuthorize("hasAuthority('SYS_ADMIN')")
+    @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public List<GenreMovie> getGenres() {
         return genreMovieService.getGenres();
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}")
+    public GenreMovie getGenre(@PathVariable UUID id) {
+        return genreMovieService.getGenre(id);
+    }
+
+    @PreAuthorize("hasAuthority('SYS_ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{id}")
+    public void updateGenre(
+            @PathVariable UUID id,
+            @Valid @RequestBody GenreMovieUpsert genreMovieUpsert
+    ) {
+        genreMovieService.update(id, genreMovieUpsert);
     }
 }

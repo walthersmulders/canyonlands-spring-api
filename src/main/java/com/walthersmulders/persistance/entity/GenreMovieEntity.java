@@ -1,5 +1,6 @@
 package com.walthersmulders.persistance.entity;
 
+import com.walthersmulders.mapstruct.dto.genremovie.GenreMovieUpsert;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,5 +38,8 @@ public class GenreMovieEntity implements Serializable {
     @OneToMany(mappedBy = "genreMovie", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MovieGenreEntity> movieGenres;
 
-    // TODO :: add update equality check method
+    public boolean checkUpdateDtoEqualsEntity(GenreMovieUpsert genreMovieUpsert) {
+        return this.genre.equals(genreMovieUpsert.genre()) &&
+               this.externalID.equals(genreMovieUpsert.externalID());
+    }
 }

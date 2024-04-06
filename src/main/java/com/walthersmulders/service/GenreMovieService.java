@@ -1,6 +1,7 @@
 package com.walthersmulders.service;
 
 import com.walthersmulders.exception.EntityExistsException;
+import com.walthersmulders.exception.EntityNotFoundException;
 import com.walthersmulders.mapstruct.dto.genremovie.GenreMovie;
 import com.walthersmulders.mapstruct.dto.genremovie.GenreMovieUpsert;
 import com.walthersmulders.mapstruct.mapper.GenreMovieMapper;
@@ -10,16 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.Map.entry;
 
 @Service
 @Slf4j
 public class GenreMovieService {
-    private final static String GENRE_MOVIE = "Genre:Movie";
+    private static final String GENRE_MOVIE = "Genre:Movie";
 
     private final GenreMovieRepository genreMovieRepository;
     private final GenreMovieMapper     genreMovieMapper;
@@ -76,5 +75,45 @@ public class GenreMovieService {
 
         return genreMovieMapper.entityToGenreMovie(genreMovie);
 
+    }
+
+    public GenreMovie getGenre(UUID id) {
+        log.info("Getting genre:movie with id: {}", id);
+
+        return genreMovieMapper.entityToGenreMovie(
+                genreMovieRepository.findById(id)
+                                    .orElseThrow(() -> new EntityNotFoundException(
+                                            GENRE_MOVIE, Map.of("genreMovieId", id.toString()))
+                                    )
+        );
+    }
+
+    public void update(UUID id, GenreMovieUpsert genreMovieUpsert) {
+        log.info("Updating genre:movie with id: {}", id);
+
+        Optional<GenreMovieEntity> existingGenreMovie = genreMovieRepository.findById(id);
+
+        if (existingGenreMovie.isEmpty()) {
+            log.error("Genre:movie with id {} not found", id);
+
+            throw new EntityNotFoundException(GENRE_MOVIE, Map.of("genreMovieId", id.toString()));
+        }
+
+        log.info("Check if incoming object has the same fields as existing");
+
+        if (existingGenreMovie.get().checkUpdateDtoEqualsEntity(genreMovieUpsert)) {
+            log.info("Incoming object has the same fields as existing, no need to update");
+        } else {
+            log.info("Incoming object has different fields as existing, updating");
+
+            GenreMovieEntity genreMovie = genreMovieMapper.genreMovieEntityUpdateMerge(
+                    existingGenreMovie.get(),
+                    genreMovieUpsert
+            );
+
+            genreMovieRepository.save(genreMovie);
+
+            log.info("Updated genre:movie with id: {}", id);
+        }
     }
 }
