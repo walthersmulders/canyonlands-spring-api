@@ -18,4 +18,12 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
     Optional<UserEntity> fetchWithBooks(
             @Param(value = "userID") UUID userID
     );
+
+    @Query("SELECT ue " +
+           "FROM UserEntity ue " +
+           "LEFT JOIN FETCH ue.movies " +
+           "WHERE ue.userID = :userID")
+    Optional<UserEntity> fetchWithMovies(
+            @Param(value = "userID") UUID userID
+    );
 }
