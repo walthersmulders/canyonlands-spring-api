@@ -1,4 +1,4 @@
-package com.walthersmulders.persistence.repository;
+package com.walthersmulders.persistence.repository.movie;
 
 import com.walthersmulders.persistence.entity.movie.MovieEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

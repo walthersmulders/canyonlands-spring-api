@@ -2,7 +2,7 @@ package com.walthersmulders.controller.users;
 
 import com.walthersmulders.mapstruct.dto.users.movie.UsersMovie;
 import com.walthersmulders.mapstruct.dto.users.movie.UsersMovieUpsert;
-import com.walthersmulders.service.UsersMovieService;
+import com.walthersmulders.service.users.UsersMovieService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

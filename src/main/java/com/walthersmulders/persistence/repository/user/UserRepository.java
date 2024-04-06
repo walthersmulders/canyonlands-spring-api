@@ -1,4 +1,4 @@
-package com.walthersmulders.persistence.repository;
+package com.walthersmulders.persistence.repository.user;
 
 import com.walthersmulders.persistence.entity.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

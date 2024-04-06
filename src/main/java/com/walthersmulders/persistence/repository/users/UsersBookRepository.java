@@ -1,4 +1,4 @@
-package com.walthersmulders.persistence.repository;
+package com.walthersmulders.persistence.repository.users;
 
 import com.walthersmulders.persistence.entity.users.book.UsersBookEntity;
 import com.walthersmulders.persistence.entity.users.book.UsersBookID;

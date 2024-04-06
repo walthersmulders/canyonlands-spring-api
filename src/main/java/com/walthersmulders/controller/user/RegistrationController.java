@@ -1,6 +1,6 @@
 package com.walthersmulders.controller.user;
 
-import com.walthersmulders.service.RegistrationService;
+import com.walthersmulders.service.user.RegistrationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;

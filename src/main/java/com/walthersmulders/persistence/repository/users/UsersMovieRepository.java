@@ -1,4 +1,4 @@
-package com.walthersmulders.persistence.repository;
+package com.walthersmulders.persistence.repository.users;
 
 import com.walthersmulders.persistence.entity.users.movie.UsersMovieEntity;
 import com.walthersmulders.persistence.entity.users.movie.UsersMovieID;

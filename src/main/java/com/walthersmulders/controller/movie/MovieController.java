@@ -4,7 +4,7 @@ import com.walthersmulders.mapstruct.dto.movie.Movie;
 import com.walthersmulders.mapstruct.dto.movie.MovieUpsert;
 import com.walthersmulders.mapstruct.dto.movie.MovieWithLinks;
 import com.walthersmulders.mapstruct.dto.movie.MovieWithLinksUpsert;
-import com.walthersmulders.service.MovieService;
+import com.walthersmulders.service.movie.MovieService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

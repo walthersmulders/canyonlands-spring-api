@@ -1,11 +1,11 @@
-package com.walthersmulders.service;
+package com.walthersmulders.service.user;
 
 import com.walthersmulders.exception.EntityNotFoundException;
 import com.walthersmulders.exception.GenericBadRequestException;
 import com.walthersmulders.mapstruct.dto.user.User;
 import com.walthersmulders.mapstruct.mapper.UserMapper;
 import com.walthersmulders.persistence.entity.user.UserEntity;
-import com.walthersmulders.persistence.repository.UserRepository;
+import com.walthersmulders.persistence.repository.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;

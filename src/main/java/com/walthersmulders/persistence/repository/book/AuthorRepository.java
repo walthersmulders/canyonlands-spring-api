@@ -1,4 +1,4 @@
-package com.walthersmulders.persistence.repository;
+package com.walthersmulders.persistence.repository.book;
 
 import com.walthersmulders.persistence.entity.book.AuthorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

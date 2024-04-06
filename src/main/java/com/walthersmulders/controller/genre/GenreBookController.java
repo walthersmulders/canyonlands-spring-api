@@ -2,7 +2,7 @@ package com.walthersmulders.controller.genre;
 
 import com.walthersmulders.mapstruct.dto.genre.book.GenreBook;
 import com.walthersmulders.mapstruct.dto.genre.book.GenreBookUpsert;
-import com.walthersmulders.service.GenreBookService;
+import com.walthersmulders.service.genre.GenreBookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,4 +1,4 @@
-package com.walthersmulders.service;
+package com.walthersmulders.service.genre;
 
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
@@ -7,8 +7,8 @@ import com.walthersmulders.mapstruct.dto.genre.book.GenreBook;
 import com.walthersmulders.mapstruct.dto.genre.book.GenreBookUpsert;
 import com.walthersmulders.mapstruct.mapper.GenreBookMapper;
 import com.walthersmulders.persistence.entity.genre.GenreBookEntity;
-import com.walthersmulders.persistence.repository.BookRepository;
-import com.walthersmulders.persistence.repository.GenreBookRepository;
+import com.walthersmulders.persistence.repository.book.BookRepository;
+import com.walthersmulders.persistence.repository.genre.GenreBookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

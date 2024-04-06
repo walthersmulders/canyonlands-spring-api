@@ -1,4 +1,4 @@
-package com.walthersmulders.service;
+package com.walthersmulders.service.genre;
 
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
@@ -6,7 +6,7 @@ import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovie;
 import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovieUpsert;
 import com.walthersmulders.mapstruct.mapper.GenreMovieMapper;
 import com.walthersmulders.persistence.entity.genre.GenreMovieEntity;
-import com.walthersmulders.persistence.repository.GenreMovieRepository;
+import com.walthersmulders.persistence.repository.genre.GenreMovieRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

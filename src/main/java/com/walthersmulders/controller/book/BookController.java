@@ -4,7 +4,7 @@ import com.walthersmulders.mapstruct.dto.book.Book;
 import com.walthersmulders.mapstruct.dto.book.BookUpsert;
 import com.walthersmulders.mapstruct.dto.book.BookWithLinks;
 import com.walthersmulders.mapstruct.dto.book.BookWithLinksUpsert;
-import com.walthersmulders.service.AuthorBookService;
+import com.walthersmulders.service.book.AuthorBookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

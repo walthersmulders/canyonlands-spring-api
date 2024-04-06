@@ -2,7 +2,7 @@ package com.walthersmulders.controller.genre;
 
 import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovie;
 import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovieUpsert;
-import com.walthersmulders.service.GenreMovieService;
+import com.walthersmulders.service.genre.GenreMovieService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

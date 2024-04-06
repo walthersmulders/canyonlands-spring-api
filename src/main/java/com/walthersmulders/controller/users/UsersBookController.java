@@ -2,7 +2,7 @@ package com.walthersmulders.controller.users;
 
 import com.walthersmulders.mapstruct.dto.users.book.UsersBook;
 import com.walthersmulders.mapstruct.dto.users.book.UsersBookUpsert;
-import com.walthersmulders.service.UsersBookService;
+import com.walthersmulders.service.users.UsersBookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

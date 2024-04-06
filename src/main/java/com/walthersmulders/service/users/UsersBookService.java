@@ -1,4 +1,4 @@
-package com.walthersmulders.service;
+package com.walthersmulders.service.users;
 
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
@@ -10,9 +10,9 @@ import com.walthersmulders.persistence.entity.book.BookEntity;
 import com.walthersmulders.persistence.entity.user.UserEntity;
 import com.walthersmulders.persistence.entity.users.book.UsersBookEntity;
 import com.walthersmulders.persistence.entity.users.book.UsersBookID;
-import com.walthersmulders.persistence.repository.BookRepository;
-import com.walthersmulders.persistence.repository.UserRepository;
-import com.walthersmulders.persistence.repository.UsersBookRepository;
+import com.walthersmulders.persistence.repository.book.BookRepository;
+import com.walthersmulders.persistence.repository.user.UserRepository;
+import com.walthersmulders.persistence.repository.users.UsersBookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
