@@ -1,6 +1,6 @@
 package com.walthersmulders.persistance.entity;
 
-import com.walthersmulders.mapstruct.dto.bookgenre.BookGenreUpsert;
+import com.walthersmulders.mapstruct.dto.genre.book.GenreBookUpsert;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BookGenreEntity implements Serializable {
+public class GenreBookEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -34,8 +34,8 @@ public class BookGenreEntity implements Serializable {
     @Column(name = "sub_genre", nullable = false, length = 500)
     private String subGenre;
 
-    public boolean checkUpdateDtoEqualsEntity(BookGenreUpsert bookGenreUpsert) {
-        return this.genre.equals(bookGenreUpsert.genre()) &&
-               this.subGenre.equals(bookGenreUpsert.subGenre());
+    public boolean checkUpdateDtoEqualsEntity(GenreBookUpsert genreBookUpsert) {
+        return this.genre.equals(genreBookUpsert.genre()) &&
+               this.subGenre.equals(genreBookUpsert.subGenre());
     }
 }

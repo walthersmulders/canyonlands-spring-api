@@ -1,8 +1,8 @@
 package com.walthersmulders.controller;
 
-import com.walthersmulders.mapstruct.dto.bookgenre.BookGenre;
-import com.walthersmulders.mapstruct.dto.bookgenre.BookGenreUpsert;
-import com.walthersmulders.service.BookGenreService;
+import com.walthersmulders.mapstruct.dto.genre.book.GenreBook;
+import com.walthersmulders.mapstruct.dto.genre.book.GenreBookUpsert;
+import com.walthersmulders.service.GenreBookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,45 +15,45 @@ import java.util.UUID;
 @RequestMapping("/genres/books")
 @RestController
 @Validated
-public class BookGenreController {
-    private final BookGenreService bookGenreService;
+public class GenreBookController {
+    private final GenreBookService genreBookService;
 
-    public BookGenreController(BookGenreService bookGenreService) {
-        this.bookGenreService = bookGenreService;
+    public GenreBookController(GenreBookService genreBookService) {
+        this.genreBookService = genreBookService;
     }
 
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public BookGenre createGenre(@Valid @RequestBody BookGenreUpsert bookGenreUpsert) {
-        return bookGenreService.create(bookGenreUpsert);
+    public GenreBook create(@Valid @RequestBody GenreBookUpsert genreBookUpsert) {
+        return genreBookService.create(genreBookUpsert);
     }
 
     @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<BookGenre> getGenres() {
-        return bookGenreService.getGenres();
+    public List<GenreBook> getAll() {
+        return genreBookService.getGenres();
     }
 
     @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
-    public BookGenre getGenre(@PathVariable UUID id) {
-        return bookGenreService.getGenre(id);
+    public GenreBook getGenre(@PathVariable UUID id) {
+        return genreBookService.getGenre(id);
     }
 
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void updateGenre(@PathVariable UUID id, @Valid @RequestBody BookGenreUpsert bookGenreUpsert) {
-        bookGenreService.update(id, bookGenreUpsert);
+    public void updateGenre(@PathVariable UUID id, @Valid @RequestBody GenreBookUpsert genreBookUpsert) {
+        genreBookService.update(id, genreBookUpsert);
     }
 
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteGenre(@PathVariable UUID id) {
-        bookGenreService.delete(id);
+        genreBookService.delete(id);
     }
 }

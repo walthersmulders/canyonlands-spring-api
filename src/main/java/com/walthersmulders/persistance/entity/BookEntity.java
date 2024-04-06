@@ -40,7 +40,7 @@ public class BookEntity implements Serializable {
     private String plot;
 
     @Column(name = "cover", nullable = false, length = 1000)
-    private String cover = "default_book_cover.jpg";
+    private String cover;
 
     @Column(name = "date_published", nullable = false)
     private LocalDate datePublished;
@@ -59,7 +59,7 @@ public class BookEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_genre_id")
-    private BookGenreEntity bookGenre;
+    private GenreBookEntity genreBook;
 
     public void addAuthor(AuthorEntity author) {
         AuthorBookEntity authorBook = new AuthorBookEntity(author, this);

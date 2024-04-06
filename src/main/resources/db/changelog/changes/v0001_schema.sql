@@ -11,8 +11,6 @@ CREATE TABLE genre_book
     PRIMARY KEY (book_genre_id)
 );
 
--- TODO :: Update Book and bookgenre naming to be consistent with movie and moviegenre
-
 CREATE TABLE genre_movie
 (
     genre_movie_id UUID         NOT NULL,
@@ -43,7 +41,7 @@ CREATE TABLE book
     title          VARCHAR(255)  NOT NULL,
     pages          INTEGER       NOT NULL,
     plot           TEXT          NOT NULL,
-    cover          VARCHAR(1000) NOT NULL DEFAULT 'default_book_cover.jpg',
+    cover          VARCHAR(1000) NOT NULL,
     date_published DATE          NOT NULL,
     date_added     TIMESTAMP     NOT NULL,
     date_updated   TIMESTAMP     NOT NULL,

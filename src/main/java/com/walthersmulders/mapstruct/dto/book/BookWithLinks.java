@@ -1,7 +1,7 @@
 package com.walthersmulders.mapstruct.dto.book;
 
 import com.walthersmulders.mapstruct.dto.author.Author;
-import com.walthersmulders.mapstruct.dto.bookgenre.BookGenre;
+import com.walthersmulders.mapstruct.dto.genre.book.GenreBook;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,6 +19,6 @@ public record BookWithLinks(
         LocalDateTime dateAdded,
         LocalDateTime dateUpdated,
         List<Author> authors,
-        BookGenre bookGenre
+        GenreBook genreBook
 ) {
 }

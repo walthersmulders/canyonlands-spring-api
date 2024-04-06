@@ -3,12 +3,12 @@ package com.walthersmulders.service;
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
 import com.walthersmulders.exception.GenericBadRequestException;
-import com.walthersmulders.mapstruct.dto.bookgenre.BookGenre;
-import com.walthersmulders.mapstruct.dto.bookgenre.BookGenreUpsert;
-import com.walthersmulders.mapstruct.mapper.BookGenreMapper;
-import com.walthersmulders.persistance.entity.BookGenreEntity;
-import com.walthersmulders.persistance.repository.BookGenreRepository;
+import com.walthersmulders.mapstruct.dto.genre.book.GenreBook;
+import com.walthersmulders.mapstruct.dto.genre.book.GenreBookUpsert;
+import com.walthersmulders.mapstruct.mapper.GenreBookMapper;
+import com.walthersmulders.persistance.entity.GenreBookEntity;
 import com.walthersmulders.persistance.repository.BookRepository;
+import com.walthersmulders.persistance.repository.GenreBookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -18,79 +18,79 @@ import static java.util.Map.entry;
 
 @Service
 @Slf4j
-public class BookGenreService {
+public class GenreBookService {
     private static final String BOOK_GENRE = "Book Genre";
 
-    private final BookGenreRepository bookGenreRepository;
-    private final BookGenreMapper     bookGenreMapper;
+    private final GenreBookRepository genreBookRepository;
+    private final GenreBookMapper     genreBookMapper;
     private final BookRepository      bookRepository;
 
-    public BookGenreService(
-            BookGenreRepository bookGenreRepository,
-            BookGenreMapper bookGenreMapper,
+    public GenreBookService(
+            GenreBookRepository genreBookRepository,
+            GenreBookMapper genreBookMapper,
             BookRepository bookRepository
     ) {
-        this.bookGenreRepository = bookGenreRepository;
-        this.bookGenreMapper = bookGenreMapper;
+        this.genreBookRepository = genreBookRepository;
+        this.genreBookMapper = genreBookMapper;
         this.bookRepository = bookRepository;
     }
 
-    public List<BookGenre> getGenres() {
+    public List<GenreBook> getGenres() {
         log.info("Getting all genres");
 
-        List<BookGenreEntity> bookGenres = bookGenreRepository.findAll();
+        List<GenreBookEntity> bookGenres = genreBookRepository.findAll();
 
         log.info("Found {} genres", bookGenres.size());
 
         return bookGenres.isEmpty() ? Collections.emptyList()
                                     : bookGenres.stream()
-                                                .map(bookGenreMapper::entityToBookGenre)
+                                                .map(genreBookMapper::entityToGenreBook)
                                                 .toList();
     }
 
-    public BookGenre create(BookGenreUpsert bookGenreUpsert) {
+    public GenreBook create(GenreBookUpsert genreBookUpsert) {
         log.info("Creating genre");
 
-        boolean exists = bookGenreRepository.exists(bookGenreUpsert.genre(), bookGenreUpsert.subGenre());
+        boolean exists = genreBookRepository.exists(genreBookUpsert.genre(), genreBookUpsert.subGenre());
 
         if (exists) {
             log.error(
                     "Genre with genre {} and sub genre {} already exists",
-                    bookGenreUpsert.genre(),
-                    bookGenreUpsert.subGenre()
+                    genreBookUpsert.genre(),
+                    genreBookUpsert.subGenre()
             );
 
             throw new EntityExistsException(
                     BOOK_GENRE, Map.ofEntries(
-                    entry("genre", bookGenreUpsert.genre()),
-                    entry("subGenre", bookGenreUpsert.subGenre())
+                    entry("genre", genreBookUpsert.genre()),
+                    entry("subGenre", genreBookUpsert.subGenre())
             ));
         }
 
-        BookGenreEntity bookGenre = bookGenreMapper.bookGenreUpsertToEntity(bookGenreUpsert);
+        GenreBookEntity bookGenre = genreBookMapper.genreBookUpsertToEntity(genreBookUpsert);
 
-        bookGenreRepository.save(bookGenre);
+        genreBookRepository.save(bookGenre);
 
         log.info("Created genre with id: {}", bookGenre.getBookGenreID());
 
-        return bookGenreMapper.entityToBookGenre(bookGenre);
+        return genreBookMapper.entityToGenreBook(bookGenre);
     }
 
-    public BookGenre getGenre(UUID id) {
+    public GenreBook getGenre(UUID id) {
         log.info("Getting genre with id: {}", id);
 
-        return bookGenreMapper.entityToBookGenre(
-                bookGenreRepository.findById(id)
+        return genreBookMapper.entityToGenreBook(
+                genreBookRepository.findById(id)
                                    .orElseThrow(() -> new EntityNotFoundException(
                                            BOOK_GENRE, Map.of("bookGenreId", id.toString()))
                                    )
         );
     }
 
-    public void update(UUID id, BookGenreUpsert bookGenreUpsert) {
+    public void update(UUID id, GenreBookUpsert genreBookUpsert) {
         log.info("Updating genre with id: {}", id);
 
-        Optional<BookGenreEntity> existingBookGenre = bookGenreRepository.findById(id);
+        Optional<GenreBookEntity> existingBookGenre = genreBookRepository.findById(id);
 
         if (existingBookGenre.isEmpty()) {
             log.error("Genre with id {} not found", id);
@@ -100,17 +100,17 @@ public class BookGenreService {
 
         log.info("Check if incoming object has the same fields as existing");
 
-        if (existingBookGenre.get().checkUpdateDtoEqualsEntity(bookGenreUpsert)) {
+        if (existingBookGenre.get().checkUpdateDtoEqualsEntity(genreBookUpsert)) {
             log.info("Incoming object has the same fields as existing, no need to update");
         } else {
             log.info("Incoming object has different fields as existing, updating");
 
-            BookGenreEntity updatedBookGenre = bookGenreMapper.bookGenreEntityUpdateMerge(
+            GenreBookEntity updatedBookGenre = genreBookMapper.genreBookEntityUpdateMerge(
                     existingBookGenre.get(),
-                    bookGenreUpsert
+                    genreBookUpsert
             );
 
-            bookGenreRepository.save(updatedBookGenre);
+            genreBookRepository.save(updatedBookGenre);
 
             log.info("Updated genre with id: {}", id);
         }
@@ -130,7 +130,7 @@ public class BookGenreService {
 
         log.info("Deleting genre with id: {}", id);
 
-        bookGenreRepository.deleteById(id);
+        genreBookRepository.deleteById(id);
 
         log.info("Deleted genre with id: {}", id);
     }

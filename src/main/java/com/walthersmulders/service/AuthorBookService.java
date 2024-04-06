@@ -15,10 +15,10 @@ import com.walthersmulders.mapstruct.mapper.BookMapper;
 import com.walthersmulders.persistance.entity.AuthorBookEntity;
 import com.walthersmulders.persistance.entity.AuthorEntity;
 import com.walthersmulders.persistance.entity.BookEntity;
-import com.walthersmulders.persistance.entity.BookGenreEntity;
+import com.walthersmulders.persistance.entity.GenreBookEntity;
 import com.walthersmulders.persistance.repository.AuthorRepository;
-import com.walthersmulders.persistance.repository.BookGenreRepository;
 import com.walthersmulders.persistance.repository.BookRepository;
+import com.walthersmulders.persistance.repository.GenreBookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,20 +40,20 @@ public class AuthorBookService {
     private final AuthorMapper        authorMapper;
     private final BookRepository      bookRepository;
     private final BookMapper          bookMapper;
-    private final BookGenreRepository bookGenreRepository;
+    private final GenreBookRepository genreBookRepository;
 
     public AuthorBookService(
             AuthorRepository authorRepository,
             AuthorMapper authorMapper,
             BookRepository bookRepository,
             BookMapper bookMapper,
-            BookGenreRepository bookGenreRepository
+            GenreBookRepository genreBookRepository
     ) {
         this.authorRepository = authorRepository;
         this.authorMapper = authorMapper;
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
-        this.bookGenreRepository = bookGenreRepository;
+        this.genreBookRepository = genreBookRepository;
     }
 
     @Transactional(readOnly = true)
@@ -145,7 +145,7 @@ public class AuthorBookService {
             throw new EntityExistsException(BOOK, errorsMap);
         }
 
-        Optional<BookGenreEntity> bookGenre = bookGenreRepository.findById(bookWithLinksUpsert.bookGenreID());
+        Optional<GenreBookEntity> bookGenre = genreBookRepository.findById(bookWithLinksUpsert.bookGenreID());
 
         if (bookGenre.isEmpty()) {
             log.error("Book genre with id {} not found", bookWithLinksUpsert.bookGenreID());
@@ -158,7 +158,7 @@ public class AuthorBookService {
 
         BookEntity book = bookMapper.bookUpsertToEntity(bookWithLinksUpsert.book());
 
-        book.setBookGenre(bookGenre.get());
+        book.setGenreBook(bookGenre.get());
         book.setDateAdded(LocalDateTime.now());
         book.setDateUpdated(LocalDateTime.now());
 
@@ -423,7 +423,7 @@ public class AuthorBookService {
             );
         }
 
-        Optional<BookGenreEntity> bookGenre = bookGenreRepository.findById(genreID);
+        Optional<GenreBookEntity> bookGenre = genreBookRepository.findById(genreID);
 
         if (bookGenre.isEmpty()) {
             log.error("Book genre with genreID {} not found", genreID);
@@ -434,7 +434,7 @@ public class AuthorBookService {
             );
         }
 
-        book.get().setBookGenre(bookGenre.get());
+        book.get().setGenreBook(bookGenre.get());
 
         bookRepository.save(book.get());
 
