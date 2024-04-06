@@ -11,6 +11,19 @@ CREATE TABLE genre_book
     PRIMARY KEY (book_genre_id)
 );
 
+-- TODO :: Update Book and bookgenre naming to be consistent with movie and moviegenre
+
+CREATE TABLE genre_movie
+(
+    genre_movie_id UUID         NOT NULL,
+    genre          VARCHAR(255) NOT NULL,
+    external_id    INTEGER      NOT NULL,
+
+    PRIMARY KEY (genre_movie_id),
+    UNIQUE (genre),
+    UNIQUE (external_id)
+);
+
 CREATE TABLE author
 (
     author_id       UUID         NOT NULL,
@@ -76,3 +89,31 @@ CREATE TABLE users_book
     FOREIGN KEY (user_id) REFERENCES users,
     FOREIGN KEY (book_id) REFERENCES book
 );
+
+CREATE TABLE movie
+(
+    movie_id      UUID          NOT NULL,
+    title         VARCHAR(500)  NOT NULL,
+    plot          TEXT          NOT NULL,
+    external_id   INTEGER       NOT NULL,
+    poster        VARCHAR(1000) NOT NULL,
+    date_released DATE          NOT NULL,
+    date_added    TIMESTAMP     NOT NULL,
+    date_updated  TIMESTAMP     NOT NULL,
+
+    PRIMARY KEY (movie_id),
+    UNIQUE (title),
+    UNIQUE (external_id)
+);
+
+CREATE TABLE movie_genre
+(
+    genre_movie_id UUID NOT NULL,
+    movie_id       UUID NOT NULL,
+
+    PRIMARY KEY (genre_movie_id, movie_id),
+    FOREIGN KEY (genre_movie_id) REFERENCES genre_movie,
+    FOREIGN KEY (movie_id) REFERENCES movie
+);
+
+

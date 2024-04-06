@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/changes/v0001_schema.sql
   - include:
       file: db/changelog/preload/v0001_preload_genre_book.sql
+  - include:
+      file: db/changelog/preload/v0001_preload_genre_movie.sql
