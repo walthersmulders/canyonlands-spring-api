@@ -1,5 +1,6 @@
 package com.walthersmulders.persistance.entity;
 
+import com.walthersmulders.mapstruct.dto.movie.MovieUpsert;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "movie")
@@ -58,7 +56,18 @@ public class MovieEntity implements Serializable {
         movieGenres.add(movieGenre);
     }
 
-    // TODO :: remove movieGenre link helper method
+    public void removeMovieGenre(GenreMovieEntity genreMovie) {
+        for (Iterator<MovieGenreEntity> iterator = movieGenres.iterator(); iterator.hasNext(); ) {
+            MovieGenreEntity entity = iterator.next();
+
+            if (entity.getMovie().equals(this) && entity.getGenreMovie().equals(genreMovie)) {
+                iterator.remove();
+
+                entity.setMovie(null);
+                entity.setGenreMovie(null);
+            }
+        }
+    }
 
     @Override
     public int hashCode() {
@@ -76,5 +85,13 @@ public class MovieEntity implements Serializable {
         }
 
         return movieID != null && movieID.equals(((MovieEntity) o).movieID);
+    }
+
+    public boolean checkUpdateDtoEqualsEntity(MovieUpsert movieUpsert) {
+        return this.title.equals(movieUpsert.title()) &&
+               this.plot.equals(movieUpsert.plot()) &&
+               this.poster.equals(movieUpsert.poster()) &&
+               this.externalID.equals(movieUpsert.externalID()) &&
+               this.dateReleased.equals(movieUpsert.dateReleased());
     }
 }
