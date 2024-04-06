@@ -1,4 +1,4 @@
-package com.walthersmulders.persistance.entity;
+package com.walthersmulders.persistence.entity.genre;
 
 import com.walthersmulders.mapstruct.dto.genre.book.GenreBookUpsert;
 import jakarta.persistence.Column;

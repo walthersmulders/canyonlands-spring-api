@@ -1,5 +1,7 @@
-package com.walthersmulders.persistance.entity;
+package com.walthersmulders.persistence.entity.user;
 
+import com.walthersmulders.persistence.entity.book.BookEntity;
+import com.walthersmulders.persistence.entity.users.book.UsersBookEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

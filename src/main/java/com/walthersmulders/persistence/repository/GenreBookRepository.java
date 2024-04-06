@@ -1,6 +1,6 @@
-package com.walthersmulders.persistance.repository;
+package com.walthersmulders.persistence.repository;
 
-import com.walthersmulders.persistance.entity.GenreBookEntity;
+import com.walthersmulders.persistence.entity.genre.GenreBookEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

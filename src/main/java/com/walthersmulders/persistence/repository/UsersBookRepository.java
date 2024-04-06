@@ -1,7 +1,7 @@
-package com.walthersmulders.persistance.repository;
+package com.walthersmulders.persistence.repository;
 
-import com.walthersmulders.persistance.entity.UsersBookEntity;
-import com.walthersmulders.persistance.entity.UsersBookID;
+import com.walthersmulders.persistence.entity.users.book.UsersBookEntity;
+import com.walthersmulders.persistence.entity.users.book.UsersBookID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

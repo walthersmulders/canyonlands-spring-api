@@ -2,8 +2,8 @@ package com.walthersmulders.service;
 
 import com.walthersmulders.mapstruct.dto.user.User;
 import com.walthersmulders.mapstruct.mapper.UserMapper;
-import com.walthersmulders.persistance.entity.UserEntity;
-import com.walthersmulders.persistance.repository.UserRepository;
+import com.walthersmulders.persistence.entity.user.UserEntity;
+import com.walthersmulders.persistence.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;

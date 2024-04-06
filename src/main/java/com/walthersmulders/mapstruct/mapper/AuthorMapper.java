@@ -4,8 +4,8 @@ import com.walthersmulders.mapstruct.dto.author.Author;
 import com.walthersmulders.mapstruct.dto.author.AuthorUpsert;
 import com.walthersmulders.mapstruct.dto.author.AuthorWithBooks;
 import com.walthersmulders.mapstruct.dto.book.Book;
-import com.walthersmulders.persistance.entity.AuthorBookEntity;
-import com.walthersmulders.persistance.entity.AuthorEntity;
+import com.walthersmulders.persistence.entity.book.AuthorBookEntity;
+import com.walthersmulders.persistence.entity.book.AuthorEntity;
 import org.mapstruct.*;
 
 import java.util.ArrayList;

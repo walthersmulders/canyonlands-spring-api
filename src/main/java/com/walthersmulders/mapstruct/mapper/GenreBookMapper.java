@@ -2,7 +2,7 @@ package com.walthersmulders.mapstruct.mapper;
 
 import com.walthersmulders.mapstruct.dto.genre.book.GenreBook;
 import com.walthersmulders.mapstruct.dto.genre.book.GenreBookUpsert;
-import com.walthersmulders.persistance.entity.GenreBookEntity;
+import com.walthersmulders.persistence.entity.genre.GenreBookEntity;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

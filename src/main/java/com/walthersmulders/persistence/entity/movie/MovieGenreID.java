@@ -1,4 +1,4 @@
-package com.walthersmulders.persistance.entity;
+package com.walthersmulders.persistence.entity.movie;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

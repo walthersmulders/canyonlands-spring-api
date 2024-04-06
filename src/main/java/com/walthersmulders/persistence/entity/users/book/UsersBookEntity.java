@@ -1,7 +1,7 @@
-package com.walthersmulders.persistance.entity.users.movie;
+package com.walthersmulders.persistence.entity.users.book;
 
-import com.walthersmulders.persistance.entity.MovieEntity;
-import com.walthersmulders.persistance.entity.UserEntity;
+import com.walthersmulders.persistence.entity.book.BookEntity;
+import com.walthersmulders.persistence.entity.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,16 +12,16 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users_movie")
+@Table(name = "users_book")
 @Getter
 @Setter
 @NoArgsConstructor
-public class UsersMovieEntity implements Serializable {
+public class UsersBookEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private UsersMovieID usersMovieID;
+    private UsersBookID usersBookID;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userID")
@@ -29,9 +29,9 @@ public class UsersMovieEntity implements Serializable {
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("movieID")
-    @JoinColumn(name = "movie_id")
-    private MovieEntity movie;
+    @MapsId("bookID")
+    @JoinColumn(name = "book_id")
+    private BookEntity book;
 
     @Column(name = "review", length = 5000)
     private String review;
@@ -39,24 +39,24 @@ public class UsersMovieEntity implements Serializable {
     @Column(name = "rating", nullable = false)
     private Integer rating;
 
-    public UsersMovieEntity(UserEntity user, MovieEntity movie, Integer rating) {
+    public UsersBookEntity(UserEntity user, BookEntity book, Integer rating) {
         this.user = user;
-        this.movie = movie;
+        this.book = book;
         this.rating = rating;
-        this.usersMovieID = new UsersMovieID(user.getUserID(), movie.getMovieID());
+        this.usersBookID = new UsersBookID(user.getUserID(), book.getBookID());
     }
 
-    public UsersMovieEntity(UserEntity user, MovieEntity movie, Integer rating, String review) {
+    public UsersBookEntity(UserEntity user, BookEntity book, Integer rating, String review) {
         this.user = user;
-        this.movie = movie;
+        this.book = book;
         this.rating = rating;
         this.review = review;
-        this.usersMovieID = new UsersMovieID(user.getUserID(), movie.getMovieID());
+        this.usersBookID = new UsersBookID(user.getUserID(), book.getBookID());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user, movie);
+        return Objects.hash(user, book);
     }
 
     @Override
@@ -65,8 +65,8 @@ public class UsersMovieEntity implements Serializable {
             return false;
         }
 
-        UsersMovieEntity that = (UsersMovieEntity) o;
+        UsersBookEntity that = (UsersBookEntity) o;
 
-        return Objects.equals(user, that.user) && Objects.equals(movie, that.movie);
+        return Objects.equals(user, that.user) && Objects.equals(book, that.book);
     }
 }

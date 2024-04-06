@@ -1,4 +1,4 @@
-package com.walthersmulders.persistance.entity;
+package com.walthersmulders.persistence.entity.book;
 
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -4,8 +4,8 @@ import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovie;
 import com.walthersmulders.mapstruct.dto.movie.Movie;
 import com.walthersmulders.mapstruct.dto.movie.MovieUpsert;
 import com.walthersmulders.mapstruct.dto.movie.MovieWithLinks;
-import com.walthersmulders.persistance.entity.MovieEntity;
-import com.walthersmulders.persistance.entity.MovieGenreEntity;
+import com.walthersmulders.persistence.entity.movie.MovieEntity;
+import com.walthersmulders.persistence.entity.movie.MovieGenreEntity;
 import org.mapstruct.*;
 
 import java.util.ArrayList;

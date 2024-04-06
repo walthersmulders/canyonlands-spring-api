@@ -1,6 +1,6 @@
-package com.walthersmulders.persistance.repository;
+package com.walthersmulders.persistence.repository;
 
-import com.walthersmulders.persistance.entity.MovieEntity;
+import com.walthersmulders.persistence.entity.movie.MovieEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

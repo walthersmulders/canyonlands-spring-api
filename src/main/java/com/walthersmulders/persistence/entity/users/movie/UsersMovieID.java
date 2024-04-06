@@ -1,4 +1,4 @@
-package com.walthersmulders.persistance.entity;
+package com.walthersmulders.persistence.entity.users.movie;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -17,19 +17,19 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsersBookID implements Serializable {
+public class UsersMovieID implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Column(name = "user_id")
     private UUID userID;
 
-    @Column(name = "book_id")
-    private UUID bookID;
+    @Column(name = "movie_id")
+    private UUID movieID;
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, bookID);
+        return Objects.hash(userID, movieID);
     }
 
     @Override
@@ -42,9 +42,9 @@ public class UsersBookID implements Serializable {
             return false;
         }
 
-        UsersBookID that = (UsersBookID) o;
+        UsersMovieID that = (UsersMovieID) o;
 
         return Objects.equals(userID, that.userID) &&
-               Objects.equals(bookID, that.bookID);
+               Objects.equals(movieID, that.movieID);
     }
 }

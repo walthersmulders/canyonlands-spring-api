@@ -1,4 +1,4 @@
-package com.walthersmulders.persistance.entity;
+package com.walthersmulders.persistence.entity.users.book;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
@@ -16,16 +17,19 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthorBookID implements Serializable {
-    @Column(name = "author_id", nullable = false)
-    private UUID authorID;
+public class UsersBookID implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-    @Column(name = "book_id", nullable = false)
+    @Column(name = "user_id")
+    private UUID userID;
+
+    @Column(name = "book_id")
     private UUID bookID;
 
     @Override
     public int hashCode() {
-        return Objects.hash(authorID, bookID);
+        return Objects.hash(userID, bookID);
     }
 
     @Override
@@ -38,9 +42,9 @@ public class AuthorBookID implements Serializable {
             return false;
         }
 
-        AuthorBookID that = (AuthorBookID) o;
+        UsersBookID that = (UsersBookID) o;
 
-        return Objects.equals(authorID, that.authorID) &&
+        return Objects.equals(userID, that.userID) &&
                Objects.equals(bookID, that.bookID);
     }
 }

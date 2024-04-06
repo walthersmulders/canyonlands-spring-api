@@ -1,6 +1,8 @@
-package com.walthersmulders.persistance.entity;
+package com.walthersmulders.persistence.entity.book;
 
 import com.walthersmulders.mapstruct.dto.book.BookUpsert;
+import com.walthersmulders.persistence.entity.genre.GenreBookEntity;
+import com.walthersmulders.persistence.entity.users.book.UsersBookEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

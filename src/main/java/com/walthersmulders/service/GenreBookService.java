@@ -6,9 +6,9 @@ import com.walthersmulders.exception.GenericBadRequestException;
 import com.walthersmulders.mapstruct.dto.genre.book.GenreBook;
 import com.walthersmulders.mapstruct.dto.genre.book.GenreBookUpsert;
 import com.walthersmulders.mapstruct.mapper.GenreBookMapper;
-import com.walthersmulders.persistance.entity.GenreBookEntity;
-import com.walthersmulders.persistance.repository.BookRepository;
-import com.walthersmulders.persistance.repository.GenreBookRepository;
+import com.walthersmulders.persistence.entity.genre.GenreBookEntity;
+import com.walthersmulders.persistence.repository.BookRepository;
+import com.walthersmulders.persistence.repository.GenreBookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

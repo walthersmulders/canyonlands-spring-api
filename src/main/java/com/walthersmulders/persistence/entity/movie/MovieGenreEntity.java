@@ -1,6 +1,7 @@
-package com.walthersmulders.persistance.entity;
+package com.walthersmulders.persistence.entity.movie;
 
 
+import com.walthersmulders.persistence.entity.genre.GenreMovieEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
