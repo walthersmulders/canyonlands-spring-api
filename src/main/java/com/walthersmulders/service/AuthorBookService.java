@@ -58,13 +58,13 @@ public class AuthorBookService {
 
     @Transactional(readOnly = true)
     public List<BookWithLinks> getBooksWithLinks() {
-        log.info("Getting all books");
+        log.info("Getting all books with links");
 
         List<BookEntity> booksWithLinks = bookRepository.fetchBooksWithLinks();
 
-        log.info("Found {} books", booksWithLinks.size());
+        log.info("Found {} books with links", booksWithLinks.size());
 
-        return booksWithLinks.isEmpty() ? List.of()
+        return booksWithLinks.isEmpty() ? Collections.emptyList()
                                         : booksWithLinks.stream()
                                                         .map(bookMapper::entityToBookWithLinks)
                                                         .toList();
@@ -77,7 +77,7 @@ public class AuthorBookService {
 
         log.info("Found {} books", books.size());
 
-        return books.isEmpty() ? List.of()
+        return books.isEmpty() ? Collections.emptyList()
                                : books.stream()
                                       .map(bookMapper::entityToBook)
                                       .toList();
@@ -114,7 +114,7 @@ public class AuthorBookService {
 
         log.info("Found {} authors", authors.size());
 
-        return authors.isEmpty() ? List.of()
+        return authors.isEmpty() ? Collections.emptyList()
                                  : authors.stream()
                                           .map(authorMapper::entityToAuthor)
                                           .toList();
@@ -167,6 +167,8 @@ public class AuthorBookService {
                            .map(authorRepository::findById)
                            .forEach(author -> author.ifPresent(book::addAuthor));
 
+        // TODO :: check if authors not found for Ids and assoc with book empty then thr error
+
         bookRepository.save(book);
 
         return bookMapper.entityToBookWithLinks(book);
@@ -207,7 +209,7 @@ public class AuthorBookService {
 
         log.info("Found {} authors", authorsWithBooks.size());
 
-        return authorsWithBooks.isEmpty() ? List.of()
+        return authorsWithBooks.isEmpty() ? Collections.emptyList()
                                           : authorsWithBooks.stream()
                                                             .map(authorMapper::entityToAuthorWithBooks)
                                                             .toList();
