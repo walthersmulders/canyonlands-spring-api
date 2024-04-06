@@ -2,8 +2,8 @@ package com.walthersmulders.service;
 
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
-import com.walthersmulders.mapstruct.dto.usersbook.UsersBook;
-import com.walthersmulders.mapstruct.dto.usersbook.UsersBookUpsert;
+import com.walthersmulders.mapstruct.dto.users.book.UsersBook;
+import com.walthersmulders.mapstruct.dto.users.book.UsersBookUpsert;
 import com.walthersmulders.mapstruct.mapper.UserMapper;
 import com.walthersmulders.mapstruct.mapper.UsersBookMapper;
 import com.walthersmulders.persistance.entity.BookEntity;

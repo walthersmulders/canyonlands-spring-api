@@ -1,4 +1,4 @@
-package com.walthersmulders.mapstruct.dto.usersbook;
+package com.walthersmulders.mapstruct.dto.users.book;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.walthersmulders.mapstruct.dto.book.Book;

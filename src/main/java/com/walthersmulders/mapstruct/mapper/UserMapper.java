@@ -1,7 +1,7 @@
 package com.walthersmulders.mapstruct.mapper;
 
 import com.walthersmulders.mapstruct.dto.user.User;
-import com.walthersmulders.mapstruct.dto.usersbook.UsersBook;
+import com.walthersmulders.mapstruct.dto.users.book.UsersBook;
 import com.walthersmulders.persistance.entity.BookEntity;
 import com.walthersmulders.persistance.entity.UserEntity;
 import org.mapstruct.InheritConfiguration;

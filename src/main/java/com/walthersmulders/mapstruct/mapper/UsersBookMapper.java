@@ -1,6 +1,6 @@
 package com.walthersmulders.mapstruct.mapper;
 
-import com.walthersmulders.mapstruct.dto.usersbook.UsersBook;
+import com.walthersmulders.mapstruct.dto.users.book.UsersBook;
 import com.walthersmulders.persistance.entity.UsersBookEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

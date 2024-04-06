@@ -1,4 +1,4 @@
-package com.walthersmulders.mapstruct.dto.usersbook;
+package com.walthersmulders.mapstruct.dto.users.book;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
