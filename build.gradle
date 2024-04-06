@@ -45,3 +45,7 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.bootRun {
+    environment new File('.env').readLines().collectEntries { it.split('=').toList() }
+}
