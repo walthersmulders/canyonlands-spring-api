@@ -1,4 +1,4 @@
-package com.walthersmulders.controller;
+package com.walthersmulders.controller.user;
 
 import com.walthersmulders.service.RegistrationService;
 import org.springframework.http.HttpStatus;

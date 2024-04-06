@@ -1,4 +1,4 @@
-package com.walthersmulders.controller;
+package com.walthersmulders.controller.user;
 
 import com.walthersmulders.mapstruct.dto.user.User;
 import com.walthersmulders.service.UserService;

@@ -1,4 +1,4 @@
-package com.walthersmulders.controller;
+package com.walthersmulders.controller.book;
 
 import com.walthersmulders.mapstruct.dto.author.Author;
 import com.walthersmulders.mapstruct.dto.author.AuthorUpsert;

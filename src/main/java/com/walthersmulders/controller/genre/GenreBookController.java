@@ -1,4 +1,4 @@
-package com.walthersmulders.controller;
+package com.walthersmulders.controller.genre;
 
 import com.walthersmulders.mapstruct.dto.genre.book.GenreBook;
 import com.walthersmulders.mapstruct.dto.genre.book.GenreBookUpsert;

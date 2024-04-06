@@ -1,4 +1,4 @@
-package com.walthersmulders.controller;
+package com.walthersmulders.controller.movie;
 
 import com.walthersmulders.mapstruct.dto.movie.Movie;
 import com.walthersmulders.mapstruct.dto.movie.MovieUpsert;
