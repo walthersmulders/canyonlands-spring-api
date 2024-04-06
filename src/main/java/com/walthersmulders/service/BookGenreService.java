@@ -12,10 +12,7 @@ import com.walthersmulders.persistance.repository.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static java.util.Map.entry;
 
@@ -45,7 +42,7 @@ public class BookGenreService {
 
         log.info("Found {} genres", bookGenres.size());
 
-        return bookGenres.isEmpty() ? List.of()
+        return bookGenres.isEmpty() ? Collections.emptyList()
                                     : bookGenres.stream()
                                                 .map(bookGenreMapper::entityToBookGenre)
                                                 .toList();
