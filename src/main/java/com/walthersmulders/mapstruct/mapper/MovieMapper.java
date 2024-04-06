@@ -1,6 +1,6 @@
 package com.walthersmulders.mapstruct.mapper;
 
-import com.walthersmulders.mapstruct.dto.genremovie.GenreMovie;
+import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovie;
 import com.walthersmulders.mapstruct.dto.movie.Movie;
 import com.walthersmulders.mapstruct.dto.movie.MovieUpsert;
 import com.walthersmulders.mapstruct.dto.movie.MovieWithLinks;

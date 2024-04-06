@@ -1,7 +1,7 @@
 package com.walthersmulders.mapstruct.mapper;
 
-import com.walthersmulders.mapstruct.dto.genremovie.GenreMovie;
-import com.walthersmulders.mapstruct.dto.genremovie.GenreMovieUpsert;
+import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovie;
+import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovieUpsert;
 import com.walthersmulders.persistance.entity.GenreMovieEntity;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;

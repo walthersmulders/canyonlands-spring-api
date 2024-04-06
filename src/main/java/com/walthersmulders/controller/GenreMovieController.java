@@ -1,7 +1,7 @@
 package com.walthersmulders.controller;
 
-import com.walthersmulders.mapstruct.dto.genremovie.GenreMovie;
-import com.walthersmulders.mapstruct.dto.genremovie.GenreMovieUpsert;
+import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovie;
+import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovieUpsert;
 import com.walthersmulders.service.GenreMovieService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

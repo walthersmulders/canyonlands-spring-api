@@ -1,6 +1,6 @@
 package com.walthersmulders.mapstruct.dto.movie;
 
-import com.walthersmulders.mapstruct.dto.genremovie.GenreMovie;
+import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovie;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

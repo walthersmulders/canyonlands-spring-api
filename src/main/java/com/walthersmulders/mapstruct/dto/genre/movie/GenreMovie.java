@@ -1,4 +1,4 @@
-package com.walthersmulders.mapstruct.dto.genremovie;
+package com.walthersmulders.mapstruct.dto.genre.movie;
 
 import java.util.UUID;
 

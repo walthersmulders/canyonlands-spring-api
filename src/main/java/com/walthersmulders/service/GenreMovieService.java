@@ -2,8 +2,8 @@ package com.walthersmulders.service;
 
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
-import com.walthersmulders.mapstruct.dto.genremovie.GenreMovie;
-import com.walthersmulders.mapstruct.dto.genremovie.GenreMovieUpsert;
+import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovie;
+import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovieUpsert;
 import com.walthersmulders.mapstruct.mapper.GenreMovieMapper;
 import com.walthersmulders.persistance.entity.GenreMovieEntity;
 import com.walthersmulders.persistance.repository.GenreMovieRepository;

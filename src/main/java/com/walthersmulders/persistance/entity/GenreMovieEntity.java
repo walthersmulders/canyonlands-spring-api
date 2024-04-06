@@ -1,6 +1,6 @@
 package com.walthersmulders.persistance.entity;
 
-import com.walthersmulders.mapstruct.dto.genremovie.GenreMovieUpsert;
+import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovieUpsert;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
