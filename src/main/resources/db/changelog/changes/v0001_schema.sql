@@ -114,4 +114,17 @@ CREATE TABLE movie_genre
     FOREIGN KEY (movie_id) REFERENCES movie
 );
 
+CREATE TABLE users_movie
+(
+    user_id  UUID    NOT NULL,
+    movie_id UUID    NOT NULL,
+    rating   INTEGER NOT NULL,
+    review   VARCHAR(5000),
+
+    PRIMARY KEY (user_id, movie_id),
+    FOREIGN KEY (user_id) REFERENCES users,
+    FOREIGN KEY (movie_id) REFERENCES movie
+);
+
+
 
