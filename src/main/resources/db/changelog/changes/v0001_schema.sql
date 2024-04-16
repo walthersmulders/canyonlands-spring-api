@@ -22,6 +22,17 @@ CREATE TABLE genre_movie
     UNIQUE (external_id)
 );
 
+CREATE TABLE genre_tv_series
+(
+    genre_tv_series_id UUID         NOT NULL,
+    genre              VARCHAR(255) NOT NULL,
+    external_id        INTEGER      NOT NULL,
+
+    PRIMARY KEY (genre_tv_series_id),
+    UNIQUE (genre),
+    UNIQUE (external_id)
+);
+
 CREATE TABLE author
 (
     author_id       UUID         NOT NULL,
@@ -86,6 +97,44 @@ CREATE TABLE users_book
     PRIMARY KEY (user_id, book_id),
     FOREIGN KEY (user_id) REFERENCES users,
     FOREIGN KEY (book_id) REFERENCES book
+);
+
+CREATE TABLE tv_series
+(
+    tv_series_id  UUID          NOT NULL,
+    title         VARCHAR(500)  NOT NULL,
+    plot          TEXT          NOT NULL,
+    external_id   INTEGER       NOT NULL,
+    poster        VARCHAR(1000) NOT NULL,
+    date_released DATE          NOT NULL,
+    date_added    TIMESTAMP     NOT NULL,
+    date_updated  TIMESTAMP     NOT NULL,
+
+    PRIMARY KEY (tv_series_id),
+    UNIQUE (title),
+    UNIQUE (external_id)
+);
+
+CREATE TABLE users_tv_series
+(
+    user_id      UUID    NOT NULL,
+    tv_series_id UUID    NOT NULL,
+    rating       INTEGER NOT NULL,
+    review       VARCHAR(5000),
+
+    PRIMARY KEY (user_id, tv_series_id),
+    FOREIGN KEY (user_id) REFERENCES users,
+    FOREIGN KEY (tv_series_id) REFERENCES tv_series
+);
+
+CREATE TABLE tv_series_genre
+(
+    genre_tv_series_id UUID NOT NULL,
+    tv_series_id       UUID NOT NULL,
+
+    PRIMARY KEY (genre_tv_series_id, tv_series_id),
+    FOREIGN KEY (genre_tv_series_id) REFERENCES genre_tv_series,
+    FOREIGN KEY (tv_series_id) REFERENCES tv_series
 );
 
 CREATE TABLE movie
