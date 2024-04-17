@@ -1,4 +1,4 @@
-package com.walthersmulders.persistence.entity.tvseries;
+package com.walthersmulders.persistence.entity.series;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -16,16 +16,16 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TvSeriesGenreID implements Serializable {
-    @Column(name = "genre_tv_series_id", nullable = false)
-    private UUID genreTvSeriesID;
+public class SeriesGenreID implements Serializable {
+    @Column(name = "genre_series_id", nullable = false)
+    private UUID genreSeriesID;
 
-    @Column(name = "tv_series_id", nullable = false)
-    private UUID tvSeriesID;
+    @Column(name = "series_id", nullable = false)
+    private UUID seriesID;
 
     @Override
     public int hashCode() {
-        return Objects.hash(genreTvSeriesID, tvSeriesID);
+        return Objects.hash(genreSeriesID, seriesID);
     }
 
     @Override
@@ -38,9 +38,9 @@ public class TvSeriesGenreID implements Serializable {
             return false;
         }
 
-        TvSeriesGenreID that = (TvSeriesGenreID) o;
+        SeriesGenreID that = (SeriesGenreID) o;
 
-        return Objects.equals(genreTvSeriesID, that.genreTvSeriesID) &&
-               Objects.equals(tvSeriesID, that.tvSeriesID);
+        return Objects.equals(genreSeriesID, that.genreSeriesID) &&
+               Objects.equals(seriesID, that.seriesID);
     }
 }

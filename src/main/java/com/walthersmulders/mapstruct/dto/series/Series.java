@@ -1,11 +1,11 @@
-package com.walthersmulders.mapstruct.dto.tvseries;
+package com.walthersmulders.mapstruct.dto.series;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record TvSeries(
-        UUID tvSeriesID,
+public record Series(
+        UUID seriesID,
         String title,
         String plot,
         String poster,

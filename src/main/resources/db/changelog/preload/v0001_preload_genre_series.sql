@@ -2,7 +2,7 @@
 
 --changeset walthersmulders:1
 
-INSERT INTO genre_tv_series (genre_tv_series_id, genre, external_id)
+INSERT INTO genre_series (genre_series_id, genre, external_id)
 VALUES (gen_random_uuid(), 'Action & Adventure', 10759),
        (gen_random_uuid(), 'Animation', 16),
        (gen_random_uuid(), 'Comedy', 35),

@@ -6,4 +6,4 @@ databaseChangeLog:
   - include:
       file: db/changelog/preload/v0001_preload_genre_movie.sql
   - include:
-      file: db/changelog/preload/v0001_preload_genre_tv_series.sql
+      file: db/changelog/preload/v0001_preload_genre_series.sql

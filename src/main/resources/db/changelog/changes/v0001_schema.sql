@@ -22,13 +22,13 @@ CREATE TABLE genre_movie
     UNIQUE (external_id)
 );
 
-CREATE TABLE genre_tv_series
+CREATE TABLE genre_series
 (
-    genre_tv_series_id UUID         NOT NULL,
-    genre              VARCHAR(255) NOT NULL,
-    external_id        INTEGER      NOT NULL,
+    genre_series_id UUID         NOT NULL,
+    genre           VARCHAR(255) NOT NULL,
+    external_id     INTEGER      NOT NULL,
 
-    PRIMARY KEY (genre_tv_series_id),
+    PRIMARY KEY (genre_series_id),
     UNIQUE (genre),
     UNIQUE (external_id)
 );
@@ -99,9 +99,9 @@ CREATE TABLE users_book
     FOREIGN KEY (book_id) REFERENCES book
 );
 
-CREATE TABLE tv_series
+CREATE TABLE series
 (
-    tv_series_id  UUID          NOT NULL,
+    series_id     UUID          NOT NULL,
     title         VARCHAR(500)  NOT NULL,
     plot          TEXT          NOT NULL,
     external_id   INTEGER       NOT NULL,
@@ -110,31 +110,31 @@ CREATE TABLE tv_series
     date_added    TIMESTAMP     NOT NULL,
     date_updated  TIMESTAMP     NOT NULL,
 
-    PRIMARY KEY (tv_series_id),
+    PRIMARY KEY (series_id),
     UNIQUE (title),
     UNIQUE (external_id)
 );
 
-CREATE TABLE users_tv_series
+CREATE TABLE users_series
 (
-    user_id      UUID    NOT NULL,
-    tv_series_id UUID    NOT NULL,
-    rating       INTEGER NOT NULL,
-    review       VARCHAR(5000),
+    user_id   UUID    NOT NULL,
+    series_id UUID    NOT NULL,
+    rating    INTEGER NOT NULL,
+    review    VARCHAR(5000),
 
-    PRIMARY KEY (user_id, tv_series_id),
+    PRIMARY KEY (user_id, series_id),
     FOREIGN KEY (user_id) REFERENCES users,
-    FOREIGN KEY (tv_series_id) REFERENCES tv_series
+    FOREIGN KEY (series_id) REFERENCES series
 );
 
-CREATE TABLE tv_series_genre
+CREATE TABLE series_genre
 (
-    genre_tv_series_id UUID NOT NULL,
-    tv_series_id       UUID NOT NULL,
+    genre_series_id UUID NOT NULL,
+    series_id       UUID NOT NULL,
 
-    PRIMARY KEY (genre_tv_series_id, tv_series_id),
-    FOREIGN KEY (genre_tv_series_id) REFERENCES genre_tv_series,
-    FOREIGN KEY (tv_series_id) REFERENCES tv_series
+    PRIMARY KEY (genre_series_id, series_id),
+    FOREIGN KEY (genre_series_id) REFERENCES genre_series,
+    FOREIGN KEY (series_id) REFERENCES series
 );
 
 CREATE TABLE movie

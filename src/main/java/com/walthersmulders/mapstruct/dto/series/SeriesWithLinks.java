@@ -1,14 +1,14 @@
-package com.walthersmulders.mapstruct.dto.tvseries;
+package com.walthersmulders.mapstruct.dto.series;
 
-import com.walthersmulders.mapstruct.dto.genre.GenreTvSeries;
+import com.walthersmulders.mapstruct.dto.genre.series.GenreSeries;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public record TvSeriesWithLinks(
-        UUID tvSeriesID,
+public record SeriesWithLinks(
+        UUID seriesID,
         String title,
         String plot,
         String poster,
@@ -16,6 +16,6 @@ public record TvSeriesWithLinks(
         LocalDate dateReleased,
         LocalDateTime dateAdded,
         LocalDateTime dateUpdated,
-        List<GenreTvSeries> genres
+        List<GenreSeries> genres
 ) {
 }
