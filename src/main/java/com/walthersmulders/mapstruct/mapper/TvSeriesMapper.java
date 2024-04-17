@@ -6,7 +6,6 @@ import com.walthersmulders.mapstruct.dto.tvseries.TvSeriesUpsert;
 import com.walthersmulders.mapstruct.dto.tvseries.TvSeriesWithLinks;
 import com.walthersmulders.persistence.entity.tvseries.TvSeriesEntity;
 import com.walthersmulders.persistence.entity.tvseries.TvSeriesGenreEntity;
-import com.walthersmulders.persistence.entity.tvseries.TvSeriesGenreID;
 import org.mapstruct.*;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public interface TvSeriesMapper {
 
     @InheritConfiguration
     TvSeriesEntity tvSeriesEntityUpdateMerge(
-            @MappingTarget TvSeriesEntity movieEntity,
+            @MappingTarget TvSeriesEntity tvSeriesEntity,
             TvSeriesUpsert tvSeriesUpsert
     );
 }
