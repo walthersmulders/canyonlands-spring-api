@@ -67,6 +67,7 @@ public class UsersMovieEntity implements Serializable {
 
         UsersMovieEntity that = (UsersMovieEntity) o;
 
-        return Objects.equals(user, that.user) && Objects.equals(movie, that.movie);
+        return Objects.equals(user, that.user) &&
+               Objects.equals(movie, that.movie);
     }
 }

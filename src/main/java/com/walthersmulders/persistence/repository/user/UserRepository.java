@@ -26,4 +26,12 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
     Optional<UserEntity> fetchWithMovies(
             @Param(value = "userID") UUID userID
     );
+
+    @Query("SELECT ue " +
+           "FROM UserEntity ue " +
+           "LEFT JOIN FETCH ue.series " +
+           "WHERE ue.userID = :userID")
+    Optional<UserEntity> fetchWithSeries(
+            @Param(value = "userID") UUID userID
+    );
 }

@@ -2,8 +2,10 @@ package com.walthersmulders.persistence.entity.user;
 
 import com.walthersmulders.persistence.entity.book.BookEntity;
 import com.walthersmulders.persistence.entity.movie.MovieEntity;
+import com.walthersmulders.persistence.entity.series.SeriesEntity;
 import com.walthersmulders.persistence.entity.users.book.UsersBookEntity;
 import com.walthersmulders.persistence.entity.users.movie.UsersMovieEntity;
+import com.walthersmulders.persistence.entity.users.series.UsersSeriesEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,6 +48,9 @@ public class UserEntity implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UsersMovieEntity> movies;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UsersSeriesEntity> series;
+
     public void addBookToUserLibrary(BookEntity book, Integer rating, String review) {
         UsersBookEntity usersBook = new UsersBookEntity(this, book, rating, review);
         books.add(usersBook);
@@ -64,6 +69,16 @@ public class UserEntity implements Serializable {
     public void addMovieToUserLibrary(MovieEntity movie, Integer rating) {
         UsersMovieEntity usersMovie = new UsersMovieEntity(this, movie, rating);
         movies.add(usersMovie);
+    }
+
+    public void addSeriesToUserLibrary(SeriesEntity seriesEntity, Integer rating, String review) {
+        UsersSeriesEntity usersSeries = new UsersSeriesEntity(this, seriesEntity, review, rating);
+        series.add(usersSeries);
+    }
+
+    public void addSeriesToUserLibrary(SeriesEntity seriesEntity, Integer rating) {
+        UsersSeriesEntity usersSeries = new UsersSeriesEntity(this, seriesEntity, rating);
+        series.add(usersSeries);
     }
 
     @Override
