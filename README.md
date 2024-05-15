@@ -16,6 +16,24 @@ running. In the root of the project you will find a `docker-compose.yml` file, t
 contains the infrastructure needed to run the project locally. It includes `PostgreSQL` and 
 `Keycloak`. 
 
+Start the Docker infrastructure up with the following command:
+
+```bash
+docker compose up -d
+```
+
+Create a `.env` file in the root of the project and make use of these defaults:
+
+```text
+KEYCLOAK_URL=http://localhost:8024/realms/canyonlands
+POSTGRES_DATABASE=canyonlands
+POSTGRES_HOST=localhost
+POSTGRES_PASSWORD=password
+POSTGRES_PORT=5432
+POSTGRES_USER=admin
+LOGGING_LEVEL=INFO
+```
+
 Once you have the Docker containers up and running you need to start the project, this can be 
 done by running the following command in your Terminal window:
 
@@ -90,3 +108,12 @@ code of `HTTP 200 OK` and a response body like the following:
     }
 ]
 ```
+
+Shutdown and clean the Docker environment with the following command:
+
+```bash
+docker compose down -v
+```
+
+
+
