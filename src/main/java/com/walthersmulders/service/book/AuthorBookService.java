@@ -294,13 +294,21 @@ public class AuthorBookService {
             log.info("Incoming object has the same fields as existing, no need to update");
         } else {
             log.info("Incoming object has different fields as existing, updating");
-            log.info("Check if book with ISBN {} already exists", bookUpsert.isbn());
 
-            boolean existsByIsbn = bookRepository.existsByIsbn(bookUpsert.isbn());
+            boolean existsByIsbn = false;
+            boolean existsByTitle = false;
+
+            log.info("Check if incoming ISBN {} has the same value as existing", bookUpsert.isbn());
+            if (!existingBook.get().getIsbn().equals(bookUpsert.isbn())) {
+                log.info("Check if book with ISBN {} already exists", bookUpsert.isbn());
+
+                existsByIsbn = bookRepository.existsByIsbn(bookUpsert.isbn());
+            }
 
             log.info("Check if book with title {} already exists", bookUpsert.title());
-
-            boolean existsByTitle = bookRepository.existsByTitle(bookUpsert.title());
+            if (!existingBook.get().getTitle().equals(bookUpsert.title())) {
+                existsByTitle = bookRepository.existsByTitle(bookUpsert.title());
+            }
 
             Map<String, String> errorsMap = new HashMap<>();
 
