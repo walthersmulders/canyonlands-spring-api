@@ -12,10 +12,8 @@ import java.util.UUID;
 public interface GenreMovieRepository extends JpaRepository<GenreMovieEntity, UUID> {
     @Query("SELECT CASE WHEN COUNT(gme) > 0 THEN true ELSE false END " +
            "FROM GenreMovieEntity gme " +
-           "WHERE gme.genre = :genre " +
-           "OR gme.externalID = :externalID")
+           "WHERE gme.genre = :genre")
     boolean exists(
-            @Param(value = "genre") String genre,
-            @Param(value = "externalID") Integer externalID
+            @Param(value = "genre") String genre
     );
 }
