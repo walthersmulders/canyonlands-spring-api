@@ -19,13 +19,6 @@ public interface MovieRepository extends JpaRepository<MovieEntity, UUID> {
             @Param(value = "title") String title
     );
 
-    @Query("SELECT CASE WHEN COUNT(me) > 0 THEN true ELSE false END " +
-           "FROM MovieEntity me " +
-           "WHERE me.externalID = :externalID")
-    boolean existsByExternalID(
-            @Param(value = "externalID") Integer externalID
-    );
-
     @Query("SELECT me " +
            "FROM MovieEntity me " +
            "LEFT JOIN FETCH me.movieGenres")
