@@ -19,13 +19,6 @@ public interface SeriesRepository extends JpaRepository<SeriesEntity, UUID> {
             @Param(value = "title") String title
     );
 
-    @Query("SELECT CASE WHEN COUNT(se) > 0 THEN true ELSE false END " +
-           "FROM SeriesEntity se " +
-           "WHERE se.externalID = :externalID")
-    boolean existsByExternalID(
-            @Param(value = "externalID") Integer externalID
-    );
-
     @Query("SELECT se " +
            "FROM SeriesEntity se " +
            "LEFT JOIN FETCH se.seriesGenres")
