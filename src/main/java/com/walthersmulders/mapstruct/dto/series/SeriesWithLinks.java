@@ -12,7 +12,6 @@ public record SeriesWithLinks(
         String title,
         String plot,
         String poster,
-        Integer externalID,
         LocalDate dateReleased,
         LocalDateTime dateAdded,
         LocalDateTime dateUpdated,
