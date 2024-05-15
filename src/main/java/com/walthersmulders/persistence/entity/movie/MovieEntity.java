@@ -37,9 +37,6 @@ public class MovieEntity implements Serializable {
     @Column(name = "poster", nullable = false, length = 1000)
     private String poster;
 
-    @Column(name = "external_id", nullable = false, unique = true)
-    private Integer externalID;
-
     @Column(name = "date_added", nullable = false)
     private LocalDateTime dateAdded;
 
@@ -92,7 +89,6 @@ public class MovieEntity implements Serializable {
         return this.title.equals(movieUpsert.title()) &&
                this.plot.equals(movieUpsert.plot()) &&
                this.poster.equals(movieUpsert.poster()) &&
-               this.externalID.equals(movieUpsert.externalID()) &&
                this.dateReleased.equals(movieUpsert.dateReleased());
     }
 }
