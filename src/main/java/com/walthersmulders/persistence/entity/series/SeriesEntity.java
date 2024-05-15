@@ -34,9 +34,6 @@ public class SeriesEntity implements Serializable {
     @Column(name = "plot", nullable = false)
     private String plot;
 
-    @Column(name = "external_id", unique = true, nullable = false)
-    private Integer externalID;
-
     @Column(name = "poster", nullable = false, length = 1000)
     private String poster;
 
@@ -93,7 +90,6 @@ public class SeriesEntity implements Serializable {
         return this.title.equals(seriesUpsert.title()) &&
                this.plot.equals(seriesUpsert.plot()) &&
                this.poster.equals(seriesUpsert.poster()) &&
-               this.externalID.equals(seriesUpsert.externalID()) &&
                this.dateReleased.equals(seriesUpsert.dateReleased());
     }
 }
