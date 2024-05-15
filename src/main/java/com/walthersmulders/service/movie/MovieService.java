@@ -47,24 +47,10 @@ public class MovieService {
 
         boolean existsByTitle = movieRepository.existsByTitle(movieWithLinksUpsert.movie().title());
 
-        log.info("Check if movie with externalID already exists");
-
-        boolean existsByExternalID = movieRepository.existsByExternalID(
-                movieWithLinksUpsert.movie().externalID()
-        );
-
-        Map<String, String> errorsMap = new HashMap<>();
-
-        if (existsByTitle || existsByExternalID) {
-            if (existsByTitle) {
-                errorsMap.put("title", "Movie with this title already exists");
-            }
-
-            if (existsByExternalID) {
-                errorsMap.put("externalID", "Movie with this externalID already exists");
-            }
-
-            throw new EntityExistsException(MOVIE, errorsMap);
+        if (existsByTitle) {
+            throw new EntityExistsException(
+                    MOVIE, Map.of("title", "Movie with this title already exists")
+            );
         }
 
         // Will throw error if any of the IDs supplied are invalid.
@@ -173,19 +159,6 @@ public class MovieService {
                     throw new EntityExistsException(
                             MOVIE,
                             Map.of("title", "Movie with this title already exists")
-                    );
-                }
-            }
-
-            if (!existingMovie.get().getExternalID().equals(movieUpsert.externalID())) {
-                log.info("Check if movie with externalID already exists");
-
-                boolean existsByExternalID = movieRepository.existsByExternalID(movieUpsert.externalID());
-
-                if (existsByExternalID) {
-                    throw new EntityExistsException(
-                            MOVIE,
-                            Map.of("externalID", "Movie with this externalID already exists")
                     );
                 }
             }
