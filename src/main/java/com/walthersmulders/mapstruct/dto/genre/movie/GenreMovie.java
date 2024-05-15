@@ -4,7 +4,6 @@ import java.util.UUID;
 
 public record GenreMovie(
         UUID genreMovieID,
-        String genre,
-        Integer externalID
+        String genre
 ) {
 }
