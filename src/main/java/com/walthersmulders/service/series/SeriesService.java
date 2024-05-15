@@ -47,24 +47,10 @@ public class SeriesService {
 
         boolean existsByTitle = seriesRepository.existsByTitle(seriesWithLinksUpsert.series().title());
 
-        log.info("Check if series with externalID already exists");
-
-        boolean existsByExternalID = seriesRepository.existsByExternalID(
-                seriesWithLinksUpsert.series().externalID()
-        );
-
-        Map<String, String> errorsMap = new HashMap<>();
-
-        if (existsByTitle || existsByExternalID) {
-            if (existsByTitle) {
-                errorsMap.put("title", "Series with title already exists");
-            }
-
-            if (existsByExternalID) {
-                errorsMap.put("externalID", "Series with externalID already exists");
-            }
-
-            throw new EntityExistsException(SERIES, errorsMap);
+        if (existsByTitle) {
+            throw new EntityExistsException(
+                    SERIES, Map.of("title", "Series with title already exists")
+            );
         }
 
         // Will throw error if any of the IDs supplied are invalid.
@@ -172,19 +158,6 @@ public class SeriesService {
                     throw new EntityExistsException(
                             SERIES,
                             Map.of(SERIES_ID, id.toString())
-                    );
-                }
-            }
-
-            if (!existingSeries.get().getExternalID().equals(seriesUpsert.externalID())) {
-                log.info("Check if series with externalID already exists");
-
-                boolean existsByExternalID = seriesRepository.existsByExternalID(seriesUpsert.externalID());
-
-                if (existsByExternalID) {
-                    throw new EntityExistsException(
-                            SERIES,
-                            Map.of("externalID", seriesUpsert.externalID().toString())
                     );
                 }
             }
