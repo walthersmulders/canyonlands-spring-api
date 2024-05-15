@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static java.util.Map.entry;
-
 @Service
 @Slf4j
 public class GenreSeriesService {
@@ -35,8 +33,7 @@ public class GenreSeriesService {
         log.info("Creating genre:series");
 
         boolean exists = genreSeriesRepository.exists(
-                genreSeriesUpsert.genre(),
-                genreSeriesUpsert.externalID()
+                genreSeriesUpsert.genre()
         );
 
         if (exists) {
@@ -45,9 +42,8 @@ public class GenreSeriesService {
                     genreSeriesUpsert.genre()
             );
 
-            throw new EntityExistsException(GENRE_SERIES, Map.ofEntries(
-                    entry("genre", genreSeriesUpsert.genre()),
-                    entry("externalID", String.valueOf(genreSeriesUpsert.externalID()))
+            throw new EntityExistsException(
+                    GENRE_SERIES, Map.of("genre", genreSeriesUpsert.genre()
             ));
         }
 
