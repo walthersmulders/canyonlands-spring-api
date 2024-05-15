@@ -33,14 +33,10 @@ public class GenreMovieEntity implements Serializable {
     @Column(name = "genre", nullable = false, unique = true)
     private String genre;
 
-    @Column(name = "external_id", nullable = false, unique = true)
-    private Integer externalID;
-
     @OneToMany(mappedBy = "genreMovie", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MovieGenreEntity> movieGenres;
 
     public boolean checkUpdateDtoEqualsEntity(GenreMovieUpsert genreMovieUpsert) {
-        return this.genre.equals(genreMovieUpsert.genre()) &&
-               this.externalID.equals(genreMovieUpsert.externalID());
+        return this.genre.equals(genreMovieUpsert.genre());
     }
 }

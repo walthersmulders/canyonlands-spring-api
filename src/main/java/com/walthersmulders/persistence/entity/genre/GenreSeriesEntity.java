@@ -30,14 +30,10 @@ public class GenreSeriesEntity implements Serializable {
     @Column(name = "genre", nullable = false, unique = true)
     private String genre;
 
-    @Column(name = "external_id", nullable = false, unique = true)
-    private Integer externalID;
-
     @OneToMany(mappedBy = "genreSeries", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SeriesGenreEntity> seriesGenres;
 
     public boolean checkUpdateDtoEqualsEntity(GenreSeriesUpsert updateDto) {
-        return this.genre.equals(updateDto.genre()) &&
-               this.externalID.equals(updateDto.externalID());
+        return this.genre.equals(updateDto.genre());
     }
 }
