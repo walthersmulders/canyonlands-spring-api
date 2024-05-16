@@ -1,3 +1,5 @@
+# Canyonlands Spring API
+
 <div align="center">
 
 [![Static Badge](https://img.shields.io/badge/license-GPL_v3.0-238636?style=for-the-badge)](COPYING)
@@ -13,7 +15,7 @@
 
 </div>
 
-# Canyonlands Spring API
+---
 
 > [!IMPORTANT]  
 > This project is a work in progress and might not perform as expected.
