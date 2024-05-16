@@ -36,6 +36,9 @@ See [COPYING](COPYING) to see the full text.
 
 A **Postman Collection** and **Environment** export can be found in the [docs](docs/api) directory.
 
+Keep in mind the Postman collection does not contain all the supported API endpoints at this 
+stage. I will update the collection as progress on the project is made.
+
 > [!NOTE] 
 > For a full walkthrough of the API endpoints please refer to the project documentation found here:
 > [Project Canyonlands](https://walthersmulders.com/personal-projects/canyonlands/overview)
