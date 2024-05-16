@@ -1,0 +1,1811 @@
+{
+	"info": {
+		"_postman_id": "d374cec5-779f-40e4-8c86-20f652bd7323",
+		"name": "Local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5629689"
+	},
+	"item": [
+		{
+			"name": "User Operations",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User by userID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by userID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Genre Book Operations",
+			"item": [
+				{
+					"name": "Get Book Genres",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/genres/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Book Genre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"genre\": \"Professional & Technical\",\n    \"subGenre\": \"Programming\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book Genre by bookGenreID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/genres/books/c45a77fd-a0c3-411d-a30a-227d9b6998d3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"books",
+								"c45a77fd-a0c3-411d-a30a-227d9b6998d3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book Genre by bookGenreID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"genre\": \"Professional & Technical\",\n    \"subGenre\": \"Programmings\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres/books/c45a77fd-a0c3-411d-a30a-227d9b6998d3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"books",
+								"c45a77fd-a0c3-411d-a30a-227d9b6998d3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book Genre by bookGenreID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/genres/books/c45a77fd-a0c3-411d-a30a-227d9b6998d3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"books",
+								"c45a77fd-a0c3-411d-a30a-227d9b6998d3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book Operations",
+			"item": [
+				{
+					"name": "Create Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"James\",\n    \"lastName\": \"Small\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Authors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Author by authorID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/authors/b87661db-ccdf-4f19-8347-7162a111eff8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authors",
+								"b87661db-ccdf-4f19-8347-7162a111eff8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Author by authorID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Walther\",\n    \"lastName\": \"Smulders\",\n    \"additionalName\": \"John\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authors/b87661db-ccdf-4f19-8347-7162a111eff8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authors",
+								"b87661db-ccdf-4f19-8347-7162a111eff8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Book with Authors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"authorIDs\": [\n        \"b87661db-ccdf-4f19-8347-7162a111eff8\"\n    ],\n    \"bookGenreID\": \"e450228e-1a30-4b79-9b37-4a1ba7eb6948\",\n    \"book\": {\n        \"isbn\": \"978-1-1242-4798-4\",\n        \"title\": \"My Awesome Book\",\n        \"pages\": 500,\n        \"plot\": \"This is a plot\",\n        \"cover\": \"cover.jpg\",\n        \"datePublished\": \"2022-08-29\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books with Links",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/books/links",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books",
+								"links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book by bookID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/books/79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books",
+								"79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book with Links by bookID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/books/79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c/links",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books",
+								"79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c",
+								"links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Authors with Books",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/authors/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authors",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Author with Books by authorID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/authors/b87661db-ccdf-4f19-8347-7162a111eff8/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authors",
+								"b87661db-ccdf-4f19-8347-7162a111eff8",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book by bookID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"My Book\",\n    \"plot\": \"This is an updated plot\",\n    \"isbn\": \"978-1-1242-4798-4\",\n    \"pages\": 400,\n    \"cover\": \"cover.jpg\",\n    \"datePublished\": \"2023-03-23\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/books/79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books",
+								"79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book Genre by bookID and bookGenreID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/books/79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c/genres/c58e0c88-aa81-4442-a165-a8860de86069",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books",
+								"79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c",
+								"genres",
+								"c58e0c88-aa81-4442-a165-a8860de86069"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Author to Book by bookID and authorID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/books/79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c/authors/fdabc0c4-9ecf-4bee-a818-f8f0b655c389",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books",
+								"79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c",
+								"authors",
+								"fdabc0c4-9ecf-4bee-a818-f8f0b655c389"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Author from Book by bookID and authorID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/books/79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c/authors/fdabc0c4-9ecf-4bee-a818-f8f0b655c389",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books",
+								"79b7d1a7-9ef5-461b-aac2-4b9db94a8d2c",
+								"authors",
+								"fdabc0c4-9ecf-4bee-a818-f8f0b655c389"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Genre Movie Operations",
+			"item": [
+				{
+					"name": "Get Movie Genres",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/genres/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Movie Genre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"genre\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movie Genre by movieGenreID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/genres/movies/afa3119a-74ba-44cf-be68-ab9bee76a5cc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"movies",
+								"afa3119a-74ba-44cf-be68-ab9bee76a5cc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Movie Genre by movieGenreID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"genre\": \"testUpdate\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres/movies/afa3119a-74ba-44cf-be68-ab9bee76a5cc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"movies",
+								"afa3119a-74ba-44cf-be68-ab9bee76a5cc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movie Operations",
+			"item": [
+				{
+					"name": "Create Movie with Links",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"genreIDs\": [\n        \"bc1522f9-0caa-463e-9838-6e69dae10a80\"\n    ],\n    \"movie\": {\n        \"title\": \"Movie One\",\n        \"plot\": \"This is a plot\",\n        \"poster\": \"poster.jpg\",\n        \"dateReleased\": \"2022-08-29\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movies",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movies with Links",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/links",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movie by movieID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/7d2926aa-4e5b-43ba-9869-251adb5f589d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"7d2926aa-4e5b-43ba-9869-251adb5f589d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Movie by movieID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Movie One UPDATE\",\n    \"plot\": \"This is a plot\",\n    \"poster\": \"poster.jpg\",\n    \"dateReleased\": \"2022-08-29\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies/7d2926aa-4e5b-43ba-9869-251adb5f589d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"7d2926aa-4e5b-43ba-9869-251adb5f589d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movie with Links by movieID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/7d2926aa-4e5b-43ba-9869-251adb5f589d/links",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"7d2926aa-4e5b-43ba-9869-251adb5f589d",
+								"links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Movie Genre to Movie by movieID and movieGenreID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/7d2926aa-4e5b-43ba-9869-251adb5f589d/genres/2c2be16f-ed37-4bd9-9897-726a1890467e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"7d2926aa-4e5b-43ba-9869-251adb5f589d",
+								"genres",
+								"2c2be16f-ed37-4bd9-9897-726a1890467e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Movie Genre from Movie by movieID and movieGenreID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/7d2926aa-4e5b-43ba-9869-251adb5f589d/genres/bc1522f9-0caa-463e-9838-6e69dae10a80",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"7d2926aa-4e5b-43ba-9869-251adb5f589d",
+								"genres",
+								"bc1522f9-0caa-463e-9838-6e69dae10a80"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Genre Music Operations",
+			"item": []
+		},
+		{
+			"name": "Music Operations",
+			"item": []
+		},
+		{
+			"name": "Genre Series Operations",
+			"item": []
+		},
+		{
+			"name": "Series Operations",
+			"item": []
+		},
+		{
+			"name": "Users Book Operations",
+			"item": [
+				{
+					"name": "Add Book to User Library with Review and Rating",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 5,\n    \"review\": \"This is a review\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"books",
+								"69b43413-af09-417e-a949-9e96de2c9087"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Book to User Library Without Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"books",
+								"69b43413-af09-417e-a949-9e96de2c9087"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Users Book without Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"books",
+								"69b43413-af09-417e-a949-9e96de2c9087"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Users Book with Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 5,\n    \"review\": \"this is a review\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"books",
+								"69b43413-af09-417e-a949-9e96de2c9087"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users Book by userID and bookID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"books",
+								"69b43413-af09-417e-a949-9e96de2c9087"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Users Books by userID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Book from User Library",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"books",
+								"69b43413-af09-417e-a949-9e96de2c9087"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users Movie Operations",
+			"item": [
+				{
+					"name": "Add Movie to Users Library with Rating and Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 5,\n    \"review\": \"This is a review\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/movies/2593c304-b1b0-4745-a863-da1d73798ff0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"movies",
+								"2593c304-b1b0-4745-a863-da1d73798ff0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Movie to Users Library without Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/movies/2593c304-b1b0-4745-a863-da1d73798ff0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"movies",
+								"2593c304-b1b0-4745-a863-da1d73798ff0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Users Movie with Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 5,\n    \"review\": \"This is a review\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/movies/2593c304-b1b0-4745-a863-da1d73798ff0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"movies",
+								"2593c304-b1b0-4745-a863-da1d73798ff0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Users Movie without Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/movies/2593c304-b1b0-4745-a863-da1d73798ff0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"movies",
+								"2593c304-b1b0-4745-a863-da1d73798ff0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users Movie by userID and movieID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/movies/2593c304-b1b0-4745-a863-da1d73798ff0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"movies",
+								"2593c304-b1b0-4745-a863-da1d73798ff0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Users Movies by userID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Keycloak",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "canyonlands",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "walthersmulders",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "walthersmulders",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "yWbjVxoipwXoqSmruM13IJ2GSvQHrM2K",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8024/realms/canyonlands/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8024",
+							"path": [
+								"realms",
+								"canyonlands",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Actuator Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "localAuthToken",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKYXlHZjVDWjNPczY4dmRyUUZxVkhpa29EUzRtRThvb2F3N21vd2VmX0xnIn0.eyJleHAiOjE3MTE5MTE4MTIsImlhdCI6MTcxMTg5MzgxMiwianRpIjoiYzAzN2VkZDUtNjU4My00NThkLWJlZDYtMjEwYmJmYzY2MjFlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDI0L3JlYWxtcy9jYW55b25sYW5kcyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIxYzUyOTQzMy0wNjNmLTQwYzItOGRiYS00ZDVhODE5N2ZkNWIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjYW55b25sYW5kcyIsInNlc3Npb25fc3RhdGUiOiI1ODUzOTE1Mi05OTRkLTRhM2MtOTdhYS1mYWY0NzI3MzQ5MTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODA4MCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsidXNlciJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImNhbnlvbmxhbmRzIjp7InJvbGVzIjpbIlNZU19BRE1JTiIsIlVTRVIiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjU4NTM5MTUyLTk5NGQtNGEzYy05N2FhLWZhZjQ3MjczNDkxNiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiV2FsdGhlciBTbXVsZGVycyIsInByZWZlcnJlZF91c2VybmFtZSI6IndhbHRoZXJzbXVsZGVycyIsImdpdmVuX25hbWUiOiJXYWx0aGVyIiwiZmFtaWx5X25hbWUiOiJTbXVsZGVycyIsImVtYWlsIjoiaW5mb0B3YWx0aGVyc211bGRlcnMuY29tIn0.IsY14opOKi3L0-MXXreu6GXMdixc6T5SdVZ9PBZP3cfUU9qhlvvp7cJvutfoeYBdUMLKKijt8FFxXfnB9ZULQNiH_T5q4aLl_I8-drl2IEMp-5Bmm0U1QzKRejT-OsHfaJpUIFe3Gb_ImhFrUsuBT-cF8BhiUZALMHGcSoNqDKuR2T0gB4ocYt2bBnc4CsPKKw3rE3zX0dAOdOLn8jMRbeI2AzvWFT4Lkvq1BIkLPNonCx45gvRr_rdwNqrXWU-R7gbo0B7b2RMFnq2ek-tONlmuUzdHHOjXNd4w8lGrHnSYfxC8nccaXn9oEULT7m43X18VcFpt9G5qFw_76wfMYQ"
+		}
+	]
+}
