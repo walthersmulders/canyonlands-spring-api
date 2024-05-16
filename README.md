@@ -30,11 +30,9 @@ GNU General Public License v3.0 or later
 
 See [COPYING](COPYING) to see the full text.
 
----
-
 ### Postman Collection
 
-A **Postman Collection** and **Environment** export can be found in the [docs](docs/api) directory.
+A Postman Collection and Environment export can be found in the [docs](docs/api) directory.
 
 Keep in mind the Postman collection does not contain all the supported API endpoints at this 
 stage. I will update the collection as progress on the project is made.
