@@ -24,7 +24,7 @@
 
 For full project documentation, guides, recipes, resources see the project website:
 
-[Project Canyonlands](https://walthersmulders.com/personal-projects/canyonlands/overview)
+[Project Canyonlands](https://walthersmulders.com/personal-projects/canyonlands/getting-started/overview/)
 
 ## License
 
@@ -41,4 +41,4 @@ stage. I will update the collection as progress on the project is made.
 
 > [!NOTE] 
 > For a full walkthrough of the API endpoints please refer to the project documentation found here:
-> [Project Canyonlands](https://walthersmulders.com/personal-projects/canyonlands/overview)
+> [Project Canyonlands](https://walthersmulders.com/personal-projects/canyonlands/getting-started/overview/)
