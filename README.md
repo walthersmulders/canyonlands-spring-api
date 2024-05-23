@@ -42,3 +42,11 @@ stage. I will update the collection as progress on the project is made.
 > [!NOTE] 
 > For a full walkthrough of the API endpoints please refer to the project documentation found here:
 > [Project Canyonlands](https://walthersmulders.com/personal-projects/canyonlands/getting-started/overview/)
+
+## Breaking Changes
+
+> [!CAUTION]
+> You might have to perform data wipes on the database schema between commits. I will update the 
+> base schema file until the v1 milestone has been reached (in terms of feature stability), at 
+> which point the branch will be merged into `master` and actively tagged and managed from that 
+> point onwards (meaning incremental schema changes will happen via liquibase).
