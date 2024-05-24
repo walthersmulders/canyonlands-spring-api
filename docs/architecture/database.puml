@@ -1,0 +1,235 @@
+@startuml
+!theme reddress-lightblue
+
+entity "Genre Movie" as genre_movie {
+  + **genre_movie_id** : UUID [PK]
+  ---
+  **genre** : VARCHAR(255)
+  ---
+  ~genre [UK]
+}
+
+entity "Genre Series" as genre_series {
+  + **genre_series_id** : UUID [PK]
+  ---
+  **genre** : VARCHAR(255)
+  ---
+  ~genre [UK]
+}
+
+entity "Genre Music" as genre_music {
+  + **genre_music_id** : UUID [PK]
+  ---
+  **genre** : VARCHAR(255)
+  ---
+  ~genre [UK]
+}
+
+entity "Genre Book" as genre_book {
+  + **book_genre_id** : UUID [PK]
+  ---
+  **genre** : VARCHAR(255)
+  **sub_genre** : VARCHAR(500)
+}
+
+
+entity "Author" as author {
+  + **author_id** : UUID [PK]
+  ---
+  **first_name** : VARCHAR(100)
+  **last_name** : VARCHAR(100)
+  **additional_name** : VARCHAR(100)
+}
+
+entity "Book" as book {
+  + **book_id** : UUID [PK]
+  # **book_genre_id** : UUID [FK]
+  ---
+  **isbn** : VARCHAR(20)
+  **title** : VARCHAR(255)
+  **pages** : INTEGER
+  **plot** : TEXT
+  **cover** : VARCHAR(1000)
+  **date_published** : DATE
+  **date_added** : TIMESTAMP
+  **date_updated** : TIMESTAMP
+  ---
+  ~isbn [UK]
+  ~title [UK]
+}
+
+entity "Author_Book" as author_book #line:red;line.bold; {
+  + **author_id** : UUID [PK, FK]
+  + **book_id** : UUID [PK, FK]
+}
+
+entity "Artist" as artist {
+  + **artist_id** : UUID [PK]
+  ---
+  **first_name** : VARCHAR(100)
+  **last_name** : VARCHAR(100)
+  **additional_name** : VARCHAR(100)
+}
+
+entity "Album" as album {
+  + **album_id** : UUID [PK]
+  # **genre_music_id** : UUID [FK]
+  ---
+  **title** : VARCHAR(255)
+  **cover** : VARCHAR(1000)
+  **date_published** : DATE
+  **date_added** : TIMESTAMP
+  **date_updated** : TIMESTAMP
+  ---
+  ~title [UK]
+}
+
+entity "Artist_Album" as artist_album #line:red;line.bold; {
+    + **artist_id** : UUID [PK, FK]
+    + **album_id** : UUID [PK, FK]
+}
+
+entity "Series" as series {
+  + **series_id** : UUID [PK]
+  ---
+  **title** : VARCHAR(500)
+  **plot** : TEXT
+  **poster** : VARCHAR(1000)
+  **date_released** : DATE
+  **date_added** : TIMESTAMP
+  **date_updated** : TIMESTAMP
+  ---
+  ~title [UK]
+}
+
+entity "Season" as season {
+  + **season_id** : UUID [PK]
+  # **series_id** : UUID [FK]
+  ---
+  **title** : VARCHAR(500)
+  **plot** : TEXT
+  **poster** : VARCHAR(1000)
+  **date_released** : DATE
+  **date_added** : TIMESTAMP
+  **date_updated** : TIMESTAMP
+  ---
+  ~(series_id, title) [UK]
+}
+
+entity "Series_Genre" as series_genre #line:red;line.bold; {
+  + **genre_series_id** : UUID [PK, FK]
+  + **series_id** : UUID [PK, FK]
+}
+
+entity "Movie" as movie {
+  + **movie_id** : UUID [PK]
+  ---
+  **title** : VARCHAR(500)
+  **plot** : TEXT
+  **poster** : VARCHAR(1000)
+  **date_released** : DATE
+  **date_added** : TIMESTAMP
+  **date_updated** : TIMESTAMP
+  ---
+  ~title [UK]
+}
+
+entity "Movie_Genre" as movie_genre #line:red;line.bold; {
+  + **genre_movie_id** : UUID [PK, FK]
+  + **movie_id** : UUID [PK, FK]
+}
+
+entity "Users" as users {
+  + **user_id** : UUID [PK]
+  ---
+  **username** : VARCHAR(100)
+  **email_address** : VARCHAR(500)
+  **first_name** : VARCHAR(100)
+  **last_name** : VARCHAR(100)
+  ---
+  ~username [UK]
+  ~email_address [UK]
+}
+
+entity "Users_Music" as users_music #line:red;line.bold; {
+  + **user_id** : UUID [PK, FK]
+  + **album_id** : UUID [PK, FK]
+  ---
+  **rating** : INTEGER
+  **review** : VARCHAR(5000)
+}
+
+entity "Users_Movie" as users_movie #line:red;line.bold; {
+  + **user_id** : UUID [PK, FK]
+  + **movie_id** : UUID [PK, FK]
+  ---
+  **rating** : INTEGER
+  **review** : VARCHAR(5000)
+}
+
+entity "Users_Series" as users_series #line:red;line.bold; {
+  + **user_id** : UUID [PK, FK]
+  + **series_id** : UUID [PK, FK]
+  ---
+  **rating** : INTEGER
+  **review** : VARCHAR(5000)
+}
+
+entity "Users_Book" as users_book #line:red;line.bold; {
+  + **user_id** : UUID [PK, FK]
+  + **book_id** : UUID [PK, FK]
+  ---
+  **rating** : INTEGER
+  **review** : VARCHAR(5000)
+}
+
+series -u[hidden]-> season
+season }|--|| series : series_id
+series -r[hidden]-> series_genre
+series ||--|{ series_genre : series_id
+series_genre -u[hidden]-> genre_series
+genre_series ||--|{ series_genre : genre_series_id
+
+users_series -u[hidden]-> series
+series ||--|{ users_series : series_id
+
+users_book -r[hidden]-> users
+users_book }|--|| users : users_id
+
+users_music -l[hidden]-> users
+users_music }|--|| users : users_id
+
+movie -l[hidden]-> movie_genre
+movie_genre }|--|| movie : movie_id
+movie_genre -d[hidden]-> genre_movie
+genre_movie ||--|{ movie_genre : genre_movie_id
+
+users_movie -u[hidden]-> users
+users_movie }|--|| users : users_id
+
+users_series -d[hidden]-> users
+users_series }|--|| users : users_id
+
+author -r[hidden]-> author_book
+author ||--|{ author_book : author_id
+book -l[hidden]-> genre_book
+genre_book ||--|{ book : book_genre_id
+book -u[hidden]-> author_book
+author_book }|--|| book : book_id
+
+users_book -l[hidden]-> book
+users_book }|--|| book : book_id
+
+users_movie -d[hidden]-> movie
+users_movie }|--|| movie : movie_id
+
+users_music -r[hidden]-> album
+users_music }|--|| album : album_id_id
+
+album -d[hidden]-> artist_album
+album ||--|{ artist_album : album_id
+artist_album -r[hidden]-> artist
+artist ||--|{ artist_album : artist_id
+album -r[hidden]-> genre_music
+album }|--|| genre_music : genre_music_id
+@enduml
