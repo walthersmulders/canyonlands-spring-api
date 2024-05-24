@@ -1221,11 +1221,455 @@
 		},
 		{
 			"name": "Genre Series Operations",
-			"item": []
+			"item": [
+				{
+					"name": "Get Series Genres",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/genres/series",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"series"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Series Genre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"genre\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres/series",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"series"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Series Genre by seriesGenreID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/genres/series/949b0337-0a14-4d74-8c0e-fd474b51f04e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"series",
+								"949b0337-0a14-4d74-8c0e-fd474b51f04e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Series Genre by seriesGenreID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"genre\": \"testUpdate\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres/series/949b0337-0a14-4d74-8c0e-fd474b51f04e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"series",
+								"949b0337-0a14-4d74-8c0e-fd474b51f04e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Series Operations",
-			"item": []
+			"item": [
+				{
+					"name": "Create Series with Links",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"genreIDs\": [\n        \"4e4d3075-8075-4c14-a6ee-53764ab7cee6\"\n    ],\n    \"series\": {\n        \"title\": \"Series Two\",\n        \"plot\": \"This is a plot\",\n        \"poster\": \"poster.jpg\",\n        \"dateReleased\": \"2023-01-14\"\n    },\n    \"seasons\": [\n        {\n            \"title\": \"Season 01\",\n            \"plot\": \"Plot of season 1\",\n            \"poster\": \"poster-s01.jpg\",\n            \"dateReleased\": \"2023-01-14\"\n        },\n        {\n            \"title\": \"Season 02\",\n            \"plot\": \"Plot of season 2\",\n            \"poster\": \"poster-s02.jpg\",\n            \"dateReleased\": \"2023-01-14\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/series",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Series without links",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Series with Links",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series/links",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Series by seriesID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series/28cc623b-15c0-40e5-8d1c-021f35df012b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"28cc623b-15c0-40e5-8d1c-021f35df012b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Series with Links by seriesID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series/28cc623b-15c0-40e5-8d1c-021f35df012b/links",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"28cc623b-15c0-40e5-8d1c-021f35df012b",
+								"links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Series by SeriesID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Series Updated Title\",\n    \"plot\": \"This is a plot\",\n    \"poster\": \"poster.jpg\",\n    \"dateReleased\": \"2023-02-14\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/series/28cc623b-15c0-40e5-8d1c-021f35df012b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"28cc623b-15c0-40e5-8d1c-021f35df012b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Series Genre to Series by seriesID and seriesGenreID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series/28cc623b-15c0-40e5-8d1c-021f35df012b/genres/63f39c47-a796-4a11-a6f9-beadc5e88be0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"28cc623b-15c0-40e5-8d1c-021f35df012b",
+								"genres",
+								"63f39c47-a796-4a11-a6f9-beadc5e88be0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Series Genre to Series by seriesID and seriesGenreID Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/series/28cc623b-15c0-40e5-8d1c-021f35df012b/genres/4e4d3075-8075-4c14-a6ee-53764ab7cee6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"28cc623b-15c0-40e5-8d1c-021f35df012b",
+								"genres",
+								"4e4d3075-8075-4c14-a6ee-53764ab7cee6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Series Season by SeriesID and SeasonID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Season Title Update\",\n    \"plot\": \"This is a plot\",\n    \"poster\": \"poster.jpg\",\n    \"dateReleased\": \"2023-02-15\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/series/28cc623b-15c0-40e5-8d1c-021f35df012b/season/0bbc2070-d413-43dd-b084-a0a89b26cdc8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"series",
+								"28cc623b-15c0-40e5-8d1c-021f35df012b",
+								"season",
+								"0bbc2070-d413-43dd-b084-a0a89b26cdc8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Users Book Operations",
