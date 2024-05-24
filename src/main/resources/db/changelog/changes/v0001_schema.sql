@@ -166,6 +166,7 @@ CREATE TABLE series
 CREATE TABLE season
 (
     season_id     UUID          NOT NULL,
+    series_id     UUID          NOT NULL,
     title         VARCHAR(500)  NOT NULL,
     plot          TEXT          NOT NULL,
     poster        VARCHAR(1000) NOT NULL,
@@ -174,17 +175,8 @@ CREATE TABLE season
     date_updated  TIMESTAMP     NOT NULL,
 
     PRIMARY KEY (season_id),
-    UNIQUE (title)
-);
-
-CREATE TABLE series_season
-(
-    series_id UUID NOT NULL,
-    season_id UUID NOT NULL,
-
-    PRIMARY KEY (series_id, season_id),
     FOREIGN KEY (series_id) REFERENCES series,
-    FOREIGN KEY (season_id) REFERENCES season
+    UNIQUE (series_id, title)
 );
 
 -- UPDATE THIS TO INCLUDE SEASON RATING, WHEN A USER ADDS A SERIES TO THEIR LIBRARY, ADD ALL THE
