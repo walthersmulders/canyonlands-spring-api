@@ -21,12 +21,12 @@ public interface SeriesRepository extends JpaRepository<SeriesEntity, UUID> {
 
     @Query("SELECT se " +
            "FROM SeriesEntity se " +
-           "LEFT JOIN FETCH se.seriesGenres")
+           "LEFT JOIN FETCH se.seasons")
     List<SeriesEntity> fetchSeriesWithLinks();
 
     @Query("SELECT se " +
            "FROM SeriesEntity se " +
-           "LEFT JOIN FETCH se.seriesGenres " +
+           "LEFT JOIN FETCH se.seasons " +
            "WHERE se.seriesID = :seriesID")
     Optional<SeriesEntity> fetchSeriesWithLinks(
             @Param(value = "seriesID") UUID seriesID

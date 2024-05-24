@@ -1,9 +1,6 @@
 package com.walthersmulders.controller.series;
 
-import com.walthersmulders.mapstruct.dto.series.Series;
-import com.walthersmulders.mapstruct.dto.series.SeriesUpsert;
-import com.walthersmulders.mapstruct.dto.series.SeriesWithLinks;
-import com.walthersmulders.mapstruct.dto.series.SeriesWithLinksUpsert;
+import com.walthersmulders.mapstruct.dto.series.*;
 import com.walthersmulders.service.series.SeriesService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -81,5 +78,16 @@ public class SeriesController {
     @DeleteMapping("/{seriesID}/genres/{genresID}")
     public void removeGenreFromTvSeries(@PathVariable UUID seriesID, @PathVariable UUID genresID) {
         seriesService.removeGenreFromSeries(seriesID, genresID);
+    }
+
+    @PreAuthorize("hasAuthority('SYS_ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{seriesID}/season/{seasonID}")
+    public void updateSeason(
+            @PathVariable UUID seriesID,
+            @PathVariable UUID seasonID,
+            @Valid @RequestBody SeasonUpsert seasonUpsert
+    ) {
+        seriesService.updateSeason(seriesID, seasonID, seasonUpsert);
     }
 }

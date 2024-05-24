@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public record SeriesWithLinksUpsert(
         @Valid @NotNull List<UUID> genreIDs,
-        @NotNull SeriesUpsert series
+        @NotNull SeriesUpsert series,
+        @NotNull List<SeasonUpsert> seasons
 ) {
 }

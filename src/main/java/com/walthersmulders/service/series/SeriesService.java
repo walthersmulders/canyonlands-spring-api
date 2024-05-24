@@ -3,12 +3,11 @@ package com.walthersmulders.service.series;
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
 import com.walthersmulders.exception.GenericBadRequestException;
-import com.walthersmulders.mapstruct.dto.series.Series;
-import com.walthersmulders.mapstruct.dto.series.SeriesUpsert;
-import com.walthersmulders.mapstruct.dto.series.SeriesWithLinks;
-import com.walthersmulders.mapstruct.dto.series.SeriesWithLinksUpsert;
+import com.walthersmulders.mapstruct.dto.series.*;
+import com.walthersmulders.mapstruct.mapper.SeasonMapper;
 import com.walthersmulders.mapstruct.mapper.SeriesMapper;
 import com.walthersmulders.persistence.entity.genre.GenreSeriesEntity;
+import com.walthersmulders.persistence.entity.series.SeasonEntity;
 import com.walthersmulders.persistence.entity.series.SeriesEntity;
 import com.walthersmulders.persistence.entity.series.SeriesGenreEntity;
 import com.walthersmulders.persistence.repository.genre.GenreSeriesRepository;
@@ -28,15 +27,18 @@ public class SeriesService {
 
     private final SeriesRepository      seriesRepository;
     private final SeriesMapper          seriesMapper;
+    private final SeasonMapper          seasonMapper;
     private final GenreSeriesRepository genreSeriesRepository;
 
     public SeriesService(
             SeriesRepository seriesRepository,
             SeriesMapper seriesMapper,
+            SeasonMapper seasonMapper,
             GenreSeriesRepository genreSeriesRepository
     ) {
         this.seriesRepository = seriesRepository;
         this.seriesMapper = seriesMapper;
+        this.seasonMapper = seasonMapper;
         this.genreSeriesRepository = genreSeriesRepository;
     }
 
@@ -70,6 +72,23 @@ public class SeriesService {
 
             throw new GenericBadRequestException("Series must have at least one genre");
         }
+
+        List<SeasonEntity> seasons = new ArrayList<>();
+
+        seriesWithLinksUpsert.seasons().forEach(item -> {
+            SeasonEntity season = seasonMapper.seasonUpsertToEntity(item);
+            season.setDateAdded(LocalDateTime.now());
+            season.setDateUpdated(LocalDateTime.now());
+            seasons.add(season);
+        });
+
+        if (seasons.isEmpty()) {
+            log.error("Series must have at least one season");
+
+            throw new GenericBadRequestException("Series must have at least one season");
+        }
+
+        series.addSeasons(seasons);
 
         seriesRepository.save(series);
 
@@ -253,5 +272,11 @@ public class SeriesService {
 
             seriesGenre.getSeries().removeSeriesGenre(seriesGenre.getGenreSeries());
         }
+    }
+
+    @Transactional
+    public void updateSeason(UUID seriesID, UUID seasonID, SeasonUpsert seasonUpsert) {
+        // TODO impl
+        log.info("TODO :: Implement this");
     }
 }

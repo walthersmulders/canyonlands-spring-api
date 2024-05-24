@@ -49,6 +49,9 @@ public class SeriesEntity implements Serializable {
     @OneToMany(mappedBy = "series", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SeriesGenreEntity> seriesGenres = new ArrayList<>();
 
+    @OneToMany(mappedBy = "series", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SeasonEntity> seasons = new ArrayList<>();
+
     public void addSeriesGenre(GenreSeriesEntity genreSeries) {
         SeriesGenreEntity seriesGenre = new SeriesGenreEntity(genreSeries, this);
         seriesGenres.add(seriesGenre);
@@ -66,6 +69,21 @@ public class SeriesEntity implements Serializable {
             }
 
         }
+    }
+
+    public void addSeason(SeasonEntity season) {
+        this.seasons.add(season);
+        season.setSeries(this);
+    }
+
+    public void addSeasons(List<SeasonEntity> seasons) {
+        this.seasons.addAll(seasons);
+        seasons.forEach(item -> item.setSeries(this));
+    }
+
+    public void removeSeason(SeasonEntity season) {
+        season.setSeries(null);
+        this.seasons.remove(season);
     }
 
     @Override
