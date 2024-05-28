@@ -53,5 +53,10 @@ public class GenreSeriesController {
         genreSeriesService.update(id, genreSeriesUpsert);
     }
 
-    // TODO :: Delete series genre functionality
+    @PreAuthorize("hasAuthority('SYS_ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void deleteGenre(@PathVariable UUID id) {
+        genreSeriesService.delete(id);
+    }
 }
