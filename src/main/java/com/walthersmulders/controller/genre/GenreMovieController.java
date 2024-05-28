@@ -53,5 +53,10 @@ public class GenreMovieController {
         genreMovieService.update(id, genreMovieUpsert);
     }
 
-    // TODO :: Delete movie genre functionality
+    @PreAuthorize("hasAuthority('SYS_ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void deleteGenre(@PathVariable UUID id) {
+        genreMovieService.delete(id);
+    }
 }

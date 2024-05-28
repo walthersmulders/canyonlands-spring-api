@@ -2,14 +2,19 @@ package com.walthersmulders.service.genre;
 
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
+import com.walthersmulders.exception.GenericBadRequestException;
 import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovie;
 import com.walthersmulders.mapstruct.dto.genre.movie.GenreMovieUpsert;
 import com.walthersmulders.mapstruct.mapper.GenreMovieMapper;
 import com.walthersmulders.persistence.entity.genre.GenreMovieEntity;
+import com.walthersmulders.persistence.entity.movie.MovieEntity;
 import com.walthersmulders.persistence.repository.genre.GenreMovieRepository;
+import com.walthersmulders.persistence.repository.movie.MovieGenreRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -20,13 +25,16 @@ public class GenreMovieService {
 
     private final GenreMovieRepository genreMovieRepository;
     private final GenreMovieMapper     genreMovieMapper;
+    private final MovieGenreRepository movieGenreRepository;
 
     public GenreMovieService(
             GenreMovieRepository genreMovieRepository,
-            GenreMovieMapper genreMovieMapper
+            GenreMovieMapper genreMovieMapper,
+            MovieGenreRepository movieGenreRepository
     ) {
         this.genreMovieRepository = genreMovieRepository;
         this.genreMovieMapper = genreMovieMapper;
+        this.movieGenreRepository = movieGenreRepository;
     }
 
     public List<GenreMovie> getGenres() {
@@ -109,6 +117,50 @@ public class GenreMovieService {
             genreMovieRepository.save(genreMovie);
 
             log.info("Updated genre:movie with id: {}", id);
+        }
+    }
+
+    @Transactional
+    @Modifying
+    public void delete(UUID genreMovieID) {
+        log.info("Check if genre movie for id: {} exists", genreMovieID);
+        Optional<GenreMovieEntity> genreMovie = genreMovieRepository.findById(genreMovieID);
+
+        if (genreMovie.isEmpty()) {
+            log.error("Genre:movie with id {} not found", genreMovieID);
+            throw new EntityNotFoundException(
+                    GENRE_MOVIE,
+                    Map.of("genreMovieId", genreMovieID.toString())
+            );
+        }
+
+        log.info("Checking if genre movie belongs to any movie");
+        boolean isLinkedToMovie = movieGenreRepository.existsByGenreMovieID(genreMovieID);
+
+        if (isLinkedToMovie) {
+            log.info("Genre belongs to at least one movie, fetching movies to check for deletion criteria");
+
+            List<MovieEntity> movies = movieGenreRepository.fetchDistinctMoviesForGenre(genreMovieID);
+
+            boolean allHaveMultipleGenres = movies.stream()
+                                                  .allMatch(item -> item.getMovieGenres().size() > 1);
+
+            if (allHaveMultipleGenres) {
+                log.info("All movies have multiple genres, can delete genre movie");
+
+                movies.forEach(item -> item.removeMovieGenre(genreMovie.get()));
+                genreMovieRepository.delete(genreMovie.get());
+
+                log.info("Deleted genre movie with id {}", genreMovieID);
+            } else {
+                throw new GenericBadRequestException("A movie must have at least one genre");
+            }
+        } else {
+            log.info("Genre movie id: {} - does not belong to any movie, deleting", genreMovieID);
+
+            genreMovieRepository.delete(genreMovie.get());
+
+            log.info("Deleted genre movie with id: {}", genreMovieID);
         }
     }
 }
