@@ -1392,6 +1392,37 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Genre Series by genreSeriesID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/genres/series/d9edf3ef-6428-483c-b681-f090b6de7c6c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"series",
+								"d9edf3ef-6428-483c-b681-f090b6de7c6c"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1415,7 +1446,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"genreIDs\": [\n        \"4e4d3075-8075-4c14-a6ee-53764ab7cee6\"\n    ],\n    \"series\": {\n        \"title\": \"Series Two\",\n        \"plot\": \"This is a plot\",\n        \"poster\": \"poster.jpg\",\n        \"dateReleased\": \"2023-01-14\"\n    },\n    \"seasons\": [\n        {\n            \"title\": \"Season 01\",\n            \"plot\": \"Plot of season 1\",\n            \"poster\": \"poster-s01.jpg\",\n            \"dateReleased\": \"2023-01-14\"\n        },\n        {\n            \"title\": \"Season 02\",\n            \"plot\": \"Plot of season 2\",\n            \"poster\": \"poster-s02.jpg\",\n            \"dateReleased\": \"2023-01-14\"\n        }\n    ]\n}",
+							"raw": "{\n    \"genreIDs\": [\n        \"d9edf3ef-6428-483c-b681-f090b6de7c6c\"\n    ],\n    \"series\": {\n        \"title\": \"Series Two\",\n        \"plot\": \"This is a plot\",\n        \"poster\": \"poster.jpg\",\n        \"dateReleased\": \"2023-01-14\"\n    },\n    \"seasons\": [\n        {\n            \"title\": \"Season 01\",\n            \"plot\": \"Plot of season 1\",\n            \"poster\": \"poster-s01.jpg\",\n            \"dateReleased\": \"2023-01-14\"\n        },\n        {\n            \"title\": \"Season 02\",\n            \"plot\": \"Plot of season 2\",\n            \"poster\": \"poster-s02.jpg\",\n            \"dateReleased\": \"2023-01-14\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1611,7 +1642,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/series/28cc623b-15c0-40e5-8d1c-021f35df012b/genres/63f39c47-a796-4a11-a6f9-beadc5e88be0",
+							"raw": "http://localhost:8080/series/448e1db3-76ec-4c90-bc99-aff36e7cb595/genres/92e7cd8b-79f9-440b-be2b-dae10374a866",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1619,9 +1650,9 @@
 							"port": "8080",
 							"path": [
 								"series",
-								"28cc623b-15c0-40e5-8d1c-021f35df012b",
+								"448e1db3-76ec-4c90-bc99-aff36e7cb595",
 								"genres",
-								"63f39c47-a796-4a11-a6f9-beadc5e88be0"
+								"92e7cd8b-79f9-440b-be2b-dae10374a866"
 							]
 						}
 					},
@@ -1643,7 +1674,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/series/28cc623b-15c0-40e5-8d1c-021f35df012b/genres/4e4d3075-8075-4c14-a6ee-53764ab7cee6",
+							"raw": "http://localhost:8080/series/448e1db3-76ec-4c90-bc99-aff36e7cb595/genres/92e7cd8b-79f9-440b-be2b-dae10374a866",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1651,9 +1682,9 @@
 							"port": "8080",
 							"path": [
 								"series",
-								"28cc623b-15c0-40e5-8d1c-021f35df012b",
+								"448e1db3-76ec-4c90-bc99-aff36e7cb595",
 								"genres",
-								"4e4d3075-8075-4c14-a6ee-53764ab7cee6"
+								"92e7cd8b-79f9-440b-be2b-dae10374a866"
 							]
 						}
 					},
