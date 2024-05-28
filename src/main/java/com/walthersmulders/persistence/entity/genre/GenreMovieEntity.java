@@ -13,9 +13,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Table containing the genres of movies.
- */
 @Entity
 @Table(name = "genre_movie")
 @Getter
