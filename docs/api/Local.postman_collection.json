@@ -804,7 +804,7 @@
 			"name": "Genre Movie Operations",
 			"item": [
 				{
-					"name": "Get Movie Genres",
+					"name": "Get Genre Movies",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -834,7 +834,7 @@
 					"response": []
 				},
 				{
-					"name": "Create Movie Genre",
+					"name": "Create Genre Movie",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -873,7 +873,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Movie Genre by movieGenreID",
+					"name": "Get Genre Movie by genreMovieID",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -904,7 +904,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Movie Genre by movieGenreID",
+					"name": "Update Genre Movie by genreMovieID",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -942,6 +942,37 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Genre Movie by genreMovieID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/genres/movies/fc3c85c9-241d-4684-a218-e6ca79ad20f0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								"movies",
+								"fc3c85c9-241d-4684-a218-e6ca79ad20f0"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -965,7 +996,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"genreIDs\": [\n        \"bc1522f9-0caa-463e-9838-6e69dae10a80\"\n    ],\n    \"movie\": {\n        \"title\": \"Movie One\",\n        \"plot\": \"This is a plot\",\n        \"poster\": \"poster.jpg\",\n        \"dateReleased\": \"2022-08-29\"\n    }\n}",
+							"raw": "{\n    \"genreIDs\": [\n        \"fc3c85c9-241d-4684-a218-e6ca79ad20f0\"\n    ],\n    \"movie\": {\n        \"title\": \"Movie One\",\n        \"plot\": \"This is a plot\",\n        \"poster\": \"poster.jpg\",\n        \"dateReleased\": \"2022-08-29\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1161,7 +1192,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/movies/7d2926aa-4e5b-43ba-9869-251adb5f589d/genres/2c2be16f-ed37-4bd9-9897-726a1890467e",
+							"raw": "http://localhost:8080/movies/bb9ba0cb-28da-4bb8-8e37-d8a7782374b2/genres/fc3c85c9-241d-4684-a218-e6ca79ad20f0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1169,9 +1200,9 @@
 							"port": "8080",
 							"path": [
 								"movies",
-								"7d2926aa-4e5b-43ba-9869-251adb5f589d",
+								"bb9ba0cb-28da-4bb8-8e37-d8a7782374b2",
 								"genres",
-								"2c2be16f-ed37-4bd9-9897-726a1890467e"
+								"fc3c85c9-241d-4684-a218-e6ca79ad20f0"
 							]
 						}
 					},
@@ -1699,7 +1730,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/f89ae585-599f-44cf-ae4a-9159250a1d12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1709,7 +1740,7 @@
 								"users",
 								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
 								"books",
-								"69b43413-af09-417e-a949-9e96de2c9087"
+								"f89ae585-599f-44cf-ae4a-9159250a1d12"
 							]
 						}
 					},
@@ -1740,7 +1771,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/f89ae585-599f-44cf-ae4a-9159250a1d12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1750,7 +1781,7 @@
 								"users",
 								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
 								"books",
-								"69b43413-af09-417e-a949-9e96de2c9087"
+								"f89ae585-599f-44cf-ae4a-9159250a1d12"
 							]
 						}
 					},
@@ -1773,7 +1804,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"rating\": 5\n}",
+							"raw": "{\n    \"rating\": 8\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1781,7 +1812,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/f89ae585-599f-44cf-ae4a-9159250a1d12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1791,7 +1822,7 @@
 								"users",
 								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
 								"books",
-								"69b43413-af09-417e-a949-9e96de2c9087"
+								"f89ae585-599f-44cf-ae4a-9159250a1d12"
 							]
 						}
 					},
@@ -1814,7 +1845,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"rating\": 5,\n    \"review\": \"this is a review\"\n}",
+							"raw": "{\n    \"rating\": 6,\n    \"review\": \"this is a review update\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1822,7 +1853,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/f89ae585-599f-44cf-ae4a-9159250a1d12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1832,7 +1863,7 @@
 								"users",
 								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
 								"books",
-								"69b43413-af09-417e-a949-9e96de2c9087"
+								"f89ae585-599f-44cf-ae4a-9159250a1d12"
 							]
 						}
 					},
@@ -1854,7 +1885,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/f89ae585-599f-44cf-ae4a-9159250a1d12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1864,7 +1895,7 @@
 								"users",
 								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
 								"books",
-								"69b43413-af09-417e-a949-9e96de2c9087"
+								"f89ae585-599f-44cf-ae4a-9159250a1d12"
 							]
 						}
 					},
@@ -1917,7 +1948,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/69b43413-af09-417e-a949-9e96de2c9087",
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/books/f89ae585-599f-44cf-ae4a-9159250a1d12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1927,7 +1958,7 @@
 								"users",
 								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
 								"books",
-								"69b43413-af09-417e-a949-9e96de2c9087"
+								"f89ae585-599f-44cf-ae4a-9159250a1d12"
 							]
 						}
 					},
