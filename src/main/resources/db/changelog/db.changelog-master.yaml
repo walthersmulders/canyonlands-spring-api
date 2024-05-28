@@ -7,3 +7,5 @@ databaseChangeLog:
       file: db/changelog/preload/v0001_preload_genre_movie.sql
   - include:
       file: db/changelog/preload/v0001_preload_genre_series.sql
+  - include:
+      file: db/changelog/preload/v0001_preload_genre_music.sql
