@@ -39,7 +39,7 @@ public class ArtistController {
 
     @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/albumbs")
+    @GetMapping("/albums")
     public List<ArtistWithAlbums> getArtistsWithAlbums() {
         return artistAlbumService.getArtistsWithAlbums();
     }
