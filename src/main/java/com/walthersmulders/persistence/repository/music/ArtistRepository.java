@@ -29,7 +29,7 @@ public interface ArtistRepository extends JpaRepository<ArtistEntity, UUID> {
     @Query("SELECT a " +
            "FROM ArtistEntity a " +
            "LEFT JOIN FETCH a.albums " +
-           "WHERE a.artistID = : artistID")
+           "WHERE a.artistID = :artistID")
     Optional<ArtistEntity> fetchArtistWithAlbums(
             @Param(value = "artistID") UUID artistID
     );
