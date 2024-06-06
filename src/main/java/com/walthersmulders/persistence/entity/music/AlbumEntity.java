@@ -2,7 +2,7 @@ package com.walthersmulders.persistence.entity.music;
 
 import com.walthersmulders.mapstruct.dto.album.AlbumUpsert;
 import com.walthersmulders.persistence.entity.genre.GenreMusicEntity;
-import com.walthersmulders.persistence.entity.users.music.UsersMusicEntity;
+import com.walthersmulders.persistence.entity.users.music.UsersAlbumEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,7 +48,7 @@ public class AlbumEntity implements Serializable {
     private List<ArtistAlbumEntity> artists = new ArrayList<>();
 
     @OneToMany(mappedBy = "album", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UsersMusicEntity> users = new ArrayList<>();
+    private List<UsersAlbumEntity> users = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_music_id")

@@ -11,14 +11,12 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-// TODO :: refactor this to UsersAlbumEntity and users_album table
-
 @Entity
-@Table(name = "users_music")
+@Table(name = "users_album")
 @Getter
 @Setter
 @NoArgsConstructor
-public class UsersMusicEntity implements Serializable {
+public class UsersAlbumEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -41,14 +39,14 @@ public class UsersMusicEntity implements Serializable {
     @Column(name = "rating", nullable = false)
     private Integer rating;
 
-    public UsersMusicEntity(UserEntity user, AlbumEntity album, Integer rating) {
+    public UsersAlbumEntity(UserEntity user, AlbumEntity album, Integer rating) {
         this.user = user;
         this.album = album;
         this.rating = rating;
         this.usersMusicID = new UsersMusicID(user.getUserID(), album.getAlbumID());
     }
 
-    public UsersMusicEntity(UserEntity user, AlbumEntity album, Integer rating, String review) {
+    public UsersAlbumEntity(UserEntity user, AlbumEntity album, Integer rating, String review) {
         this.user = user;
         this.album = album;
         this.rating = rating;
@@ -67,7 +65,7 @@ public class UsersMusicEntity implements Serializable {
             return false;
         }
 
-        UsersMusicEntity that = (UsersMusicEntity) o;
+        UsersAlbumEntity that = (UsersAlbumEntity) o;
 
         return Objects.equals(user, that.user) && Objects.equals(album, that.album);
     }

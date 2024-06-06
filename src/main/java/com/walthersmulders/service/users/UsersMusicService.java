@@ -8,7 +8,7 @@ import com.walthersmulders.mapstruct.mapper.UserMapper;
 import com.walthersmulders.mapstruct.mapper.UsersAlbumMapper;
 import com.walthersmulders.persistence.entity.music.AlbumEntity;
 import com.walthersmulders.persistence.entity.user.UserEntity;
-import com.walthersmulders.persistence.entity.users.music.UsersMusicEntity;
+import com.walthersmulders.persistence.entity.users.music.UsersAlbumEntity;
 import com.walthersmulders.persistence.entity.users.music.UsersMusicID;
 import com.walthersmulders.persistence.repository.music.AlbumRepository;
 import com.walthersmulders.persistence.repository.user.UserRepository;
@@ -61,7 +61,7 @@ public class UsersMusicService {
             throw new EntityNotFoundException("User", Map.of(USER_ID, userID.toString()));
         }
 
-        UsersMusicEntity existingAlbum = userWithAlbums.get()
+        UsersAlbumEntity existingAlbum = userWithAlbums.get()
                                                        .getAlbums()
                                                        .stream()
                                                        .filter(album -> album.getAlbum().getAlbumID().equals(albumID))
@@ -105,7 +105,7 @@ public class UsersMusicService {
     public UsersAlbum getUsersAlbum(UUID userID, UUID albumID) {
         log.info("Fetching album with albumID: {} for user with userID: {}", albumID, userID);
 
-        Optional<UsersMusicEntity> usersAlbum = usersMusicRepository.fetchUsersAlbum(userID, albumID);
+        Optional<UsersAlbumEntity> usersAlbum = usersMusicRepository.fetchUsersAlbum(userID, albumID);
 
         if (usersAlbum.isEmpty()) {
             log.error("Combination with userID: {} and albumID: {} not found", userID, albumID);
@@ -124,7 +124,7 @@ public class UsersMusicService {
     public List<UsersAlbum> getAllUserAlbums(UUID userID) {
         log.info("Fetching all albums for user with userID: {}", userID);
 
-        List<UsersMusicEntity> usersAlbums = usersMusicRepository.fetchAllUsersAlbums(userID);
+        List<UsersAlbumEntity> usersAlbums = usersMusicRepository.fetchAllUsersAlbums(userID);
 
         log.info("Fetched all albums for user with userID: {}", userID);
 
@@ -142,7 +142,7 @@ public class UsersMusicService {
     public void update(UUID userID, UUID albumID, UsersAlbumUpsert usersAlbumUpsert) {
         log.info("Updating album with albumID: {} for user with userID: {}", albumID, userID);
 
-        Optional<UsersMusicEntity> existingUsersAlbum = usersMusicRepository.findById(
+        Optional<UsersAlbumEntity> existingUsersAlbum = usersMusicRepository.findById(
                 new UsersMusicID(userID, albumID)
         );
 
