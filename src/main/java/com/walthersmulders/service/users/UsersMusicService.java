@@ -12,7 +12,7 @@ import com.walthersmulders.persistence.entity.users.music.UsersAlbumEntity;
 import com.walthersmulders.persistence.entity.users.music.UsersMusicID;
 import com.walthersmulders.persistence.repository.music.AlbumRepository;
 import com.walthersmulders.persistence.repository.user.UserRepository;
-import com.walthersmulders.persistence.repository.users.UsersMusicRepository;
+import com.walthersmulders.persistence.repository.users.UsersAlbumRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,20 +32,20 @@ public class UsersMusicService {
     private final UserRepository       userRepository;
     private final UserMapper           userMapper;
     private final AlbumRepository      albumRepository;
-    private final UsersMusicRepository usersMusicRepository;
+    private final UsersAlbumRepository usersAlbumRepository;
     private final UsersAlbumMapper     usersAlbumMapper;
 
     public UsersMusicService(
             UserRepository userRepository,
             UserMapper userMapper,
             AlbumRepository albumRepository,
-            UsersMusicRepository usersMusicRepository,
+            UsersAlbumRepository usersAlbumRepository,
             UsersAlbumMapper usersAlbumMapper
     ) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.albumRepository = albumRepository;
-        this.usersMusicRepository = usersMusicRepository;
+        this.usersAlbumRepository = usersAlbumRepository;
         this.usersAlbumMapper = usersAlbumMapper;
     }
 
@@ -105,7 +105,7 @@ public class UsersMusicService {
     public UsersAlbum getUsersAlbum(UUID userID, UUID albumID) {
         log.info("Fetching album with albumID: {} for user with userID: {}", albumID, userID);
 
-        Optional<UsersAlbumEntity> usersAlbum = usersMusicRepository.fetchUsersAlbum(userID, albumID);
+        Optional<UsersAlbumEntity> usersAlbum = usersAlbumRepository.fetchUsersAlbum(userID, albumID);
 
         if (usersAlbum.isEmpty()) {
             log.error("Combination with userID: {} and albumID: {} not found", userID, albumID);
@@ -124,7 +124,7 @@ public class UsersMusicService {
     public List<UsersAlbum> getAllUserAlbums(UUID userID) {
         log.info("Fetching all albums for user with userID: {}", userID);
 
-        List<UsersAlbumEntity> usersAlbums = usersMusicRepository.fetchAllUsersAlbums(userID);
+        List<UsersAlbumEntity> usersAlbums = usersAlbumRepository.fetchAllUsersAlbums(userID);
 
         log.info("Fetched all albums for user with userID: {}", userID);
 
@@ -134,7 +134,7 @@ public class UsersMusicService {
     public void removeAlbumFromUserLibrary(UUID userID, UUID albumID) {
         log.info("Deleting album with albumID: {} for user with userID: {}", albumID, userID);
 
-        usersMusicRepository.deleteById(new UsersMusicID(userID, albumID));
+        usersAlbumRepository.deleteById(new UsersMusicID(userID, albumID));
 
         log.info("Deleted album with albumID: {} for user with userID: {}", albumID, userID);
     }
@@ -142,7 +142,7 @@ public class UsersMusicService {
     public void update(UUID userID, UUID albumID, UsersAlbumUpsert usersAlbumUpsert) {
         log.info("Updating album with albumID: {} for user with userID: {}", albumID, userID);
 
-        Optional<UsersAlbumEntity> existingUsersAlbum = usersMusicRepository.findById(
+        Optional<UsersAlbumEntity> existingUsersAlbum = usersAlbumRepository.findById(
                 new UsersMusicID(userID, albumID)
         );
 
@@ -158,7 +158,7 @@ public class UsersMusicService {
         existingUsersAlbum.get().setReview(usersAlbumUpsert.review());
         existingUsersAlbum.get().setRating(usersAlbumUpsert.rating());
 
-        usersMusicRepository.save(existingUsersAlbum.get());
+        usersAlbumRepository.save(existingUsersAlbum.get());
 
         log.info("Updated album with albumID: {} for user with userID: {}", albumID, userID);
     }

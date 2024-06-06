@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface UsersMusicRepository extends JpaRepository<UsersAlbumEntity, UsersMusicID> {
+public interface UsersAlbumRepository extends JpaRepository<UsersAlbumEntity, UsersMusicID> {
     @Query("SELECT um " +
            "FROM UsersAlbumEntity um " +
            "JOIN FETCH um.album a " +
