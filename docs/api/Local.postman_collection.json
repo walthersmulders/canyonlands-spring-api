@@ -1422,7 +1422,7 @@
 			"name": "Music Operations",
 			"item": [
 				{
-					"name": "Create Artists",
+					"name": "Create Artist",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1613,6 +1613,299 @@
 							"path": [
 								"artists",
 								"a578530f-f891-48f9-8ecb-a0574b24d3c6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Album with Artists",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"artistIDs\": [\n        \"a578530f-f891-48f9-8ecb-a0574b24d3c6\"\n    ],\n    \"genreMusicID\": \"bc6abff0-391a-4eb6-9004-d1b12a83c374\",\n    \"album\": {\n        \"title\": \"My Awesome Album\",\n        \"cover\": \"cover.jpg\",\n        \"datePublished\": \"2022-08-29\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/albums",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Albums with Links",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/albums/links",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"albums",
+								"links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Albums",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/albums",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Album by albumID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/albums/08dcd375-372e-405c-ab96-ac58893d5933",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Album with Links by albumID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/albums/08dcd375-372e-405c-ab96-ac58893d5933/links",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933",
+								"links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Album by albumID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"My Album\",\n    \"cover\": \"cover.jpg\",\n    \"datePublished\": \"2023-03-23\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/albums/08dcd375-372e-405c-ab96-ac58893d5933",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Album Genre by albumID and genreMusicID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/albums/08dcd375-372e-405c-ab96-ac58893d5933/genres/3b321db8-0bc1-4830-83a4-cff82dcb2b0c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933",
+								"genres",
+								"3b321db8-0bc1-4830-83a4-cff82dcb2b0c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Artist to Album by albumID and artistID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/albums/08dcd375-372e-405c-ab96-ac58893d5933/artists/2db8aeb0-47c6-4caf-94a3-fa3a8563f777",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933",
+								"artists",
+								"2db8aeb0-47c6-4caf-94a3-fa3a8563f777"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Artist from Album by albumID and artistID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/albums/08dcd375-372e-405c-ab96-ac58893d5933/artists/2db8aeb0-47c6-4caf-94a3-fa3a8563f777",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933",
+								"artists",
+								"2db8aeb0-47c6-4caf-94a3-fa3a8563f777"
 							]
 						}
 					},
