@@ -1,7 +1,7 @@
 package com.walthersmulders.controller.users;
 
-import com.walthersmulders.mapstruct.dto.users.music.UsersMusic;
-import com.walthersmulders.mapstruct.dto.users.music.UsersMusicUpsert;
+import com.walthersmulders.mapstruct.dto.users.album.UsersMusic;
+import com.walthersmulders.mapstruct.dto.users.album.UsersMusicUpsert;
 import com.walthersmulders.service.users.UsersMusicService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

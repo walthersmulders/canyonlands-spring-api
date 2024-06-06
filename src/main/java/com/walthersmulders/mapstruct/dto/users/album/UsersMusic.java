@@ -1,4 +1,4 @@
-package com.walthersmulders.mapstruct.dto.users.music;
+package com.walthersmulders.mapstruct.dto.users.album;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.walthersmulders.mapstruct.dto.album.Album;

@@ -1,6 +1,6 @@
 package com.walthersmulders.mapstruct.mapper;
 
-import com.walthersmulders.mapstruct.dto.users.music.UsersMusic;
+import com.walthersmulders.mapstruct.dto.users.album.UsersMusic;
 import com.walthersmulders.persistence.entity.users.music.UsersMusicEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

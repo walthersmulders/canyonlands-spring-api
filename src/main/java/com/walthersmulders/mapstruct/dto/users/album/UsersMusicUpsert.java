@@ -1,4 +1,4 @@
-package com.walthersmulders.mapstruct.dto.users.music;
+package com.walthersmulders.mapstruct.dto.users.album;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

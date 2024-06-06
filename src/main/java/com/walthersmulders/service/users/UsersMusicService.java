@@ -2,8 +2,8 @@ package com.walthersmulders.service.users;
 
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
-import com.walthersmulders.mapstruct.dto.users.music.UsersMusic;
-import com.walthersmulders.mapstruct.dto.users.music.UsersMusicUpsert;
+import com.walthersmulders.mapstruct.dto.users.album.UsersMusic;
+import com.walthersmulders.mapstruct.dto.users.album.UsersMusicUpsert;
 import com.walthersmulders.mapstruct.mapper.UserMapper;
 import com.walthersmulders.mapstruct.mapper.UsersMusicMapper;
 import com.walthersmulders.persistence.entity.music.AlbumEntity;
