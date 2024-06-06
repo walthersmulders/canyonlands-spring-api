@@ -151,7 +151,7 @@ entity "Users" as users {
   ~email_address [UK]
 }
 
-entity "Users_Music" as users_music #line:red;line.bold; {
+entity "Users_Album" as users_album #line:red;line.bold; {
   + **user_id** : UUID [PK, FK]
   + **album_id** : UUID [PK, FK]
   ---
@@ -196,8 +196,8 @@ series ||--|{ users_series : series_id
 users_book -r[hidden]-> users
 users_book }|--|| users : users_id
 
-users_music -l[hidden]-> users
-users_music }|--|| users : users_id
+users_album -l[hidden]-> users
+users_album }|--|| users : users_id
 
 movie -l[hidden]-> movie_genre
 movie_genre }|--|| movie : movie_id
@@ -223,8 +223,8 @@ users_book }|--|| book : book_id
 users_movie -d[hidden]-> movie
 users_movie }|--|| movie : movie_id
 
-users_music -r[hidden]-> album
-users_music }|--|| album : album_id_id
+users_album -r[hidden]-> album
+users_album }|--|| album : album_id_id
 
 album -d[hidden]-> artist_album
 album ||--|{ artist_album : album_id

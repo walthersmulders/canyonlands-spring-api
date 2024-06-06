@@ -125,7 +125,7 @@ CREATE TABLE users
     UNIQUE (email_address)
 );
 
-CREATE TABLE users_music
+CREATE TABLE users_album
 (
     user_id  UUID    NOT NULL,
     album_id UUID    NOT NULL,
