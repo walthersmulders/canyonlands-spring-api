@@ -13,10 +13,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "album")
@@ -62,7 +59,18 @@ public class AlbumEntity implements Serializable {
         artists.add(artistAlbum);
     }
 
-    // TODO :: Remove artists helper methods
+    public void removeArtist(ArtistEntity artist) {
+        for (Iterator<ArtistAlbumEntity> iterator = artists.iterator(); iterator.hasNext(); ) {
+            ArtistAlbumEntity artistAlbumEntity = iterator.next();
+
+            if (artistAlbumEntity.getAlbum().equals(this) && artistAlbumEntity.getArtist().equals(artist)) {
+                iterator.remove();
+
+                artistAlbumEntity.setAlbum(null);
+                artistAlbumEntity.setArtist(null);
+            }
+        }
+    }
 
     public boolean checkUpdateDtoEqualsEntity(AlbumUpsert albumUpsert) {
         return this.title.equals(albumUpsert.title()) &&
