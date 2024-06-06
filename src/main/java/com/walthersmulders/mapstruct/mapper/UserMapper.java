@@ -1,9 +1,9 @@
 package com.walthersmulders.mapstruct.mapper;
 
 import com.walthersmulders.mapstruct.dto.user.User;
+import com.walthersmulders.mapstruct.dto.users.album.UsersAlbum;
 import com.walthersmulders.mapstruct.dto.users.book.UsersBook;
 import com.walthersmulders.mapstruct.dto.users.movie.UsersMovie;
-import com.walthersmulders.mapstruct.dto.users.album.UsersMusic;
 import com.walthersmulders.mapstruct.dto.users.series.UsersSeries;
 import com.walthersmulders.persistence.entity.book.BookEntity;
 import com.walthersmulders.persistence.entity.movie.MovieEntity;
@@ -41,7 +41,7 @@ public interface UserMapper {
 
     UsersSeries entityToUsersSeries(SeriesEntity series, Integer rating);
 
-    UsersMusic entityToUsersAlbum(AlbumEntity album, Integer rating);
+    UsersAlbum entityToUsersAlbum(AlbumEntity album, Integer rating);
 
-    UsersMusic entityToUsersAlbum(AlbumEntity album, Integer rating, String review);
+    UsersAlbum entityToUsersAlbum(AlbumEntity album, Integer rating, String review);
 }

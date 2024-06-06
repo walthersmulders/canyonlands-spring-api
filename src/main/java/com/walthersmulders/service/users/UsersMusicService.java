@@ -2,7 +2,7 @@ package com.walthersmulders.service.users;
 
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
-import com.walthersmulders.mapstruct.dto.users.album.UsersMusic;
+import com.walthersmulders.mapstruct.dto.users.album.UsersAlbum;
 import com.walthersmulders.mapstruct.dto.users.album.UsersMusicUpsert;
 import com.walthersmulders.mapstruct.mapper.UserMapper;
 import com.walthersmulders.mapstruct.mapper.UsersMusicMapper;
@@ -50,7 +50,7 @@ public class UsersMusicService {
     }
 
     @Transactional
-    public UsersMusic addAlbumToUserLibrary(UUID userID, UUID albumID, UsersMusicUpsert usersMusicUpsert) {
+    public UsersAlbum addAlbumToUserLibrary(UUID userID, UUID albumID, UsersMusicUpsert usersMusicUpsert) {
         log.info("Adding album to user library for userID: {} and albumID: {}", userID, albumID);
 
         Optional<UserEntity> userWithAlbums = userRepository.fetchWithAlbums(userID);
@@ -102,7 +102,7 @@ public class UsersMusicService {
     }
 
     @Transactional(readOnly = true)
-    public UsersMusic getUsersAlbum(UUID userID, UUID albumID) {
+    public UsersAlbum getUsersAlbum(UUID userID, UUID albumID) {
         log.info("Fetching album with albumID: {} for user with userID: {}", albumID, userID);
 
         Optional<UsersMusicEntity> usersAlbum = usersMusicRepository.fetchUsersAlbum(userID, albumID);
@@ -121,7 +121,7 @@ public class UsersMusicService {
         return usersMusicMapper.entityToUsersMusic(usersAlbum.get());
     }
 
-    public List<UsersMusic> getAllUserAlbums(UUID userID) {
+    public List<UsersAlbum> getAllUserAlbums(UUID userID) {
         log.info("Fetching all albums for user with userID: {}", userID);
 
         List<UsersMusicEntity> usersAlbums = usersMusicRepository.fetchAllUsersAlbums(userID);

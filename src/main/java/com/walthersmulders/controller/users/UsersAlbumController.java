@@ -1,6 +1,6 @@
 package com.walthersmulders.controller.users;
 
-import com.walthersmulders.mapstruct.dto.users.album.UsersMusic;
+import com.walthersmulders.mapstruct.dto.users.album.UsersAlbum;
 import com.walthersmulders.mapstruct.dto.users.album.UsersMusicUpsert;
 import com.walthersmulders.service.users.UsersMusicService;
 import jakarta.validation.Valid;
@@ -25,7 +25,7 @@ public class UsersAlbumController {
     @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/{userID}/albums/{albumID}")
-    public UsersMusic addAlbumToUserLibrary(
+    public UsersAlbum addAlbumToUserLibrary(
             @PathVariable(name = "userID") UUID userID,
             @PathVariable(name = "albumID") UUID albumID,
             @Valid @RequestBody UsersMusicUpsert usersMusicUpsert
@@ -36,7 +36,7 @@ public class UsersAlbumController {
     @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{userID}/albums/{albumID}")
-    public UsersMusic getUsersAlbum(
+    public UsersAlbum getUsersAlbum(
             @PathVariable(name = "userID") UUID userID,
             @PathVariable(name = "albumID") UUID albumID
     ) {
@@ -46,7 +46,7 @@ public class UsersAlbumController {
     @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{userID}/albums")
-    public List<UsersMusic> getAllUserAlbums(@PathVariable(name = "userID") UUID userID) {
+    public List<UsersAlbum> getAllUserAlbums(@PathVariable(name = "userID") UUID userID) {
         return usersMusicService.getAllUserAlbums(userID);
     }
 
