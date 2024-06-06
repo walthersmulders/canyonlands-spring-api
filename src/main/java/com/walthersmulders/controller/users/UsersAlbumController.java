@@ -1,7 +1,7 @@
 package com.walthersmulders.controller.users;
 
 import com.walthersmulders.mapstruct.dto.users.album.UsersAlbum;
-import com.walthersmulders.mapstruct.dto.users.album.UsersMusicUpsert;
+import com.walthersmulders.mapstruct.dto.users.album.UsersAlbumUpsert;
 import com.walthersmulders.service.users.UsersMusicService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -28,9 +28,9 @@ public class UsersAlbumController {
     public UsersAlbum addAlbumToUserLibrary(
             @PathVariable(name = "userID") UUID userID,
             @PathVariable(name = "albumID") UUID albumID,
-            @Valid @RequestBody UsersMusicUpsert usersMusicUpsert
+            @Valid @RequestBody UsersAlbumUpsert usersAlbumUpsert
     ) {
-        return usersMusicService.addAlbumToUserLibrary(userID, albumID, usersMusicUpsert);
+        return usersMusicService.addAlbumToUserLibrary(userID, albumID, usersAlbumUpsert);
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -66,8 +66,8 @@ public class UsersAlbumController {
     public void update(
             @PathVariable(name = "userID") UUID userID,
             @PathVariable(name = "albumID") UUID albumID,
-            @Valid @RequestBody UsersMusicUpsert usersMusicUpsert
+            @Valid @RequestBody UsersAlbumUpsert usersAlbumUpsert
     ) {
-        usersMusicService.update(userID, albumID, usersMusicUpsert);
+        usersMusicService.update(userID, albumID, usersAlbumUpsert);
     }
 }

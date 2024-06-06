@@ -3,7 +3,7 @@ package com.walthersmulders.service.users;
 import com.walthersmulders.exception.EntityExistsException;
 import com.walthersmulders.exception.EntityNotFoundException;
 import com.walthersmulders.mapstruct.dto.users.album.UsersAlbum;
-import com.walthersmulders.mapstruct.dto.users.album.UsersMusicUpsert;
+import com.walthersmulders.mapstruct.dto.users.album.UsersAlbumUpsert;
 import com.walthersmulders.mapstruct.mapper.UserMapper;
 import com.walthersmulders.mapstruct.mapper.UsersMusicMapper;
 import com.walthersmulders.persistence.entity.music.AlbumEntity;
@@ -50,7 +50,7 @@ public class UsersMusicService {
     }
 
     @Transactional
-    public UsersAlbum addAlbumToUserLibrary(UUID userID, UUID albumID, UsersMusicUpsert usersMusicUpsert) {
+    public UsersAlbum addAlbumToUserLibrary(UUID userID, UUID albumID, UsersAlbumUpsert usersAlbumUpsert) {
         log.info("Adding album to user library for userID: {} and albumID: {}", userID, albumID);
 
         Optional<UserEntity> userWithAlbums = userRepository.fetchWithAlbums(userID);
@@ -82,22 +82,22 @@ public class UsersMusicService {
                                                    Map.of(ALBUM_ID, albumID.toString())
                                            ));
 
-        if (usersMusicUpsert.review() != null) {
+        if (usersAlbumUpsert.review() != null) {
             userWithAlbums.get().addAlbumToUserLibrary(
                     album,
-                    usersMusicUpsert.rating(),
-                    usersMusicUpsert.review()
+                    usersAlbumUpsert.rating(),
+                    usersAlbumUpsert.review()
             );
 
             log.info("Album with albumID: {} added to user's library with rating and review", albumID);
 
-            return userMapper.entityToUsersAlbum(album, usersMusicUpsert.rating(), usersMusicUpsert.review());
+            return userMapper.entityToUsersAlbum(album, usersAlbumUpsert.rating(), usersAlbumUpsert.review());
         } else {
-            userWithAlbums.get().addAlbumToUserLibrary(album, usersMusicUpsert.rating());
+            userWithAlbums.get().addAlbumToUserLibrary(album, usersAlbumUpsert.rating());
 
             log.info("Album with albumID: {} added to user's library with rating", albumID);
 
-            return userMapper.entityToUsersAlbum(album, usersMusicUpsert.rating());
+            return userMapper.entityToUsersAlbum(album, usersAlbumUpsert.rating());
         }
     }
 
@@ -139,7 +139,7 @@ public class UsersMusicService {
         log.info("Deleted album with albumID: {} for user with userID: {}", albumID, userID);
     }
 
-    public void update(UUID userID, UUID albumID, UsersMusicUpsert usersMusicUpsert) {
+    public void update(UUID userID, UUID albumID, UsersAlbumUpsert usersAlbumUpsert) {
         log.info("Updating album with albumID: {} for user with userID: {}", albumID, userID);
 
         Optional<UsersMusicEntity> existingUsersAlbum = usersMusicRepository.findById(
@@ -155,8 +155,8 @@ public class UsersMusicService {
             ));
         }
 
-        existingUsersAlbum.get().setReview(usersMusicUpsert.review());
-        existingUsersAlbum.get().setRating(usersMusicUpsert.rating());
+        existingUsersAlbum.get().setReview(usersAlbumUpsert.review());
+        existingUsersAlbum.get().setRating(usersAlbumUpsert.rating());
 
         usersMusicRepository.save(existingUsersAlbum.get());
 
