@@ -5,7 +5,7 @@ import com.walthersmulders.exception.EntityNotFoundException;
 import com.walthersmulders.mapstruct.dto.users.album.UsersAlbum;
 import com.walthersmulders.mapstruct.dto.users.album.UsersAlbumUpsert;
 import com.walthersmulders.mapstruct.mapper.UserMapper;
-import com.walthersmulders.mapstruct.mapper.UsersMusicMapper;
+import com.walthersmulders.mapstruct.mapper.UsersAlbumMapper;
 import com.walthersmulders.persistence.entity.music.AlbumEntity;
 import com.walthersmulders.persistence.entity.user.UserEntity;
 import com.walthersmulders.persistence.entity.users.music.UsersMusicEntity;
@@ -33,20 +33,20 @@ public class UsersMusicService {
     private final UserMapper           userMapper;
     private final AlbumRepository      albumRepository;
     private final UsersMusicRepository usersMusicRepository;
-    private final UsersMusicMapper     usersMusicMapper;
+    private final UsersAlbumMapper     usersAlbumMapper;
 
     public UsersMusicService(
             UserRepository userRepository,
             UserMapper userMapper,
             AlbumRepository albumRepository,
             UsersMusicRepository usersMusicRepository,
-            UsersMusicMapper usersMusicMapper
+            UsersAlbumMapper usersAlbumMapper
     ) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.albumRepository = albumRepository;
         this.usersMusicRepository = usersMusicRepository;
-        this.usersMusicMapper = usersMusicMapper;
+        this.usersAlbumMapper = usersAlbumMapper;
     }
 
     @Transactional
@@ -118,7 +118,7 @@ public class UsersMusicService {
 
         log.info("Combination with userID: {} and albumID: {} found", userID, albumID);
 
-        return usersMusicMapper.entityToUsersMusic(usersAlbum.get());
+        return usersAlbumMapper.entityToUsersMusic(usersAlbum.get());
     }
 
     public List<UsersAlbum> getAllUserAlbums(UUID userID) {
@@ -128,7 +128,7 @@ public class UsersMusicService {
 
         log.info("Fetched all albums for user with userID: {}", userID);
 
-        return usersAlbums.stream().map(usersMusicMapper::entityToUsersMusic).toList();
+        return usersAlbums.stream().map(usersAlbumMapper::entityToUsersMusic).toList();
     }
 
     public void removeAlbumFromUserLibrary(UUID userID, UUID albumID) {
