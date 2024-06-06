@@ -2,7 +2,7 @@ package com.walthersmulders.controller.users;
 
 import com.walthersmulders.mapstruct.dto.users.album.UsersAlbum;
 import com.walthersmulders.mapstruct.dto.users.album.UsersAlbumUpsert;
-import com.walthersmulders.service.users.UsersMusicService;
+import com.walthersmulders.service.users.UsersAlbumService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,10 +16,10 @@ import java.util.UUID;
 @RestController
 @Validated
 public class UsersAlbumController {
-    private final UsersMusicService usersMusicService;
+    private final UsersAlbumService usersAlbumService;
 
-    public UsersAlbumController(UsersMusicService usersMusicService) {
-        this.usersMusicService = usersMusicService;
+    public UsersAlbumController(UsersAlbumService usersAlbumService) {
+        this.usersAlbumService = usersAlbumService;
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -30,7 +30,7 @@ public class UsersAlbumController {
             @PathVariable(name = "albumID") UUID albumID,
             @Valid @RequestBody UsersAlbumUpsert usersAlbumUpsert
     ) {
-        return usersMusicService.addAlbumToUserLibrary(userID, albumID, usersAlbumUpsert);
+        return usersAlbumService.addAlbumToUserLibrary(userID, albumID, usersAlbumUpsert);
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -40,14 +40,14 @@ public class UsersAlbumController {
             @PathVariable(name = "userID") UUID userID,
             @PathVariable(name = "albumID") UUID albumID
     ) {
-        return usersMusicService.getUsersAlbum(userID, albumID);
+        return usersAlbumService.getUsersAlbum(userID, albumID);
     }
 
     @PreAuthorize("hasAuthority('USER')")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{userID}/albums")
     public List<UsersAlbum> getAllUserAlbums(@PathVariable(name = "userID") UUID userID) {
-        return usersMusicService.getAllUserAlbums(userID);
+        return usersAlbumService.getAllUserAlbums(userID);
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -57,7 +57,7 @@ public class UsersAlbumController {
             @PathVariable(name = "userID") UUID userID,
             @PathVariable(name = "albumID") UUID albumID
     ) {
-        usersMusicService.removeAlbumFromUserLibrary(userID, albumID);
+        usersAlbumService.removeAlbumFromUserLibrary(userID, albumID);
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -68,6 +68,6 @@ public class UsersAlbumController {
             @PathVariable(name = "albumID") UUID albumID,
             @Valid @RequestBody UsersAlbumUpsert usersAlbumUpsert
     ) {
-        usersMusicService.update(userID, albumID, usersAlbumUpsert);
+        usersAlbumService.update(userID, albumID, usersAlbumUpsert);
     }
 }

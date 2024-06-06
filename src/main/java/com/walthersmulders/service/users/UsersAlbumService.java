@@ -24,7 +24,7 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-public class UsersMusicService {
+public class UsersAlbumService {
     private static final String ALBUM_ID = "albumID";
     private static final String ALBUM    = "Album";
     private static final String USER_ID  = "userID";
@@ -35,7 +35,7 @@ public class UsersMusicService {
     private final UsersAlbumRepository usersAlbumRepository;
     private final UsersAlbumMapper     usersAlbumMapper;
 
-    public UsersMusicService(
+    public UsersAlbumService(
             UserRepository userRepository,
             UserMapper userMapper,
             AlbumRepository albumRepository,
