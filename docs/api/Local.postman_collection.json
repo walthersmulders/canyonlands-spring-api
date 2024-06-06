@@ -2661,6 +2661,270 @@
 			]
 		},
 		{
+			"name": "Users Album Operations",
+			"item": [
+				{
+					"name": "Add Album to User Library with Review and Rating",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 5,\n    \"review\": \"This is a review\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/albums/08dcd375-372e-405c-ab96-ac58893d5933",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Album to User Library without Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/albums/08dcd375-372e-405c-ab96-ac58893d5933",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Users Album without Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 8\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/albums/08dcd375-372e-405c-ab96-ac58893d5933",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Users Album with Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": 6,\n    \"review\": \"this is a review update\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/albums/08dcd375-372e-405c-ab96-ac58893d5933",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users Album by userID and albumID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/albums/08dcd375-372e-405c-ab96-ac58893d5933",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Users Albums by userID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/albums",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Album from User Library",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/1c529433-063f-40c2-8dba-4d5a8197fd5b/albums/08dcd375-372e-405c-ab96-ac58893d5933",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1c529433-063f-40c2-8dba-4d5a8197fd5b",
+								"albums",
+								"08dcd375-372e-405c-ab96-ac58893d5933"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Users Movie Operations",
 			"item": [
 				{
