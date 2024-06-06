@@ -2,9 +2,11 @@ package com.walthersmulders.persistence.entity.user;
 
 import com.walthersmulders.persistence.entity.book.BookEntity;
 import com.walthersmulders.persistence.entity.movie.MovieEntity;
+import com.walthersmulders.persistence.entity.music.AlbumEntity;
 import com.walthersmulders.persistence.entity.series.SeriesEntity;
 import com.walthersmulders.persistence.entity.users.book.UsersBookEntity;
 import com.walthersmulders.persistence.entity.users.movie.UsersMovieEntity;
+import com.walthersmulders.persistence.entity.users.music.UsersMusicEntity;
 import com.walthersmulders.persistence.entity.users.series.UsersSeriesEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -51,6 +53,9 @@ public class UserEntity implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UsersSeriesEntity> series;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UsersMusicEntity> albums;
+
     public void addBookToUserLibrary(BookEntity book, Integer rating, String review) {
         UsersBookEntity usersBook = new UsersBookEntity(this, book, rating, review);
         books.add(usersBook);
@@ -79,6 +84,16 @@ public class UserEntity implements Serializable {
     public void addSeriesToUserLibrary(SeriesEntity seriesEntity, Integer rating) {
         UsersSeriesEntity usersSeries = new UsersSeriesEntity(this, seriesEntity, rating);
         series.add(usersSeries);
+    }
+
+    public void addAlbumToUserLibrary(AlbumEntity albumEntity, Integer rating) {
+        UsersMusicEntity usersAlbums = new UsersMusicEntity(this, albumEntity, rating);
+        albums.add(usersAlbums);
+    }
+
+    public void addAlbumToUserLibrary(AlbumEntity albumEntity, Integer rating, String review) {
+        UsersMusicEntity usersAlbums = new UsersMusicEntity(this, albumEntity, rating, review);
+        albums.add(usersAlbums);
     }
 
     @Override

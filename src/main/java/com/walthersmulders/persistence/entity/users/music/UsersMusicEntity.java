@@ -11,6 +11,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+// TODO :: refactor this to UsersAlbumEntity and users_album table
+
 @Entity
 @Table(name = "users_music")
 @Getter
