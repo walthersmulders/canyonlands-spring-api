@@ -49,3 +49,13 @@ tasks.named('test') {
 tasks.bootRun {
     environment new File('.env').readLines().collectEntries { it.split('=').toList() }
 }
+
+tasks.named("bootJar") {
+    layered {
+        enabled = true
+    }
+}
+
+tasks.named("bootBuildImage") {
+    environment["BP_JVM_VERSION"] = "21"
+}
