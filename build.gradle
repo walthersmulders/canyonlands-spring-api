@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.walthersmulders'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
     sourceCompatibility = '21'
@@ -58,4 +58,6 @@ tasks.named("bootJar") {
 
 tasks.named("bootBuildImage") {
     environment["BP_JVM_VERSION"] = "21"
+    builder = "bellsoft/buildpacks.builder:musl"
+    environment["BPL_JVM_HEAD_ROOM"] = "5"
 }
